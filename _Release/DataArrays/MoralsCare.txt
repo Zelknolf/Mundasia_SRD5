@@ -1,0 +1,4 @@
+0|No Care|12800
+1|Emergency Care|12801
+2|Basic Care|12802
+3|Broad Care|12803

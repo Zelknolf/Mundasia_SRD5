@@ -1,0 +1,4 @@
+0|Personal Loyalty|12808
+1|Social Group Loyalty|12809
+2|Broad Group Loyalty|12810
+3|Broad Trait Loyalty|12811

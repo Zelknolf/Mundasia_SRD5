@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1E28853A-7696-48B1-B233-2983C9F7FBD9}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Mund_SRD5_Server</RootNamespace>
+    <AssemblyName>Mund_SRD5_Server</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Account\Account.cs" />
+    <Compile Include="Communication\Objects\AccountCreation.cs" />
+    <Compile Include="Communication\Objects\CharacterCreation.cs" />
+    <Compile Include="Communication\Objects\CharacterSelection.cs" />
+    <Compile Include="Communication\Objects\EquipRequest.cs" />
+    <Compile Include="Communication\Objects\Login.cs" />
+    <Compile Include="Communication\Objects\MoveRequest.cs" />
+    <Compile Include="Communication\Objects\MundEncoding.cs" />
+    <Compile Include="Communication\Objects\RequestCharacter.cs" />
+    <Compile Include="Communication\Objects\SessionUpdate.cs" />
+    <Compile Include="Communication\Objects\TileChange.cs" />
+    <Compile Include="Communication\Service\Encryption.cs" />
+    <Compile Include="Communication\Service\IServerService.cs" />
+    <Compile Include="Communication\Service\ServerService.cs" />
+    <Compile Include="Communication\Service\Service.cs" />
+    <Compile Include="Objects\Creatures\Background.cs" />
+    <Compile Include="Objects\Creatures\CreatureInventory.cs" />
+    <Compile Include="Objects\Creatures\Creature.cs" />
+    <Compile Include="Objects\Creatures\CreatureImage.cs" />
+    <Compile Include="Objects\Creatures\DisplayCharacter.cs" />
+    <Compile Include="Objects\Creatures\Race.cs" />
+    <Compile Include="Objects\Creatures\Skill.cs" />
+    <Compile Include="Objects\Creatures\SkinColor.cs" />
+    <Compile Include="Objects\Items\ClothColor.cs" />
+    <Compile Include="Objects\Items\InventoryItem.cs" />
+    <Compile Include="ServerStatus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ServerStatus.Designer.cs">
+      <DependentUpon>ServerStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ServerProgram.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI\Direction.cs" />
+    <Compile Include="UI\IPlaySceneDrawable.cs" />
+    <Compile Include="World\Map.cs" />
+    <Compile Include="World\MapDelta.cs" />
+    <Compile Include="World\Tile.cs" />
+    <Compile Include="World\TileImage.cs" />
+    <Compile Include="World\TileSet.cs" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

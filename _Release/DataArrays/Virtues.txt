@@ -1,0 +1,6 @@
+0|Altruism|12000
+1|Wisdom|12001
+2|Prudence|12002
+3|Arete|12003
+4|Courage|12004
+5|Patience|12005

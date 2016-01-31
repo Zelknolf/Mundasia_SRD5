@@ -1,0 +1,4 @@
+0|No Tradition|12816
+1|Tenet Tradition|12817
+2|Pillar Tradition|12818
+3|Ritual Tradition|12819

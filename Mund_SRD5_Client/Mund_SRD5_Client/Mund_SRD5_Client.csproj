@@ -1,0 +1,218 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3E69C889-B990-43CA-9533-CC849ABB1F5D}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Mund_SRD5_Client</RootNamespace>
+    <AssemblyName>Mund_SRD5_Client</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\Mund_SRD5_Server\Mund_SRD5_Server\Communication\Objects\AccountCreation.cs">
+      <Link>Communication\Objects\AccountCreation.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Mund_SRD5_Server\Mund_SRD5_Server\Communication\Objects\CharacterCreation.cs">
+      <Link>Communication\Objects\CharacterCreation.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Mund_SRD5_Server\Mund_SRD5_Server\Communication\Objects\CharacterSelection.cs">
+      <Link>Communication\Objects\CharacterSelection.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Mund_SRD5_Server\Mund_SRD5_Server\Communication\Objects\EquipRequest.cs">
+      <Link>Communication\Objects\EquipRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Mund_SRD5_Server\Mund_SRD5_Server\Communication\Objects\Login.cs">
+      <Link>Communication\Objects\Login.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Mund_SRD5_Server\Mund_SRD5_Server\Communication\Objects\MoveRequest.cs">
+      <Link>Communication\Objects\MoveRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Mund_SRD5_Server\Mund_SRD5_Server\Communication\Objects\MundEncoding.cs">
+      <Link>Communication\Objects\MundEncoding.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Mund_SRD5_Server\Mund_SRD5_Server\Communication\Objects\RequestCharacter.cs">
+      <Link>Communication\Objects\RequestCharacter.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Mund_SRD5_Server\Mund_SRD5_Server\Communication\Objects\SessionUpdate.cs">
+      <Link>Communication\Objects\SessionUpdate.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Mund_SRD5_Server\Mund_SRD5_Server\Communication\Objects\TileChange.cs">
+      <Link>Communication\Objects\TileChange.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Mund_SRD5_Server\Mund_SRD5_Server\Objects\Creatures\Background.cs">
+      <Link>Objects\Creatures\Background.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Mund_SRD5_Server\Mund_SRD5_Server\Objects\Creatures\Creature.cs">
+      <Link>Objects\Creatures\Creature.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Mund_SRD5_Server\Mund_SRD5_Server\Objects\Creatures\CreatureImage.cs">
+      <Link>Objects\Creatures\CreatureImage.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Mund_SRD5_Server\Mund_SRD5_Server\Objects\Creatures\CreatureInventory.cs">
+      <Link>Objects\Creatures\CreatureInventory.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Mund_SRD5_Server\Mund_SRD5_Server\Objects\Creatures\DisplayCharacter.cs">
+      <Link>Objects\Creatures\DisplayCharacter.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Mund_SRD5_Server\Mund_SRD5_Server\Objects\Creatures\Race.cs">
+      <Link>Objects\Creatures\Race.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Mund_SRD5_Server\Mund_SRD5_Server\Objects\Creatures\Skill.cs">
+      <Link>Objects\Creatures\Skill.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Mund_SRD5_Server\Mund_SRD5_Server\Objects\Creatures\SkinColor.cs">
+      <Link>Objects\Creatures\SkinColor.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Mund_SRD5_Server\Mund_SRD5_Server\Objects\Items\ClothColor.cs">
+      <Link>Objects\Items\ClothColor.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Mund_SRD5_Server\Mund_SRD5_Server\Objects\Items\InventoryItem.cs">
+      <Link>Objects\Items\InventoryItem.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Mund_SRD5_Server\Mund_SRD5_Server\UI\Direction.cs">
+      <Link>UI\UIObjects\Direction.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Mund_SRD5_Server\Mund_SRD5_Server\UI\IPlaySceneDrawable.cs">
+      <Link>UI\UIObjects\IPlaySceneDrawable.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Mund_SRD5_Server\Mund_SRD5_Server\World\Map.cs">
+      <Link>World\Map.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Mund_SRD5_Server\Mund_SRD5_Server\World\MapDelta.cs">
+      <Link>World\MapDelta.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Mund_SRD5_Server\Mund_SRD5_Server\World\Tile.cs">
+      <Link>World\Tile.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Mund_SRD5_Server\Mund_SRD5_Server\World\TileImage.cs">
+      <Link>World\TileImage.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Mund_SRD5_Server\Mund_SRD5_Server\World\TileSet.cs">
+      <Link>World\TileSet.cs</Link>
+    </Compile>
+    <Compile Include="ClientForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ClientForm.Designer.cs">
+      <DependentUpon>ClientForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ClientProgram.cs" />
+    <Compile Include="Communication\Consumer\Encryption.cs" />
+    <Compile Include="Communication\Consumer\ServiceConsumer.cs" />
+    <Compile Include="Communication\Consumer\Worker.cs" />
+    <Compile Include="PrimaryForm.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SplashScreen.cs" />
+    <Compile Include="SplashScreen.Designer.cs">
+      <DependentUpon>SplashScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Startup.cs" />
+    <Compile Include="UI\Info\StringLibrary.cs" />
+    <Compile Include="UI\Screens\CharacterCreationScreen.cs" />
+    <Compile Include="UI\Screens\CharacterPanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Screens\CharacterSelectScreen.cs" />
+    <Compile Include="UI\Screens\LoginForm.cs" />
+    <Compile Include="UI\Screens\LoginScreen.cs" />
+    <Compile Include="UI\Screens\NewAccountForm.cs" />
+    <Compile Include="UI\Screens\PlayScene\PlayScene.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Screens\PlayScene\PlaySceneControl.cs" />
+    <Compile Include="UI\Screens\PlayScene\PlayScene_MouseClick.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Screens\PlayScene\PlayScene_MouseMove.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Screens\PlayScene\PlayScene_Paint.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Screens\PlayScene\PlayScene_Resize.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Screens\PlayScene\TileEditPane.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Windows\InventoryForm.cs" />
+    <Compile Include="UI\Windows\ItemCreationForm.cs" />
+    <Compile Include="UI\Windows\Lore\Lore.cs" />
+    <Compile Include="UI\Windows\Lore\LoreText.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Windows\Lore\LoreTOC.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Windows\Lore\LoreViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Windows\PlayerInterface.cs" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

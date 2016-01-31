@@ -1,0 +1,12 @@
+0|Strength|10900
+1|Agility|10901
+2|Endurance|10902
+3|Perception|10903
+4|Quickness|10904
+5|Memory|10905
+6|Persuasion|10906
+7|Glibness|10907
+8|Appearance|10908
+9|Force|10909
+10|Control|10910
+11|Discipline|10911

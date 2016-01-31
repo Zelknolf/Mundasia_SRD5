@@ -1,0 +1,4 @@
+0|No Authority|12812
+1|Grudging Authority|12813
+2|Passive Authority|12814
+3|Active Authority|12815

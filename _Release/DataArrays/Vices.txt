@@ -1,0 +1,6 @@
+0|Greed|12500
+1|Naivete|12501
+2|Foolhardiness|12502
+3|Torpidity|12503
+4|Cowardice|12504
+5|Wrath|12505

@@ -1,0 +1,38 @@
+0|Mundasia
+1|New Account
+2|User Name
+3|Password
+4|Re-Enter Password
+5|Email
+6|Create
+7|Cancel
+8|Log In
+9|Exit
+10|Female
+11|Male
+12|Name
+13|Next
+14|A character's name is however people are expected to regard the character. This should be provided from the in-character perspective, though do not bear any other restriction.
+15|A character's sex is mostly meaningful in terms of what role they play in reproduction. Some cultures place additional emphasis in particular directions to the different sexes, but the choice has no other effect on game mechanics.\n\nA character's race determines which precise sort of creature the character is, and thus has a strong influence on the character's basic abilities and potentials. A character's race selection defines a minimum starting value for every ability score, and often includes a special bonus in specific circumstance.
+16|A character's virtue is the most-universal of the character's positive characteristics. Characters would generally expect to be regarded well for possessing this trait. While this selection doesn't prevent demonstrating other virtuous traits, it is generally expected that this be played consistently, and that the matching vice not be prevalent in the portrayal of the character.
+17|A character's vice is the most-universal of the character's negative characteristics. Characters would generally expect to be regarded poorly for possessing this trait. While this selection doesn't prevent demonstrating other unpleasant traits, it is generally expected that this be played consistently, and that the matching virtue not be prevalent in the portrayal of the character.
+18|A character's moral authority setting represents how they respond to legitimate authority figures, with most opinions falling somewhere on a continuum between the argument that no person has the right to express authority over another and that it is the duty of all people to actively support and progress the interests of authority by virtue of the fact that they hold it.
+19|A character's moral care setting represents how much they believe that people should be expected to care for the wellbeing of one another. Most opinions fall on a continuum between the argument that all people should be expected to provide for themselves to the argument that everyone deserves to be cared for even when they are not in peril.
+20|A character's moral fairness setting represents how much they believe that people deserve to be treated equally when compared to one another. Most opinions fall on a continuum between those who claim that fairness is unworthy of seeking and all interactions are about who holds power over whom and those who claim that everyone deserves to have equal results in broad aspects of their lives.
+21|A character's moral loyalty setting represents how large of a group the character feels obligated to treat well, usually occupying some range between no one and all beings of some sort, such as all sentient life.
+22|A character's moral tradition setting represents how much emphasis a character places on the traditions in which they were raised, ranging from a total rejection of the value of tradition to a precise and detailed following of all of the traditions by virtue of the fact that they are tradition.
+23|A character's profession represents the thing that the character did to make a living, and thus also what sort of education the character had, before becoming a player character. Every profession provides training in three skills and adds one point to one ability score that is relevant to the character's vocation, and it also provides some profession-specific benefits in targeted situations.
+24|A character's talent represents some capacity in which the character is more capable than others naturally. This increases the associated ability score by one point, and improves the character's aptitude for learning when using it, just as if the character's race were more inclined toward the ability.
+25|A character's hobby is the skill associated with whatever thing the character does in his or her spare time. This is generally understood to be self-taught, and provides training in the skill at a slightly lower amount of proficiency than if it were provided by a profession. If a character's hobby is also provided by the character's profession, then that skill's rank is increased by 1.
+26|Traits
+27|Morals
+28|Abilities
+29|Ability Scores
+30|Skills
+31|Profession
+32|Talent
+33|Hobby
+34|Create Character
+35|Lore
+36|A character's aspiration is the hopes and goals of the character, which they presumably invest in developing when they have the luxury to do so. A character's aspiration provides skills and abilities like hobbies and professions, but at less skill, and these abilities don't resist decay the way that actively-practiced abilities do.
+37|Select Character

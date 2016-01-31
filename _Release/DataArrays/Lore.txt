@@ -1,0 +1,15 @@
+0|Bazzurdin|BazzurdinSymbol.png|Religion|14000
+1|Caralil|CaralilSymbol.png|Religion|14001
+2|Dopumeh|DopumehSymbol.png|Religion|14002
+3|Garshwynn|GarshwynnSymbol.png|Religion|14003
+4|Ishania|IshaniaSymbol.png|Religion|14004
+5|Karn|KarnSymbol.png|Religion|14005
+6|Lyca|LycaSymbol.png|Religion|14006
+7|Pazunish|PazunishSymbol.png|Religion|14007
+8|Raltonin|RaltoninSymbol.png|Religion|14008
+9|Sylahisi|SylahisiSymbol.png|Religion|14009
+10|Thuun|ThuunSymbol.png|Religion|14010
+11|Tywekia|TywekiaSymbol.png|Religion|14011
+12|Uashyl|UashylSymbol.png|Religion|14012
+13|Boot Wearer|ElfFoot.png|Elven Culture|13500
+14|Godtouched|Godtouched.png|Religion|14013

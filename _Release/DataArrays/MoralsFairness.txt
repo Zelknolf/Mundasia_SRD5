@@ -1,0 +1,4 @@
+0|No Fairness|12804
+1|In-Group Fairness|12805
+2|Foundational Fairness|12806
+3|Absolute Fairness|12807
