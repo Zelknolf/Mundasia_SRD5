@@ -20,66 +20,42 @@ namespace Mundasia.Objects
 
                 Name = split[1];
 
-                if (!int.TryParse(split[2], out Strength))
+                if (!int.TryParse(split[2], out Height))
                 {
-                    Strength = -1;
+                    Height = 4;
                 }
-                if (!int.TryParse(split[3], out Agility))
+                if (!int.TryParse(split[3], out Movement))
                 {
-                    Agility = -1;
+                    Movement = 6;
                 }
-                if (!int.TryParse(split[4], out Endurance))
+                if (!int.TryParse(split[4], out Strength))
                 {
-                    Endurance = -1;
+                    Strength = 1;
                 }
-                if (!int.TryParse(split[5], out Perception))
+                if (!int.TryParse(split[5], out Dexterity))
                 {
-                    Perception = -1;
+                    Dexterity = 1;
                 }
-                if (!int.TryParse(split[6], out Quickness))
+                if (!int.TryParse(split[6], out Constitution))
                 {
-                    Quickness = -1;
+                    Constitution = 1;
                 }
-                if (!int.TryParse(split[7], out Memory))
+                if (!int.TryParse(split[7], out Intelligence))
                 {
-                    Memory = -1;
+                    Intelligence = 1;
                 }
-                if (!int.TryParse(split[8], out Persuasion))
+                if (!int.TryParse(split[8], out Wisdom))
                 {
-                    Persuasion = -1;
+                    Wisdom = 1;
                 }
-                if (!int.TryParse(split[9], out Glibness))
+                if (!int.TryParse(split[9], out Charisma))
                 {
-                    Glibness = -1;
+                    Charisma = 1;
                 }
-                if (!int.TryParse(split[10], out Appearance))
+                if (!uint.TryParse(split[10], out Description))
                 {
-                    Appearance = -1;
+                    Description = 13000;
                 }
-                if (!int.TryParse(split[11], out Force))
-                {
-                    Force = -1;
-                }
-                if (!int.TryParse(split[12], out Control))
-                {
-                    Control = -1;
-                }
-                if (!int.TryParse(split[13], out Discipline))
-                {
-                    Discipline = -1;
-                }
-
-                uint desc;
-                if (uint.TryParse(split[14], out desc))
-                {
-                    Description = desc;
-                }
-                else
-                {
-                    Description = uint.MaxValue;
-                }
-
-                int.TryParse(split[15], out Height);
             }
             else
             {
@@ -89,23 +65,19 @@ namespace Mundasia.Objects
             }
         }
 
-        public Race(uint id, uint description, string name, int strength, int agility, int endurance, int perception, int quickness, int memory, int persuasion, int glibness, int appearance, int force, int control, int discipline)
+        public Race(uint id, uint description, string name, int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma, int height, int movement)
         {
             Id = id;
             Description = description;
             Name = name;
             Strength = strength;
-            Agility = agility;
-            Endurance = endurance;
-            Perception = perception;
-            Quickness = quickness;
-            Memory = memory;
-            Persuasion = persuasion;
-            Glibness = glibness;
-            Appearance = appearance;
-            Force = force;
-            Control = control;
-            Discipline = discipline;
+            Dexterity = dexterity;
+            Constitution = constitution;
+            Intelligence = intelligence;
+            Wisdom = wisdom;
+            Charisma = charisma;
+            Height = height;
+            Movement = movement;
         }
 
         /// <summary>
@@ -234,59 +206,34 @@ namespace Mundasia.Objects
         public int Strength;
 
         /// <summary>
-        /// The race's base agility score
+        /// The race's base dexterity score
         /// </summary>
-        public int Agility;
+        public int Dexterity;
 
         /// <summary>
-        /// The race's base endurance score
+        /// The race's base constitution score
         /// </summary>
-        public int Endurance;
+        public int Constitution;
 
         /// <summary>
-        /// The race's base perception score
+        /// The race's base intelligence score
         /// </summary>
-        public int Perception;
+        public int Intelligence;
 
         /// <summary>
-        /// The race's base quickness score
+        /// The race's base wisdom score
         /// </summary>
-        public int Quickness;
+        public int Wisdom;
 
         /// <summary>
-        /// The race's base memory score
+        /// The race's base charisma score
         /// </summary>
-        public int Memory;
+        public int Charisma;
 
         /// <summary>
-        /// The race's base persuasion score
+        /// The race's base movement in tiles.
         /// </summary>
-        public int Persuasion;
-
-        /// <summary>
-        /// The race's base glibness score
-        /// </summary>
-        public int Glibness;
-
-        /// <summary>
-        /// The race's base appearance score
-        /// </summary>
-        public int Appearance;
-
-        /// <summary>
-        /// The race's base force score
-        /// </summary>
-        public int Force;
-
-        /// <summary>
-        /// The race's base control score
-        /// </summary>
-        public int Control;
-
-        /// <summary>
-        /// The race's base discipline score
-        /// </summary>
-        public int Discipline;
+        public int Movement;
 
         /// <summary>
         /// The race's available skin colors.
