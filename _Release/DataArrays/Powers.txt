@@ -1,0 +1,14 @@
+0|Darkvision|50000
+1|Dwarven Resilience|50001
+2|Stonecunning|50002
+3|Dwarven Toughness|50003
+4|Fey Ancestry|50004
+5|Elven Spellcasting|50005
+6|Lucky|50006
+7|Brave|50007
+8|Halfling Nimbleness|50008
+9|Naturally Stealthy|50009
+10|Gnome Cunning|50010
+11|Artificer's Lore|50011
+12|Relentless Endurance|50012
+13|Savage Attacks|50013
