@@ -56,6 +56,34 @@ namespace Mundasia.Objects
                 {
                     Description = 13000;
                 }
+                if (!int.TryParse(split[11], out FreeSkills))
+                {
+                    FreeSkills = 0;
+                }
+
+                AutomaticSkills = new List<int>();
+                string[] autoSkills = split[12].Split('[');
+                foreach(string autoSkill in autoSkills)
+                {
+                    int sk;
+                    if (Int32.TryParse(autoSkill, out sk)) AutomaticSkills.Add(sk);
+                }
+
+                SelectedSkill = new List<int>();
+                string[] selSkills = split[13].Split('[');
+                foreach(string selSkill in selSkills)
+                {
+                    int sk;
+                    if (Int32.TryParse(selSkill, out sk)) SelectedSkill.Add(sk);
+                }
+
+                Powers = new List<int>();
+                string[] pows = split[14].Split('[');
+                foreach(string pow in pows)
+                {
+                    int sk;
+                    if (Int32.TryParse(pow, out sk)) Powers.Add(sk);
+                }
             }
             else
             {
@@ -65,7 +93,7 @@ namespace Mundasia.Objects
             }
         }
 
-        public Race(uint id, uint description, string name, int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma, int height, int movement)
+        public Race(uint id, uint description, string name, int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma, int height, int movement, int freeSkills, List<int> automaticSkills, List<int> freeSkillOptions, List<int> powers)
         {
             Id = id;
             Description = description;
@@ -78,6 +106,10 @@ namespace Mundasia.Objects
             Charisma = charisma;
             Height = height;
             Movement = movement;
+            FreeSkills = freeSkills;
+            AutomaticSkills = automaticSkills;
+            SelectedSkill = freeSkillOptions;
+            Powers = powers;
         }
 
         /// <summary>
@@ -234,6 +266,26 @@ namespace Mundasia.Objects
         /// The race's base movement in tiles.
         /// </summary>
         public int Movement;
+
+        /// <summary>
+        /// The number of free skill selections that members of the race can take.
+        /// </summary>
+        public int FreeSkills;
+
+        /// <summary>
+        /// Skills that are automatically granted to members of this race.
+        /// </summary>
+        public List<int> AutomaticSkills;
+
+        /// <summary>
+        /// A list of skills that members of this race may pick the free skill from.
+        /// </summary>
+        public List<int> SelectedSkill;
+
+        /// <summary>
+        /// A list of powers that members of this race receive.
+        /// </summary>
+        public List<int> Powers;
 
         /// <summary>
         /// The race's available skin colors.
