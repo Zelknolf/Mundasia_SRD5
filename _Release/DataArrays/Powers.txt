@@ -54,3 +54,56 @@
 53|Magical Secrets I|50053
 54|Magical Secrets II|50054
 55|Magical Secrets III|50055
+56|Channel Divinity I|50056
+57|Channel Divinity II|50057
+58|Channel Divinity III|50058
+59|Turn Undead|50059
+60|Destroy Undead|50060
+61|Divine Intervention|50061
+62|Wild Shape|50062
+63|Timeless Body|50063
+64|Beast Spells|50064
+65|Archery Fighting Style|50065
+66|Defense Fighting Style|50066
+67|Dueling Fighting Style|50067
+68|Great Weapon Fighting Style|50068
+69|Protection Fighting Style|50069
+70|Two-Weapon Fighting Style|50070
+71|Second Wind|50071
+72|Action Surge|50072
+73|Triple Attack|50073
+74|Quadruple Attack|50074
+75|Indomitable I|50075
+76|Indomitable II|50076
+77|Indomitable III|50077
+78|Martial Arts I|50078
+79|Martial Arts II|50079
+80|Martial Arts III|50080
+81|Martial Arts IV|50081
+82|Monk Unarmored Defense|50082
+83|Unarmored Movement|50083
+84|Unarmored Movement II|50084
+85|Deflect Missiles|50085
+86|Slow Fall|50086
+87|Stunning Strike|50087
+88|Flurry of Blows|50088
+89|Patient Defense|50089
+90|Step of the Wind|50090
+91|Ki-Empowered Strikes|50091
+92|Evasion|50092
+93|Stillness of Mind|50093
+94|Purity of Body|50094
+95|Tongue of the Sun and Moon|50095
+96|Diamond Soul|50096
+97|Timeless Body|50097
+98|Empty Body|50098
+99|Perfect Self|50099
+100|Divine Sense|50100
+101|Lay on Hands|50101
+102|Divine Smite|50102
+103|Divine Health|50103
+104|Aura of Protection|50104
+105|Aura of Courage I|50105
+106|Aura of Courage II|50106
+107|Improved Divine Smite|50107
+108|Cleansing Touch|50108
