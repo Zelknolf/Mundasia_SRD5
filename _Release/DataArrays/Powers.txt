@@ -133,3 +133,179 @@
 132|Vanish|50132
 133|Feral Senses|50133
 134|Foe Slayer|50134
+135|Housebreaking Expertise|50135
+136|Sneak Attack I|50136
+137|Sneak Attack II|50137
+138|Sneak Attack III|50138
+139|Sneak Attack IV|50139
+140|Sneak Attack V|50140
+141|Sneak Attack VI|50141
+142|Sneak Attack VII|50142
+143|Sneak Attack VIII|50143
+144|Sneak Attack IX|50144
+145|Sneak Attack X|50145
+146|Thieves' Cant|50146
+147|Cunning Action|50147
+148|Uncanny Dodge|50148
+149|Reliable Talent|50149
+150|Blindsense|50150
+151|Slippery Mind|50151
+152|Elusive|50152
+153|Stroke of Luck|153
+154|Flexible Casting|154
+155|Careful Spell|50155
+156|Distant Spell|50156
+157|Empowered Spell|50157
+158|Extended Spell|50158
+159|Heightened Spell|50159
+160|Quickened Spell|50160
+161|Subtle Spell|50161
+162|Twinned Spell|50162
+163|Sorcerous Restoration|50163
+164|Pact of the Chain|50164
+165|Pact of the Blade|50165
+166|Pact of the Tome|50166
+167|Mystic Arcanum: Chain Lightning|50167
+168|Mystic Arcanum: Circle of Death|50168
+169|Mystic Arcanum: Contingency|50169
+170|Mystic Arcanum: Create Undead|50170
+171|Mystic Arcanum: Distintegrate|50171
+172|Mystic Arcanum: Eyebite|50172
+173|Mystic Arcanum: Flesh to Stone|50173
+174|Mystic Arcanum: Freezing Sphere|50174
+175|Mystic Arcanum: Globe of Invulnerability|50175
+176|Mystic Arcanum: Guards and Wards|50176
+177|Mystic Arcanum: Instant Summons|50177
+178|Mystic Arcanum: Irresistible Dance|50178
+179|Mystic Arcanum: Magic Jar|50179
+180|Mystic Arcanum: Mass Suggestion|50180
+181|Mystic Arcanum: Move Earth|50181
+182|Mystic Arcanum: Programmed Illusion|50182
+183|Mystic Arcanum: Sunbeam|50183
+184|Mystic Arcanum: True Seeing|50184
+185|Mystic Arcanum: Wall of Ice|50185
+186|Mystic Arcanum: Arcane Sword|50186
+187|Mystic Arcanum: Delayed Blast Fireball|50187
+188|Mystic Arcanum: Etherealness|50188
+189|Mystic Arcanum: Finger of Death|50189
+190|Mystic Arcanum: Forcecage|50190
+191|Mystic Arcanum: Magnificent Mansion|50191
+192|Mystic Arcanum: Mirage Arcane|50192
+193|Mystic Arcanum: Plane Shift|50193
+194|Mystic Arcanum: Prismatic Spray|50194
+195|Mystic Arcanum: Project Image|50195
+196|Mystic Arcanum: Reverse Gravity|50196
+197|Mystic Arcanum: Sequester|50197
+198|Mystic Arcanum: Simulacrum|50198
+199|Mystic Arcanum: Symbol|50199
+200|Mystic Arcanum: Teleport|50200
+201|Mystic Arcanum: Antimagic Field|50201
+202|Mystic Arcanum: Antipathy/Sympathy|50202
+203|Mystic Arcanum: Clone|50203
+204|Mystic Arcanum: Control Weather|50204
+205|Mystic Arcanum: Demiplane|50205
+206|Mystic Arcanum: Dominate Monster|50206
+207|Mystic Arcanum: Feeblemind|50207
+208|Mystic Arcanum: Incendiary Cloud|50208
+209|Mystic Arcanum: Maze|50209
+210|Mystic Arcanum: Mind Blank|50210
+211|Mystic Arcanum: Power Word Stun|50211
+212|Mystic Arcanum: Sunburst|50212
+213|Mystic Arcanum: Astral Projection|50213
+214|Mystic Arcanum: Foresight|50214
+215|Mystic Arcanum: Gate|50215
+216|Mystic Arcanum: Imprisonment|50216
+217|Mystic Arcanum: Meteor Swarm|50217
+218|Mystic Arcanum: Power Word Kill|50218
+219|Mystic Arcanum: Prismatic Wall|50219
+220|Mystic Arcanum: Shapechange|50220
+221|Mystic Arcanum: Time Stop|50221
+222|Mystic Arcanum: True Polymorph|50222
+223|Mystic Arcanum: Weird|50223
+224|Mystic Arcanum: Wish|50224
+225|Eldritch Master|50225
+226|Spell Mastery: Alarm|50226
+227|Spell Mastery: Burning Hands|50227
+228|Spell Mastery: Charm Person|50228
+229|Spell Mastery: Color Spray|50229
+230|Spell Mastery: Comprehend Languages|50230
+231|Spell Mastery: Detect Magic|50231
+232|Spell Mastery: Disguise Self|50232
+233|Spell Mastery: Expeditious Retreat|50233
+234|Spell Mastery: False Life|50234
+235|Spell Mastery: Feather Fall|50235
+236|Spell Mastery: Floating Disk|50236
+237|Spell Mastery: Fog Cloud|50237
+238|Spell Mastery: Grease|50238
+239|Spell Mastery: Hideous Laughter|50239
+240|Spell Mastery: Identify|50240
+241|Spell Mastery: Illusory Script|50241
+242|Spell Mastery: Jump|50242
+243|Spell Mastery: Longstrider|50243
+244|Spell Mastery: Mage Armor|50244
+245|Spell Mastery: Magic Missile|50245
+246|Spell Mastery: Protection from Evil and Good|50246
+247|Spell Mastery: Shield|50247
+248|Spell Mastery: Silent Image|50248
+249|Spell Mastery: Sleep|50249
+250|Spell Mastery: Thunderwave|50250
+251|Spell Mastery: Unseen Servant|50251
+252|Spell Mastery: Acid Arrow|50252
+253|Spell Mastery: Alter Self|50253
+254|Spell Mastery: Arcane Lock|50254
+255|Spell Mastery: Arcanist's Magic Aura|50255
+256|Spell Mastery: Blindness/Deafness|50256
+257|Spell Mastery: Blur|50257
+258|Spell Mastery: Continual Flame|50258
+259|Spell Mastery: Darkness|50259
+260|Spell Mastery: Darkvision|50260
+261|Spell Mastery: Detect Thoughts|50261
+262|Spell Mastery: Enlarge/Reduce|50262
+263|Spell Mastery: Flaming Sphere|50263
+264|Spell Mastery: Gentle Repose|50264
+265|Spell Mastery: Gust of Wind|50265
+266|Spell Mastery: Hold Person|50266
+267|Spell Mastery: Invisibility|50267
+268|Spell Mastery: Knock|50268
+269|Spell Mastery: Levitate|50269
+270|Spell Mastery: Locate Object|50270
+271|Spell Mastery: Magic Mouth|50271
+272|Spell Mastery: Magic Weapon|50272
+273|Spell Mastery: Mirror Image|50273
+274|Spell Mastery: Misty Step|50274
+275|Spell Mastery: Ray of Enfeeblement|50275
+276|Spell Mastery: Rope Trick|50276
+277|Spell Mastery: Scorching Ray|50277
+278|Spell Mastery: See Invisibility|50278
+279|Spell Mastery: Shatter|50279
+280|Spell Mastery: Spider Climb|50280
+281|Spell Mastery: Suggestion|50281
+282|Spell Mastery: Web|50282
+283|Signature Spell: Animate Dead|50283
+284|Signature Spell: Bestow Curse|50284
+285|Signature Spell: Blink|50285
+286|Signature Spell: Clairvoyance|50286
+287|Signature Spell: Dispel Magic|50287
+288|Signature Spell: Fear|50288
+289|Signature Spell: Fireball|50289
+290|Signature Spell: Fly|50290
+291|Signature Spell: Gaseous Form|50291
+292|Signature Spell: Glyph of Warding|50292
+293|Signature Spell: Haste|50293
+294|Signature Spell: Hypnotic Pattern|50294
+295|Signature Spell: Lightning Bolt|50295
+296|Signature Spell: Magic Circle|50296
+297|Signature Spell: Major Image|50297
+298|Signature Spell: Nondetection|50298
+299|Signature Spell: Phantom Steed|50299
+300|Signature Spell: Protection from Energy|50300
+301|Signature Spell: Remove Curse|50301
+302|Signature Spell: Sending|50302
+303|Signature Spell: Sleet Storm|50303
+304|Signature Spell: Slow|50304
+305|Signature Spell: Stinking Cloud|50305
+306|Signature Spell: Tiny Hut|50306
+307|Signature Spell: Tongues|50307
+308|Signature Spell: Vampiric Touch|50308
+309|Signature Spell: Water Breathing|50309
+310|Arcane Recovery|50310
