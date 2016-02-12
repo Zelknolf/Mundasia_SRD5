@@ -107,3 +107,29 @@
 106|Aura of Courage II|50106
 107|Improved Divine Smite|50107
 108|Cleansing Touch|50108
+109|Favored Enemy: Aberrations|50109
+110|Favored Enemy: Beasts|50110
+111|Favored Enemy: Celestials|50111
+112|Favored Enemy: Constructs|50112
+113|Favored Enemy: Dragons|50113
+114|Favored Enemy: Elementals|50114
+115|Favored Enemy: Fey|50115
+116|Favored Enemy: Fiends|50116
+117|Favored Enemy: Giants|50117
+118|Favored Enemy: Monstrosities|50118
+119|Favored Enemy: Oozes|50119
+120|Favored Enemy: Plants|50120
+121|Favored Enemy: Undead|50121
+122|Natural Explorer: Arctic|50122
+123|Natural Explorer: Coast|50123
+124|Natural Explorer: Desert|50124
+125|Natural Explorer: Forest|50125
+126|Natural Explorer: Grassland|50126
+127|Natural Explorer: Mountain|50127
+128|Natural Explorer: Swamp|50128
+129|Primeval Awareness|50129
+130|Land's Stride|50130
+131|Hide in Plain Sight|50131
+132|Vanish|50132
+133|Feral Senses|50133
+134|Foe Slayer|50134
