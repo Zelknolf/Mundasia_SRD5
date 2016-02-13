@@ -38,3 +38,13 @@
 119|4|Navigation|10119
 120|3|Poisoning|10120
 121|3|Housebreaking|10121
+200|5|Play Bagpipes|10200
+201|5|Play Drums|10201
+202|5|Play Dulcimer|10202
+203|5|Play Flute|10203
+204|5|Play Lute|10204
+205|5|Play Lyre|10205
+206|5|Play Horn|10206
+207|5|Play Panflute|10207
+208|5|Play Shawm|10208
+209|5|Play Viol|10209

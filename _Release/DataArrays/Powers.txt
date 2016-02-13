@@ -309,3 +309,7 @@
 308|Signature Spell: Vampiric Touch|50308
 309|Signature Spell: Water Breathing|50309
 310|Arcane Recovery|50310
+311|Frenzy|50311
+312|Mindless Rage|50312
+313|Intimidating Presence|50313
+314|Retaliation|50314
