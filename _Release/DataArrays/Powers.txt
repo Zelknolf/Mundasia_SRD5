@@ -313,3 +313,58 @@
 312|Mindless Rage|50312
 313|Intimidating Presence|50313
 314|Retaliation|50314
+315|Cutting Words|50315
+316|Additional Secrets|50316
+317|Peerless Skill|50317
+318|Disciple of Life|50318
+319|Channel Divinity: Preserve Life|50319
+320|Blessed Healer|50320
+321|Divine Strike I|50321
+322|Divine Strike II|50322
+323|Supreme Healing|50323
+324|Natural Recovery|50324
+325|Land's Stride|50325
+326|Nature's Ward|50326
+327|Nature's Sanctuary|50327
+328|Improved Critical|50328
+329|Remarkable Athlete|50329
+330|Superior Critical|50330
+331|Survivor|50331
+332|Open Hand Technique|50332
+333|Wholeness of Body|50333
+334|Tranquility|50334
+335|Quivering Palm|50335
+336|Channel Divinity: Sacred Weapon|50336
+337|Channel Divinity: Turn the Unholy|50337
+338|Aura of Devotion I|50338
+339|Aura of Devotion II|50339
+340|Purity of Spirit|50340
+341|Holy Nimbus|50341
+342|Colossus Slayer|50342
+343|Giant Killer|50343
+344|Horde Breaker|50344
+345|Escape the Horde|50345
+346|Multiattack Defense|50346
+347|Steel Will|50347
+348|Volley|50348
+349|Whirlwind Attack|50349
+350|Stand Against the Tide|50350
+351|Fast Hands|50351
+352|Second Story Work|50352
+353|Supreme Sneak|50353
+354|Use Magic Device|50354
+355|Thief's Reflexes|50355
+356|Draconic Ancestor: Black|50356
+357|Draconic Ancestor: Blue|50357
+358|Draconic Ancestor: Brass|50358
+359|Draconic Ancestor: Bronze|50359
+360|Draconic Ancestor: Copper|50360
+361|Draconic Ancestor: Gold|50361
+362|Draconic Ancestor: Green|50362
+363|Draconic Ancestor: Red|50363
+364|Draconic Ancestor: Silver|50364
+365|Draconic Ancestor: White|50365
+366|Draconic Resilience|50366
+367|Elemental Affinity|50367
+368|Dragon Wings|368
+369|Draconic Presence|369
