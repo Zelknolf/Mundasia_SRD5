@@ -366,5 +366,14 @@
 365|Draconic Ancestor: White|50365
 366|Draconic Resilience|50366
 367|Elemental Affinity|50367
-368|Dragon Wings|368
-369|Draconic Presence|369
+368|Dragon Wings|50368
+369|Draconic Presence|50369
+370|Dark One's Blessing|50370
+371|Dark One's Own Luck|50371
+372|Fiendish Resilience|50372
+373|Hurl Through Hell|50373
+374|Evocation Savant|50374
+375|Sculpt Spell|50375
+376|Potent Cantrip|50376
+377|Empowered Evocation|50377
+378|Overchannel|50378
