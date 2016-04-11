@@ -23,7 +23,7 @@ namespace Mundasia.Objects
             {
                 Id = index;
 
-                uint.TryParse(split[1], out Ability);
+                Ability = uint.Parse(split[1]);
 
                 Name = split[2];
 
