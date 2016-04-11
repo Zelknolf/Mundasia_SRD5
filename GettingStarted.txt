@@ -1,0 +1,2 @@
+1. Check out the repository
+2. run makedebuglinks.cmd from an admin-level command prompt
