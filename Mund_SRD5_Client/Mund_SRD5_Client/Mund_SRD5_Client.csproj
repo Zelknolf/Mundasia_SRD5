@@ -136,6 +136,7 @@
     <Compile Include="Communication\Consumer\Encryption.cs" />
     <Compile Include="Communication\Consumer\ServiceConsumer.cs" />
     <Compile Include="Communication\Consumer\Worker.cs" />
+    <Compile Include="Objects\Creatures\Power.cs" />
     <Compile Include="PrimaryForm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SplashScreen.cs" />
