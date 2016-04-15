@@ -1,0 +1,105 @@
+0|Acid Arrow|4|2|0
+1|Acid Splash|1|0|0
+2|Aid|0|2|0
+3|Alarm|0|1|1
+4|Alter Self|7|2|0
+5|Animal Messenger|3|2|1
+6|Animal Shapes|7|8|0
+7|Animate Dead|6|3|0
+8|Animate Objects|7|5|0
+9|Antilife Shell|0|5|0
+10|Antimagic Field|0|8|0
+11|Antipathy/Sympathy|3|8|0
+12|Arcane Eye|2|4|0
+13|Arcane Hand|4|5|0
+14|Arcane Lock|0|2|0
+15|Arcane Sword|4|7|0
+16|Arcanist's Magic Aura|5|2|0
+17|Astral Projection|6|9|0
+18|Augury|2|2|1
+19|Awaken|7|5|0
+20|Bane|3|1|0
+21|Banishment|0|4|0
+22|Barkskin|7|2|0
+23|Beacon of Hope|7|2|0
+24|Bestow Curse|6|3|0
+25|Black Tentacles|1|4|0
+26|Blade Barrier|4|6|0
+27|Bless|3|1|0
+28|Blight|6|4|0
+29|Blindness/Deafness|6|2|0
+30|Blink|7|3|0
+31|Blur|5|2|0
+32|Burning Hands|4|1|0
+33|Call Lightning|1|3|0
+34|Calm Emotions|3|2|0
+35|Chain Lightning|4|6|0
+36|Charm Person|3|1|0
+37|Chill Touch|6|0|0
+38|Circle of Death|6|6|0
+39|Clairvoyance|2|3|0
+40|Clone|6|8|0
+41|Cloudkill|1|5|0
+42|Color Spray|5|1|0
+43|Command|3|1|0
+44|Commune|2|5|1
+45|Commune with Nature|2|5|1
+46|Comprehend Languages|2|1|1
+47|Cone of Cold|4|5|0
+48|Confusion|3|4|0
+49|Conjure Animals|1|3|0
+50|Conjure Celestial|1|7|0
+51|Conjure Elemental|1|5|0
+52|Conjure Fey|1|6|0
+53|Conjure Minor Elementals|1|4|0
+54|Conjure Woodland Beings|1|4|0
+55|Contact Other Plane|2|5|1
+56|Contagion|6|5|0
+57|Contingency|4|6|0
+58|Continual Flame|4|2|0
+59|Control Water|7|4|0
+60|Control Weather|7|8|0
+61|Create Food and Water|1|3|0
+62|Create or Destroy Water|7|1|0
+63|Create Undead|6|6|0
+64|Creation|5|5|0
+65|Cure Wounds|4|1|0
+66|Dancing Lights|4|0|0
+67|Darkness|4|2|0
+68|Darkvision|7|2|0
+69|Daylight|4|3|0
+70|Death Ward|0|4|0
+71|Delayed Blast Fireball|4|7|0
+72|Demiplane|1|8|0
+73|Detect Evil and Good|2|1|0
+74|Detect Magic|2|1|1
+75|Detect Poison and Disease|2|1|1
+76|Detect Thoughts|2|2|0
+77|Dimension Door|1|4|0
+78|Disguise Self|5|1|0
+79|Disintegrate|7|6|0
+80|Dispel Evil and Good|0|5|0
+81|Dispel Magic|0|3|0
+82|Divination|2|4|1
+83|Divine Favor|4|1|0
+84|Divine Word|4|7|0
+85|Dominate Beast|3|4|0
+86|Dominate Monster|3|8|0
+87|Dominate Person|3|5|0
+88|Dream|5|5|0
+89|Earthquake|4|8|0
+90|Enhance Ability|7|2|0
+91|Enlarge/Reduce|7|2|0
+92|Entangle|1|1|0
+93|Enthrall|3|2|0
+94|Etherealness|7|7|0
+95|Expeditious Retreat|7|1|0
+96|Eyebite|6|6|0
+97|Fabricate|7|4|0
+98|Faerie Fire|4|1|0
+99|Faithful Hound|1|4|0
+100|False Life|6|1|0
+101|Fear|5|3|0
+102|Feather Fall|7|1|0
+103|Feeblemind|3|8|0
+104|Find Steed|1|2|0
