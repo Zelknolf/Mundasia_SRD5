@@ -103,3 +103,202 @@
 102|Feather Fall|7|1|0
 103|Feeblemind|3|8|0
 104|Find Steed|1|2|0
+105|Find the Path|2|6|0
+106|Find Traps|2|2|0
+107|Finger of Death|6|7|0
+108|Fireball|4|3|0
+109|Fire Shield|4|4|0
+110|Fire Storm|4|7|0
+111|Flame Blade|4|2|0
+112|Flame Strike|4|5|0
+113|Flaming Sphere|1|2|0
+114|Flesh to Stone|7|6|0
+115|Floating Disk|1|1|1
+116|Fly|7|3|0
+117|Fog Cloud|1|1|0
+118|Forbiddance|0|6|1
+119|Forcecage|4|7|0
+120|Foresight|2|9|0
+121|Freedom of Movement|0|4|0
+122|Freezing Sphere|4|6|0
+123|Gaseous Form|7|3|0
+124|Gate|1|9|0
+125|Geas|3|5|0
+126|Gentle Repose|6|2|1
+127|Giant Insect|7|4|0
+128|Glibness|7|8|0
+129|Globe of Invulnerability|0|6|0
+130|Glyph of Warding|0|3|0
+131|Grease|1|1|0
+132|Greater Invisibility|5|4|0
+133|Greater Restoration|0|5|0
+134|Guards and Wards|0|6|0
+135|Guidance|2|0|0
+136|Guiding Bolt|4|1|0
+137|Gust of Wind|4|2|0
+138|Hallow|4|5|0
+139|Hallucinatory Terrain|5|4|0
+140|Harm|7|6|0
+141|Haste|7|3|0
+142|Heal|4|6|0
+143|Healing Word|4|1|0
+144|Heat Metal|7|2|0
+145|Heroes' Feast|1|6|0
+146|Heroism|3|1|0
+147|Hideous Laughter|3|1|0
+148|Hold Monster|3|5|0
+149|Hold Person|3|2|0
+150|Holy Aura|0|8|0
+151|Hypnotic Pattern|5|3|0
+152|Ice Storm|4|4|0
+153|Identify|2|1|1
+154|Illusory Script|5|1|1
+155|Imprisonment|0|9|0
+156|Incendiary Cloud|1|8|0
+157|Inflict Wounds|6|1|0
+158|Insect Plague|1|5|0
+159|Instant Summons|1|6|1
+160|Invisibility|5|2|0
+161|Irresistible Dance|3|6|0
+162|Jump|7|1|0
+163|Knock|7|2|0
+164|Legend Lore|2|5|0
+165|Lesser Restoration|0|2|0
+166|Levitate|7|2|0
+167|Light|4|0|0
+168|Lightning Bolt|4|3|0
+169|Locate Animals or Plants|2|2|1
+170|Locate Creature|2|4|0
+171|Locate Object|2|2|0
+172|Longstrider|7|1|0
+173|Mage Armor|0|1|0
+174|Mage Hand|1|0|0
+175|Magic Circle|0|3|0
+176|Magic Jar|6|6|0
+177|Magic Missile|4|1|0
+178|Magic Mouth|5|2|1
+179|Magic Weapon|7|2|0
+180|Magnificent Mansion|1|7|0
+181|Major Image|5|3|0
+182|Mass Cure Wounds|4|5|0
+183|Mass Heal|4|9|0
+184|Mass Healing Word|4|3|0
+185|Mass Suggestion|3|6|0
+186|Maze|1|8|0
+187|Meld into Stone|7|3|1
+188|Mending|7|0|0
+189|Message|7|0|0
+190|Meteor Swarm|4|9|0
+191|Mind Blank|0|8|0
+192|Minor Illusion|5|0|0
+193|Mirage Arcane|5|7|0
+194|Mirror Image|5|2|0
+195|Mislead|5|5|0
+196|Misty Step|1|2|0
+197|Modify Memory|3|5|0
+198|Moonbeam|4|2|0
+199|Move Earth|7|6|0
+200|Nondetection|0|3|0
+201|Pass Without Trace|0|2|0
+202|Passwall|7|5|0
+203|Phantasmal Killer|5|4|0
+204|Phantom Steed|5|3|1
+205|Planar Ally|1|6|0
+206|Planar Binding|0|5|0
+207|Plane Shift|1|7|0
+208|Plant Growth|7|3|0
+209|Polymorph|7|4|0
+210|Power Word Kill|3|9|0
+211|Power Word Stun|3|8|0
+212|Prayer of Healing|4|2|0
+213|Prestidigitation|7|0|0
+214|Prismatic Spray|4|7|0
+215|Prismatic Wall|0|9|0
+216|Private Sanctum|0|4|0
+217|Produce Flame|1|0|0
+218|Programmed Illusion|5|6|0
+219|Project Image|5|7|0
+220|Protection from Energy|0|3|0
+221|Protection from Evil and Good|0|1|0
+222|Protection from Poison|0|2|0
+223|Purify Food and Drink|7|1|1
+224|Raise Dead|6|5|0
+225|Ray of Enfeeblement|6|2|0
+226|Ray of Frost|4|0|0
+227|Regenerate|7|7|0
+228|Reincarnate|7|5|0
+229|Remove Curse|0|3|0
+230|Resilient Sphere|4|4|0
+231|Resistance|0|0|0
+232|Resurrection|6|7|0
+233|Reverse Gravity|7|7|0
+234|Revivify|6|3|0
+235|Rope Trick|7|2|0
+236|Sacred Flame|4|0|0
+237|Sanctuary|0|1|0
+238|Scorching Ray|4|2|0
+239|Scrying|2|5|0
+240|Secret Chest|1|4|0
+241|See Invisibility|2|2|0
+242|Seeming|5|5|0
+243|Sending|4|3|0
+244|Sequester|7|7|0
+245|Shapechange|7|9|0
+246|Shatter|4|2|0
+247|Shield|0|1|0
+248|Shield of Faith|0|1|0
+249|Shillelagh|7|0|0
+250|Shocking Grasp|4|0|0
+251|Silence|5|2|1
+252|Silent Image|5|1|0
+253|Simulacrum|5|7|0
+254|Sleep|3|1|0
+255|Sleet Storm|1|3|0
+256|Slow|7|3|0
+257|Speak with Animals|2|1|1
+258|Speak with Dead|6|3|0
+259|Speak with Plants|7|3|0
+260|Spider Climb|7|2|0
+261|Spike Growth|7|2|0
+262|Spirit Guardians|1|3|0
+263|Spiritual Weapon|4|2|0
+264|Stinking Cloud|1|3|0
+265|Stone Shape|7|4|0
+266|Stoneskin|0|4|0
+267|Storm of Vengeance|1|9|0
+268|Suggestion|3|2|0
+269|Sunbeam|4|6|0
+270|Sunburst|4|8|0
+271|Symbol|0|7|0
+272|Telekinesis|7|5|0
+273|Telepathic Bond|2|5|1
+274|Teleport|1|7|0
+275|Teleportation Circle|1|5|0
+276|Thaumaturgy|7|0|0
+277|Thunderwave|4|1|0
+278|Time Stop|7|9|0
+279|Tiny Hut|4|3|1
+280|Tongues|2|3|0
+281|Transport via Plants|1|6|0
+282|Tree Stride|1|5|0
+283|True Polymorph|7|9|0
+284|True Resurrection|6|9|0
+285|True Seeing|2|6|0
+286|True Strike|2|0|0
+287|Unseen Servant|1|1|1
+288|Vampiric Touch|6|3|0
+289|Wall of Fire|4|4|0
+290|Wall of Force|4|5|0
+291|Wall of Ice|4|6|0
+292|Wall of Stone|4|5|0
+293|Wall of Thorns|1|6|0
+294|Warding Bond|0|2|0
+295|Water Breathing|7|3|1
+296|Water Walk|7|3|1
+297|Web|1|2|0
+298|Weird|5|9|0
+299|Wind Walk|7|6|0
+300|Wind Wall|4|3|0
+301|Wish|1|9|0
+302|Word of Recall|1|6|0
+303|Zone of Truth|3|2|0
