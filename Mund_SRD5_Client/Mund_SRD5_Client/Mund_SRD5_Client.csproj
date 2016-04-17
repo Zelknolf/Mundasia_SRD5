@@ -136,6 +136,8 @@
     <Compile Include="Communication\Consumer\Encryption.cs" />
     <Compile Include="Communication\Consumer\ServiceConsumer.cs" />
     <Compile Include="Communication\Consumer\Worker.cs" />
+    <Compile Include="Objects\Creatures\SpellSchool.cs" />
+    <Compile Include="Objects\Creatures\Spell.cs" />
     <Compile Include="Objects\Creatures\Power.cs" />
     <Compile Include="PrimaryForm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -153,9 +155,7 @@
     <Compile Include="UI\Screens\LoginForm.cs" />
     <Compile Include="UI\Screens\LoginScreen.cs" />
     <Compile Include="UI\Screens\NewAccountForm.cs" />
-    <Compile Include="UI\Screens\PlayScene\PlayScene.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="UI\Screens\PlayScene\PlayScene.cs" />
     <Compile Include="UI\Screens\PlayScene\PlaySceneControl.cs" />
     <Compile Include="UI\Screens\PlayScene\PlayScene_MouseClick.cs">
       <SubType>Component</SubType>

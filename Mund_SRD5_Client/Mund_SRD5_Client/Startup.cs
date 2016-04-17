@@ -33,7 +33,7 @@ namespace Mundasia.Client
                 return false;
             }
             splash.progress.PerformStep();
-            if(!LocalLoad())
+            if (!LocalLoad())
             {
                 error = "Unable to load local resources.";
                 splash.Close();
@@ -79,6 +79,10 @@ namespace Mundasia.Client
             TileSet.Load();
             splash.progress.PerformStep();
             Background.Load();
+            splash.progress.PerformStep();
+            SpellSchool.Load();
+            splash.progress.PerformStep();
+            Spell.Load();
             return true;
         }
     }
