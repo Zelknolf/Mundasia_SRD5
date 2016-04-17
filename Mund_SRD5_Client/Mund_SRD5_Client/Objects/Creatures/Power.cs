@@ -115,7 +115,7 @@ namespace Mundasia.Objects
         /// Get all currently-loaded powers as an enumerable.
         /// </summary>
         /// <returns>an IEnumerable containing all loaded powers</returns>
-        public static IEnumerable<Power> GetSkills()
+        public static IEnumerable<Power> GetPowers()
         {
             return _library.Values;
         }
