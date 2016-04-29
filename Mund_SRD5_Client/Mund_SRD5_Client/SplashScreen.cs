@@ -33,7 +33,7 @@ namespace Mundasia.Client
             progress.Size = new Size(400, 10);
             progress.Location = new Point(50, 395);
             progress.Step = 1;
-            progress.Maximum = 20;
+            progress.Maximum = 21;
             progress.Style = ProgressBarStyle.Continuous;
             progress.ForeColor = Color.DarkViolet;
             progress.PerformStep();
