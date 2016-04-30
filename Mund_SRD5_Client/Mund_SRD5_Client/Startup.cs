@@ -85,6 +85,8 @@ namespace Mundasia.Client
             Spell.Load();
             splash.progress.PerformStep();
             SpellList.Load();
+            splash.progress.PerformStep();
+            CharacterClass.Load();
             return true;
         }
     }

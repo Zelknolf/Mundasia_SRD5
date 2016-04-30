@@ -7,7 +7,7 @@
 6|3|Investigation|10006
 7|3|Nature|10007
 8|3|Religion|10008
-9|4||Animal Handling|10009
+9|4|Animal Handling|10009
 10|4|Insight|10010
 11|4|Medicine|10011
 12|4|Perception|10012

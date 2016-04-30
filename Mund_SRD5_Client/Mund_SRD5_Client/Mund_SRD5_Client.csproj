@@ -136,6 +136,7 @@
     <Compile Include="Communication\Consumer\Encryption.cs" />
     <Compile Include="Communication\Consumer\ServiceConsumer.cs" />
     <Compile Include="Communication\Consumer\Worker.cs" />
+    <Compile Include="Objects\Creatures\CharacterClass.cs" />
     <Compile Include="Objects\Creatures\SpellList.cs" />
     <Compile Include="Objects\Creatures\SpellSchool.cs" />
     <Compile Include="Objects\Creatures\Spell.cs" />
