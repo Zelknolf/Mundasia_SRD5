@@ -18,6 +18,8 @@ namespace Mundasia.Interface
     {
         public CharacterCreationScreen() {}
 
+        static Size IconSize = new Size(64, 64);
+
         private static int selectionHeight = 250;
         private static int padding = 5;
         private static int indent = 20;
@@ -110,15 +112,25 @@ namespace Mundasia.Interface
             characterClassBox.Location = new Point(padding, padding);
             StyleListView(characterClassBox);
 
+            ImageList imgs = new ImageList();
+            imgs.ImageSize = IconSize;
+            imgs.ColorDepth = ColorDepth.Depth32Bit;
+
+            int imageIndex = 0;
+
             foreach (CharacterClass cl in CharacterClass.GetClasses())
             {
                 if (cl.HitDie > 0) // Subclasses mark themselves as 0 HD.
                 {
                     ListViewItem toAdd = new ListViewItem(new string[] { "", cl.Name });
+                    toAdd.ImageIndex = imageIndex;
+                    imgs.Images.Add(cl.Icon);
+                    imageIndex++;
                     StyleListViewItem(toAdd);
                     characterClassBox.Items.Add(toAdd);
                 }
             }
+            characterClassBox.SmallImageList = imgs;
 
             _editPanel.Controls.Add(characterClassBox);
 
@@ -158,8 +170,8 @@ namespace Mundasia.Interface
             listView.ForeColor = Color.White;
             listView.HeaderStyle = ColumnHeaderStyle.None;
             listView.Font = labelFont;
-            listView.Columns[0].Width = 64;
-            listView.Columns[1].Width = listView.ClientRectangle.Width - SystemInformation.VerticalScrollBarWidth - 64;
+            listView.Columns[0].Width = IconSize.Width + 2;
+            listView.Columns[1].Width = listView.ClientRectangle.Width - SystemInformation.VerticalScrollBarWidth - IconSize.Width - 2;
         }
 
         private static void StyleListViewItem(ListViewItem item)

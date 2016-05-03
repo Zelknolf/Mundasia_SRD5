@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using System.Drawing;
 using System.IO;
 
 namespace Mundasia.Objects
@@ -72,12 +73,29 @@ namespace Mundasia.Objects
                     }
                     ClassPowers[index].Add(toAdd);
                 }
+
+                _iconFileName = split[10];
             }
         }
+
 
         public uint Id;
 
         public string Name;
+
+        private string _iconFileName;
+
+        private Image _icon;
+
+        public Image Icon
+        {
+            get
+            {
+                if (_icon != null) return _icon;
+                _icon = Image.FromFile(System.IO.Directory.GetCurrentDirectory() + "\\Images\\Classes\\" + _iconFileName + ".png");
+                return _icon;
+            }
+        }
 
         public int HitDie;
 
