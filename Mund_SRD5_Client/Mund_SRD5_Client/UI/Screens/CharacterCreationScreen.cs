@@ -139,6 +139,24 @@ namespace Mundasia.Interface
 
         private static void _form_Resize(object sender, EventArgs e)
         {
+            _panel.Size = _form.ClientRectangle.Size;
+
+            _characterSheet.Height = _form.ClientRectangle.Height - (padding * 2);
+            _characterSheet.Width = (_form.ClientRectangle.Width / 2) - (padding * 3);
+            _characterSheet.Location = new Point(padding, padding);
+
+            _editPanel.Height = _characterSheet.Height;
+            _editPanel.Width = _characterSheet.Width;
+            _editPanel.Location = new Point(_characterSheet.Location.X + _characterSheet.Width + padding, padding);
+
+            switch(_currentEdit)
+            {
+                case CurrentEdit.Class:
+                    characterClassBox.Height = _editPanel.Height - (padding * 2);
+                    characterClassBox.Width = _editPanel.Width - (padding * 2);
+                    characterClassBox.Location = new Point(padding, padding);
+                    break;
+            }
         }
 
         private static CurrentEdit _currentEdit;
