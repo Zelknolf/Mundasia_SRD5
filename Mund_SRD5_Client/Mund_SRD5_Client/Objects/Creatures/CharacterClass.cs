@@ -87,6 +87,8 @@ namespace Mundasia.Objects
 
         private Image _icon;
 
+        private static Image _nullIcon;
+
         public Image Icon
         {
             get
@@ -94,6 +96,16 @@ namespace Mundasia.Objects
                 if (_icon != null) return _icon;
                 _icon = Image.FromFile(System.IO.Directory.GetCurrentDirectory() + "\\Images\\Classes\\" + _iconFileName + ".png");
                 return _icon;
+            }
+        }
+
+        public static Image NullClassImage
+        {
+            get
+            {
+                if (_nullIcon != null) return _nullIcon;
+                _nullIcon = Image.FromFile(System.IO.Directory.GetCurrentDirectory() + "\\Images\\Classes\\NoClass.png");
+                return _nullIcon;
             }
         }
 

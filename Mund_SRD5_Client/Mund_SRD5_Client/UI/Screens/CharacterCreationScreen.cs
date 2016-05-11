@@ -43,8 +43,8 @@ namespace Mundasia.Interface
         static NumericUpDown wisdomEntry = new NumericUpDown();
         static NumericUpDown charismaEntry = new NumericUpDown();
 
-        static Label characterClassLabel = new Label();
-        static Label characterClassSelection = new Label();
+        static Panel characterClassIcon = new Panel();
+        static Label characterClassText = new Label();
 
         static ListView characterClassBox = new ListView();
 
@@ -70,26 +70,27 @@ namespace Mundasia.Interface
             _panel.Size = _form.ClientRectangle.Size;
             _panel.BackColor = Color.Black;
 
-            characterClassLabel.Text = "Class:";
-            characterClassLabel.Size = characterClassLabel.PreferredSize;
-            characterClassLabel.Location = new Point(padding, padding);
-            StyleLabel(characterClassLabel);
+            characterClassIcon.Size = new Size(64, 64);
+            characterClassIcon.Location = new Point(padding, padding);
+            characterClassIcon.BackgroundImage = CharacterClass.NullClassImage;
 
-            characterClassSelection.Text = "<not selected>";
-            characterClassSelection.Size = characterClassSelection.PreferredSize;
-            characterClassSelection.Location = new Point(characterClassLabel.Location.X + characterClassLabel.Width + padding, padding);
-            StyleLabel(characterClassSelection);
+            characterClassText.Text = "No Class Selected";
+            characterClassText.Location = new Point(characterClassIcon.Location.X + characterClassIcon.Width + padding, padding);
+            characterClassText.TextAlign = ContentAlignment.MiddleCenter;
+            StyleLabel(characterClassText);
+            characterClassText.Size = new Size(100, 64);
 
 
             if (!_eventsInitialized)
             {
-                characterClassLabel.Click += EditCharacterClass;
-                characterClassSelection.Click += EditCharacterClass;
+                characterClassIcon.Click += EditCharacterClass;
+                characterClassText.Click += EditCharacterClass;
+                characterClassBox.ItemSelectionChanged += CharacterClassBox_ItemSelectionChanged;
                 _eventsInitialized = true;
             }
 
-            _characterSheet.Controls.Add(characterClassLabel);
-            _characterSheet.Controls.Add(characterClassSelection);
+            _characterSheet.Controls.Add(characterClassIcon);
+            _characterSheet.Controls.Add(characterClassText);
 
             _panel.Controls.Add(_characterSheet);
             _panel.Controls.Add(_editPanel);
@@ -102,7 +103,19 @@ namespace Mundasia.Interface
             _form.Controls.Remove(_panel);
         }
 
-        
+        private static void CharacterClassBox_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            if(e.IsSelected)
+            {
+                CharacterClass selectedClass = CharacterClass.GetClass((uint)e.Item.Tag);
+                if(selectedClass != null)
+                {
+                    characterClassText.Text = selectedClass.Name;
+                    characterClassIcon.BackgroundImage = selectedClass.Icon;
+                }
+            }
+        }
+
         public static void EditCharacterClass(object sender, EventArgs e)
         {
             if (_currentEdit == CurrentEdit.Class) return;
@@ -124,6 +137,7 @@ namespace Mundasia.Interface
                 {
                     ListViewItem toAdd = new ListViewItem(new string[] { "", cl.Name });
                     toAdd.ImageIndex = imageIndex;
+                    toAdd.Tag = cl.Id;
                     imgs.Images.Add(cl.Icon);
                     imageIndex++;
                     StyleListViewItem(toAdd);
