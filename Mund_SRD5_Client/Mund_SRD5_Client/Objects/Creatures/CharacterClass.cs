@@ -75,6 +75,8 @@ namespace Mundasia.Objects
                 }
 
                 _iconFileName = split[10];
+
+                Description = uint.Parse(split[11]);
             }
         }
 
@@ -82,6 +84,8 @@ namespace Mundasia.Objects
         public uint Id;
 
         public string Name;
+
+        public uint Description;
 
         private string _iconFileName;
 

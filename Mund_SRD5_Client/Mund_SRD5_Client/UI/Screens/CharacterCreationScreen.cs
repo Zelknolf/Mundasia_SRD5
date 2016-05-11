@@ -138,6 +138,7 @@ namespace Mundasia.Interface
                     ListViewItem toAdd = new ListViewItem(new string[] { "", cl.Name });
                     toAdd.ImageIndex = imageIndex;
                     toAdd.Tag = cl.Id;
+                    toAdd.ToolTipText = StringLibrary.GetString(cl.Description);
                     imgs.Images.Add(cl.Icon);
                     imageIndex++;
                     StyleListViewItem(toAdd);
@@ -201,6 +202,7 @@ namespace Mundasia.Interface
             listView.BackColor = Color.Black;
             listView.ForeColor = Color.White;
             listView.HeaderStyle = ColumnHeaderStyle.None;
+            listView.ShowItemToolTips = true;
             listView.Font = labelFont;
             listView.Columns[0].Width = IconSize.Width + 2;
             listView.Columns[1].Width = listView.ClientRectangle.Width - SystemInformation.VerticalScrollBarWidth - IconSize.Width - 2;

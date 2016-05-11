@@ -1,0 +1,25 @@
+12000|Barbarian
+12001|Bard
+12002|Cleric
+12003|Druid
+12004|Fighter
+12005|Monk
+12006|Paladin
+12007|Ranger
+12008|Rogue
+12009|Sorcerer
+12010|Warlock
+12011|Wizard
+
+12100|Path of the Berzerker
+12110|College of Lore
+12120|Life Domain
+12130|Circle of the Land
+12140|Champion
+12150|Way of the Open Hand
+12160|Oath of Devotion
+12170|Hunter
+12180|Thief
+12190|Draconic Bloodline
+12200|Fiendish Patron
+12210|School of Evocation
