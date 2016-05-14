@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+using System.Drawing;
 using System.IO;
 
 namespace Mundasia.Objects
@@ -84,6 +86,8 @@ namespace Mundasia.Objects
                     int sk;
                     if (Int32.TryParse(pow, out sk)) Powers.Add(sk);
                 }
+
+                _iconFileName = split[15];
             }
             else
             {
@@ -306,5 +310,31 @@ namespace Mundasia.Objects
         /// The hair styles available to PCs. Index is gender.
         /// </summary>
         public Dictionary<int, int> PlayableHairStyles;
+
+        private string _iconFileName;
+
+        public Image _icon;
+
+        private static Image _nullIcon;
+
+        public Image Icon
+        {
+            get
+            {
+                if (_icon != null) return _icon;
+                _icon = Image.FromFile(System.IO.Directory.GetCurrentDirectory() + "\\Images\\Races\\" + _iconFileName + ".png");
+                return _icon;
+            }
+        }
+
+        public static Image NullRaceImage
+        {
+            get
+            {
+                if (_nullIcon != null) return _nullIcon;
+                _nullIcon = Image.FromFile(System.IO.Directory.GetCurrentDirectory() + "\\Images\\Classes\\NoClass.png");
+                return _nullIcon;
+            }
+        }
     }
 }
