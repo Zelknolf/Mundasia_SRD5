@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using System.Drawing;
 using System.IO;
 
 namespace Mundasia.Objects
@@ -23,10 +24,11 @@ namespace Mundasia.Objects
 
             if (!uint.TryParse(pieces[0], out Id)) return;
             Name = pieces[1];
-            if (!uint.TryParse(pieces[2], out skillProf1)) return;
-            if (!uint.TryParse(pieces[3], out skillProf2)) return;
-            if (!uint.TryParse(pieces[4], out toolProf)) return;
-            if (!uint.TryParse(pieces[5], out description)) return;
+            if (!uint.TryParse(pieces[2], out SkillProf1)) return;
+            if (!uint.TryParse(pieces[3], out SkillProf2)) return;
+            if (!uint.TryParse(pieces[4], out ToolProf)) return;
+            if (!uint.TryParse(pieces[5], out Description)) return;
+            _iconFileName = pieces[6];
             IsValid = true;
         }
 
@@ -48,22 +50,48 @@ namespace Mundasia.Objects
         /// <summary>
         /// The id of the first skill that this background provides proficiency in.
         /// </summary>
-        public uint skillProf1;
+        public uint SkillProf1;
 
         /// <summary>
         /// The id of the second skill that this background provides proficiency in.
         /// </summary>
-        public uint skillProf2;
+        public uint SkillProf2;
 
         /// <summary>
         /// The id of the tools that this background provides proficiency in.
         /// </summary>
-        public uint toolProf;
+        public uint ToolProf;
 
         /// <summary>
         /// The id of the description of this background.
         /// </summary>
-        public uint description;
+        public uint Description;
+
+        private string _iconFileName;
+
+        public Image _icon;
+
+        private static Image _nullIcon;
+
+        public Image Icon
+        {
+            get
+            {
+                if (_icon != null) return _icon;
+                _icon = Image.FromFile(System.IO.Directory.GetCurrentDirectory() + "\\Images\\Backgrounds\\" + _iconFileName + ".png");
+                return _icon;
+            }
+        }
+
+        public static Image NullBackgroundImage
+        {
+            get
+            {
+                if (_nullIcon != null) return _nullIcon;
+                _nullIcon = Image.FromFile(System.IO.Directory.GetCurrentDirectory() + "\\Images\\Backgrounds\\NoBackground.png");
+                return _nullIcon;
+            }
+        }
 
         /// <summary>
         /// Static storage for backgrounds loaded by the static load function.

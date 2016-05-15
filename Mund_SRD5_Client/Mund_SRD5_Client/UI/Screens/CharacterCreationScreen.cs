@@ -43,11 +43,47 @@ namespace Mundasia.Interface
         static NumericUpDown wisdomEntry = new NumericUpDown();
         static NumericUpDown charismaEntry = new NumericUpDown();
 
+        private static Image _iconNoGender;
+        private static Image _iconMasculine;
+        private static Image _iconFeminine;
+        static Image IconNoGender
+        {
+            get
+            {
+                if (_iconNoGender != null) return _iconNoGender;
+                _iconNoGender = Image.FromFile(System.IO.Directory.GetCurrentDirectory() + "\\Images\\Gender\\no_gender.png");
+                return _iconNoGender;
+            }
+        }
+        static Image IconMasculine
+        {
+            get
+            {
+                if (_iconMasculine != null) return _iconMasculine;
+                _iconMasculine = Image.FromFile(System.IO.Directory.GetCurrentDirectory() + "\\Images\\Gender\\masculine.png");
+                return _iconMasculine;
+            }
+        }
+        static Image IconFeminine
+        {
+            get
+            {
+                if (_iconFeminine != null) return _iconFeminine;
+                _iconFeminine = Image.FromFile(System.IO.Directory.GetCurrentDirectory() + "\\Images\\Gender\\feminine.png");
+                return _iconFeminine;
+            }
+        }
+        static Panel genderIcon = new Panel();
+        static Label genderText = new Label();
+        static Panel backgroundIcon = new Panel();
+        static Label backgroundText = new Label();
         static Panel characterClassIcon = new Panel();
         static Label characterClassText = new Label();
         static Panel raceIcon = new Panel();
         static Label raceText = new Label();
 
+        static ListView genderBox = new ListView();
+        static ListView backgroundBox = new ListView();
         static ListView characterClassBox = new ListView();
         static ListView raceBox = new ListView();
 
@@ -73,22 +109,42 @@ namespace Mundasia.Interface
             _panel.Size = _form.ClientRectangle.Size;
             _panel.BackColor = Color.Black;
 
+            genderIcon.Size = new Size(64, 64);
+            genderIcon.Location = new Point(padding, padding);
+            genderIcon.BackgroundImage = IconNoGender;
+
+            genderText.Text = "No sprite type selected";
+            genderText.Location = new Point(genderIcon.Location.X + genderIcon.Width + padding, padding);
+            genderText.TextAlign = ContentAlignment.MiddleCenter;
+            StyleLabel(genderText);
+            genderText.Size = new Size((_characterSheet.Width - (genderIcon.Width * 2) - (padding * 5)) / 2, 64);
+
+            backgroundIcon.Size = new Size(64, 64);
+            backgroundIcon.Location = new Point(genderText.Location.X + genderText.Size.Width + padding, padding);
+            backgroundIcon.BackgroundImage = Background.NullBackgroundImage;
+
+            backgroundText.Text = "No background selected";
+            backgroundText.Location = new Point(backgroundIcon.Location.X + backgroundIcon.Size.Width + padding, padding);
+            backgroundText.TextAlign = ContentAlignment.MiddleCenter;
+            StyleLabel(backgroundText);
+            backgroundText.Size = genderText.Size;
+
             raceIcon.Size = new Size(64, 64);
-            raceIcon.Location = new Point(padding, padding);
+            raceIcon.Location = new Point(padding, genderIcon.Location.Y + genderIcon.Size.Height + padding);
             raceIcon.BackgroundImage = Race.NullRaceImage;
 
             raceText.Text = "No Race Selected";
-            raceText.Location = new Point(raceIcon.Location.X + raceIcon.Width + padding, padding);
+            raceText.Location = new Point(raceIcon.Location.X + raceIcon.Width + padding, raceIcon.Location.Y);
             raceText.TextAlign = ContentAlignment.MiddleCenter;
             StyleLabel(raceText);
-            raceText.Size = new Size((_characterSheet.Width - (raceIcon.Width * 2) - (padding * 5)) / 2, 64);
+            raceText.Size = genderText.Size;
 
             characterClassIcon.Size = new Size(64, 64);
-            characterClassIcon.Location = new Point(raceText.Location.X + raceText.Width + padding, padding);
+            characterClassIcon.Location = new Point(raceText.Location.X + raceText.Width + padding, raceIcon.Location.Y);
             characterClassIcon.BackgroundImage = CharacterClass.NullClassImage;
 
             characterClassText.Text = "No Class Selected";
-            characterClassText.Location = new Point(characterClassIcon.Location.X + characterClassIcon.Width + padding, padding);
+            characterClassText.Location = new Point(characterClassIcon.Location.X + characterClassIcon.Width + padding, raceIcon.Location.Y);
             characterClassText.TextAlign = ContentAlignment.MiddleCenter;
             StyleLabel(characterClassText);
             characterClassText.Size = raceText.Size;
@@ -96,6 +152,12 @@ namespace Mundasia.Interface
 
             if (!_eventsInitialized)
             {
+                genderIcon.Click += EditGender;
+                genderText.Click += EditGender;
+                genderBox.ItemSelectionChanged += GenderBox_ItemSelectionChanged;
+                backgroundIcon.Click += EditBackground;
+                backgroundText.Click += EditBackground;
+                backgroundBox.ItemSelectionChanged += BackgroundBox_ItemSelectionChanged;
                 raceIcon.Click += EditRace;
                 raceText.Click += EditRace;
                 raceBox.ItemSelectionChanged += RaceBox_ItemSelectionChanged;
@@ -105,6 +167,10 @@ namespace Mundasia.Interface
                 _eventsInitialized = true;
             }
 
+            _characterSheet.Controls.Add(genderIcon);
+            _characterSheet.Controls.Add(genderText);
+            _characterSheet.Controls.Add(backgroundIcon);
+            _characterSheet.Controls.Add(backgroundText);
             _characterSheet.Controls.Add(raceIcon);
             _characterSheet.Controls.Add(raceText);
             _characterSheet.Controls.Add(characterClassIcon);
@@ -120,6 +186,123 @@ namespace Mundasia.Interface
             _form.Resize -= _form_Resize;
             _form.Controls.Remove(_panel);
         }
+
+        #region Gender Selection
+        private static void GenderBox_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            if(e.IsSelected)
+            {
+                genderText.Text = e.Item.Name;
+                genderIcon.BackgroundImage = (int)e.Item.Tag == 0 ? IconFeminine : IconMasculine;
+
+                _populateGenderList();
+            }
+        }
+
+        public static void EditGender(object sender, EventArgs e)
+        {
+            if (_currentEdit == CurrentEdit.Gender) return;
+
+            _editPanel.Controls.Clear();
+
+            genderBox.Height = _editPanel.Height - (padding * 2);
+            genderBox.Width = _editPanel.Width - (padding * 2);
+            genderBox.Location = new Point(padding, padding);
+            StyleListView(genderBox);
+
+            _populateGenderList();
+
+            _editPanel.Controls.Add(genderBox);
+
+            _currentEdit = CurrentEdit.Gender;
+        }
+
+        private static void _populateGenderList()
+        {
+            genderBox.Items.Clear();
+            ImageList imgs = new ImageList();
+            imgs.ImageSize = IconSize;
+            imgs.ColorDepth = ColorDepth.Depth32Bit;
+
+            ListViewItem toAdd = new ListViewItem(new string[] { "", "Feminine Sprite" });
+            toAdd.Name = "Feminine Sprite";
+            toAdd.ImageIndex = 0;
+            toAdd.Tag = 0;
+            imgs.Images.Add(IconFeminine);
+            StyleListViewItem(toAdd);
+            genderBox.Items.Add(toAdd);
+
+            toAdd = new ListViewItem(new string[] { "", "Masculine Sprite" });
+            toAdd.Name = "Masculine Sprite";
+            toAdd.ImageIndex = 1;
+            toAdd.Tag = 1;
+            imgs.Images.Add(IconMasculine);
+            StyleListViewItem(toAdd);
+            genderBox.Items.Add(toAdd);
+
+            genderBox.SmallImageList = imgs;
+        }
+        #endregion
+
+        #region Background
+        private static void BackgroundBox_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            if(e.IsSelected)
+            {
+                Background background = Background.GetBackground((uint)e.Item.Tag);
+                if(background != null)
+                {
+                    backgroundText.Text = e.Item.Name;
+                    backgroundIcon.BackgroundImage = background.Icon;
+
+                    _populateBackgroundList();
+                }
+            }
+        }
+
+        public static void EditBackground(object sender, EventArgs e)
+        {
+            if (_currentEdit == CurrentEdit.Background) return;
+
+            _editPanel.Controls.Clear();
+
+            backgroundBox.Height = _editPanel.Height - (padding * 2);
+            backgroundBox.Width = _editPanel.Width - (padding * 2);
+            backgroundBox.Location = new Point(padding, padding);
+            StyleListView(backgroundBox);
+
+            _populateBackgroundList();
+
+            _editPanel.Controls.Add(backgroundBox);
+
+            _currentEdit = CurrentEdit.Background;
+        }
+
+        private static void _populateBackgroundList()
+        {
+            backgroundBox.Items.Clear();
+
+            ImageList imgs = new ImageList();
+            imgs.ImageSize = IconSize;
+            imgs.ColorDepth = ColorDepth.Depth32Bit;
+
+            int imageIndex = 0;
+
+            foreach (Background bkgrd in Background.GetBackgrounds())
+            {
+                ListViewItem toAdd = new ListViewItem(new string[] { "", bkgrd.Name });
+                toAdd.Name = bkgrd.Name;
+                toAdd.ImageIndex = imageIndex;
+                toAdd.Tag = bkgrd.Id;
+                toAdd.ToolTipText = StringLibrary.GetString(bkgrd.Description);
+                imgs.Images.Add(bkgrd.Icon);
+                imageIndex++;
+                StyleListViewItem(toAdd);
+                backgroundBox.Items.Add(toAdd);
+            }
+            backgroundBox.SmallImageList = imgs;
+        }
+        #endregion
 
         #region Race Selection
         private static void RaceBox_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
@@ -313,7 +496,9 @@ namespace Mundasia.Interface
         private enum CurrentEdit
         {
             None,
+            Background,
             Class,
+            Gender,
             Race
         }
 
