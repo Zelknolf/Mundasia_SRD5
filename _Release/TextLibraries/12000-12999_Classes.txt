@@ -1,4 +1,4 @@
-12000|Barbarian
+12000|The barbarian is a savage fighter whose solid physique and skillset make them suited for demanding surroundings. They rely on savage violence and stubborn tenacity to overcome obstacles in their path. They use primative weapons and simple tactics, but their intensity and fortitude in battle make them a formidable opponent.
 12001|Bard
 12002|Cleric
 12003|Druid
