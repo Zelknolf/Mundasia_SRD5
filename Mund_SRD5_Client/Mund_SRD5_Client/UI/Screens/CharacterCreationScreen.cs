@@ -43,6 +43,8 @@ namespace Mundasia.Interface
         static NumericUpDown wisdomEntry = new NumericUpDown();
         static NumericUpDown charismaEntry = new NumericUpDown();
 
+        static Label pointsLeft = new Label();
+
         private static Image _iconNoGender;
         private static Image _iconMasculine;
         private static Image _iconFeminine;
@@ -73,6 +75,17 @@ namespace Mundasia.Interface
                 return _iconFeminine;
             }
         }
+
+        private static Image _abilityScoreIcon;
+        static Image IconAbilityScore
+        {
+            get
+            {
+                if (_abilityScoreIcon != null) return _abilityScoreIcon;
+                _abilityScoreIcon = Image.FromFile(System.IO.Directory.GetCurrentDirectory() + "\\Images\\Chrome\\abilityScore.png");
+                return _abilityScoreIcon;
+            }
+        }
         static Panel genderIcon = new Panel();
         static Label genderText = new Label();
         static Panel backgroundIcon = new Panel();
@@ -82,12 +95,64 @@ namespace Mundasia.Interface
         static Panel raceIcon = new Panel();
         static Label raceText = new Label();
 
+        static Label labelStrength = new Label();
+        static Label labelStrengthMod = new Label();
+        static Label labelStrengthScore = new Label();
+        static Panel abilityStrength = new Panel();
+
+        static Label labelDexterity = new Label();
+        static Label labelDexterityMod = new Label();
+        static Label labelDexterityScore = new Label();
+        static Panel abilityDexterity = new Panel();
+
+        static Label labelConstitution = new Label();
+        static Label labelConstitutionMod = new Label();
+        static Label labelConstitutionScore = new Label();
+        static Panel abilityConstitution = new Panel();
+
+        static Label labelIntelligence = new Label();
+        static Label labelIntelligenceMod = new Label();
+        static Label labelIntelligenceScore = new Label();
+        static Panel abilityIntelligence = new Panel();
+
+        static Label labelWisdom = new Label();
+        static Label labelWisdomMod = new Label();
+        static Label labelWisdomScore = new Label();
+        static Panel abilityWisdom = new Panel();
+
+        static Label labelCharisma = new Label();
+        static Label labelCharismaMod = new Label();
+        static Label labelCharismaScore = new Label();
+        static Panel abilityCharisma = new Panel();
+
+        static Label strengthEditLabel = new Label();
+        static NumericUpDown strengthEdit = new NumericUpDown();
+        static Label dexterityEditLabel = new Label();
+        static NumericUpDown dexterityEdit = new NumericUpDown();
+        static Label constitutionEditLabel = new Label();
+        static NumericUpDown constitutionEdit = new NumericUpDown();
+        static Label intelligenceEditLabel = new Label();
+        static NumericUpDown intelligenceEdit = new NumericUpDown();
+        static Label wisdomEditLabel = new Label();
+        static NumericUpDown wisdomEdit = new NumericUpDown();
+        static Label charismaEditLabel = new Label();
+        static NumericUpDown charismaEdit = new NumericUpDown();
+
         static ListView genderBox = new ListView();
         static ListView backgroundBox = new ListView();
         static ListView characterClassBox = new ListView();
         static ListView raceBox = new ListView();
 
         private static bool _eventsInitialized = false;
+
+        private static int _strengthScore = 6;
+        private static int _dexterityScore = 6;
+        private static int _constitutionScore = 6;
+        private static int _intelligenceScore = 6;
+        private static int _wisdomScore = 6;
+        private static int _charismaScore = 6;
+
+        private static Race _selectedRace;
 
         public static void Set(Form primaryForm)
         {
@@ -149,6 +214,113 @@ namespace Mundasia.Interface
             StyleLabel(characterClassText);
             characterClassText.Size = raceText.Size;
 
+            // strength
+            abilityStrength.Size = new Size(64, 64);
+            abilityStrength.BackgroundImage = IconAbilityScore;
+            labelStrength.Text = "STR";
+            labelStrength.Location = new Point(padding, raceIcon.Location.Y + raceIcon.Size.Height + padding);
+            StyleLabel(labelStrength);
+            labelStrength.Width = abilityStrength.Width;
+            labelStrength.TextAlign = ContentAlignment.MiddleCenter;
+            abilityStrength.Location = new Point(padding, labelStrength.Location.Y + labelStrength.Size.Height);
+
+            labelStrengthMod.Text = "-2";
+            StyleAbilityMod(labelStrengthMod);
+            abilityStrength.Controls.Add(labelStrengthMod);
+
+            labelStrengthScore.Text = "6";
+            StyleAbilityScore(labelStrengthScore);
+            abilityStrength.Controls.Add(labelStrengthScore);
+
+            // dexterity
+            abilityDexterity.Size = new Size(64, 64);
+            abilityDexterity.BackgroundImage = IconAbilityScore;
+            labelDexterity.Text = "DEX";
+            labelDexterity.Location = new Point(padding, abilityStrength.Location.Y + abilityStrength.Size.Height + padding);
+            StyleLabel(labelDexterity);
+            labelDexterity.Width = abilityDexterity.Width;
+            labelDexterity.TextAlign = ContentAlignment.MiddleCenter;
+            abilityDexterity.Location = new Point(padding, labelDexterity.Location.Y + labelDexterity.Size.Height);
+
+            labelDexterityMod.Text = "-2";
+            StyleAbilityMod(labelDexterityMod);
+            abilityDexterity.Controls.Add(labelDexterityMod);
+
+            labelDexterityScore.Text = "6";
+            StyleAbilityScore(labelDexterityScore);
+            abilityDexterity.Controls.Add(labelDexterityScore);
+
+            // constitution
+            abilityConstitution.Size = new Size(64, 64);
+            abilityConstitution.BackgroundImage = IconAbilityScore;
+            labelConstitution.Text = "CON";
+            labelConstitution.Location = new Point(padding, abilityDexterity.Location.Y + abilityDexterity.Size.Height + padding);
+            StyleLabel(labelConstitution);
+            labelConstitution.Width = abilityConstitution.Width;
+            labelConstitution.TextAlign = ContentAlignment.MiddleCenter;
+            abilityConstitution.Location = new Point(padding, labelConstitution.Location.Y + labelConstitution.Size.Height);
+
+            labelConstitutionMod.Text = "-2";
+            StyleAbilityMod(labelConstitutionMod);
+            abilityConstitution.Controls.Add(labelConstitutionMod);
+
+            labelConstitutionScore.Text = "6";
+            StyleAbilityScore(labelConstitutionScore);
+            abilityConstitution.Controls.Add(labelConstitutionScore);
+
+            // intelligence
+            abilityIntelligence.Size = new Size(64, 64);
+            abilityIntelligence.BackgroundImage = IconAbilityScore;
+            labelIntelligence.Text = "INT";
+            labelIntelligence.Location = new Point(padding, abilityConstitution.Location.Y + abilityConstitution.Size.Height + padding);
+            StyleLabel(labelIntelligence);
+            labelIntelligence.Width = abilityIntelligence.Width;
+            labelIntelligence.TextAlign = ContentAlignment.MiddleCenter;
+            abilityIntelligence.Location = new Point(padding, labelIntelligence.Location.Y + labelIntelligence.Size.Height);
+
+            labelIntelligenceMod.Text = "-2";
+            StyleAbilityMod(labelIntelligenceMod);
+            abilityIntelligence.Controls.Add(labelIntelligenceMod);
+
+            labelIntelligenceScore.Text = "6";
+            StyleAbilityScore(labelIntelligenceScore);
+            abilityIntelligence.Controls.Add(labelIntelligenceScore);
+
+            // wisdom
+            abilityWisdom.Size = new Size(64, 64);
+            abilityWisdom.BackgroundImage = IconAbilityScore;
+            labelWisdom.Text = "WIS";
+            labelWisdom.Location = new Point(padding, abilityIntelligence.Location.Y + abilityIntelligence.Size.Height + padding);
+            StyleLabel(labelWisdom);
+            labelWisdom.Width = abilityWisdom.Width;
+            labelWisdom.TextAlign = ContentAlignment.MiddleCenter;
+            abilityWisdom.Location = new Point(padding, labelWisdom.Location.Y + labelWisdom.Size.Height);
+
+            labelWisdomMod.Text = "-2";
+            StyleAbilityMod(labelWisdomMod);
+            abilityWisdom.Controls.Add(labelWisdomMod);
+
+            labelWisdomScore.Text = "6";
+            StyleAbilityScore(labelWisdomScore);
+            abilityWisdom.Controls.Add(labelWisdomScore);
+
+            // charisma
+            abilityCharisma.Size = new Size(64, 64);
+            abilityCharisma.BackgroundImage = IconAbilityScore;
+            labelCharisma.Text = "CHA";
+            labelCharisma.Location = new Point(padding, abilityWisdom.Location.Y + abilityWisdom.Size.Height + padding);
+            StyleLabel(labelCharisma);
+            labelCharisma.Width = abilityCharisma.Width;
+            labelCharisma.TextAlign = ContentAlignment.MiddleCenter;
+            abilityCharisma.Location = new Point(padding, labelCharisma.Location.Y + labelCharisma.Size.Height);
+
+            labelCharismaMod.Text = "-2";
+            StyleAbilityMod(labelCharismaMod);
+            abilityCharisma.Controls.Add(labelCharismaMod);
+
+            labelCharismaScore.Text = "6";
+            StyleAbilityScore(labelCharismaScore);
+            abilityCharisma.Controls.Add(labelCharismaScore);
 
             if (!_eventsInitialized)
             {
@@ -164,6 +336,45 @@ namespace Mundasia.Interface
                 characterClassIcon.Click += EditCharacterClass;
                 characterClassText.Click += EditCharacterClass;
                 characterClassBox.ItemSelectionChanged += CharacterClassBox_ItemSelectionChanged;
+                labelStrength.Click += EditAbilityScores;
+                labelStrengthMod.Click += EditAbilityScores;
+                labelStrengthScore.Click += EditAbilityScores;
+                abilityStrength.Click += EditAbilityScores;
+                labelDexterity.Click += EditAbilityScores;
+                labelDexterityMod.Click += EditAbilityScores;
+                labelDexterityScore.Click += EditAbilityScores;
+                abilityDexterity.Click += EditAbilityScores;
+                labelConstitution.Click += EditAbilityScores;
+                labelConstitutionMod.Click += EditAbilityScores;
+                labelConstitutionScore.Click += EditAbilityScores;
+                abilityConstitution.Click += EditAbilityScores;
+                labelIntelligence.Click += EditAbilityScores;
+                labelIntelligenceMod.Click += EditAbilityScores;
+                labelIntelligenceScore.Click += EditAbilityScores;
+                abilityIntelligence.Click += EditAbilityScores;
+                labelWisdom.Click += EditAbilityScores;
+                labelWisdomMod.Click += EditAbilityScores;
+                labelWisdomScore.Click += EditAbilityScores;
+                abilityWisdom.Click += EditAbilityScores;
+                labelCharisma.Click += EditAbilityScores;
+                labelCharismaMod.Click += EditAbilityScores;
+                labelCharismaScore.Click += EditAbilityScores;
+                abilityCharisma.Click += EditAbilityScores;
+
+
+                strengthEdit.Value = _strengthScore;
+                dexterityEdit.Value = _dexterityScore;
+                constitutionEdit.Value = _constitutionScore;
+                intelligenceEdit.Value = _intelligenceScore;
+                wisdomEdit.Value = _wisdomScore;
+                charismaEdit.Value = _charismaScore;
+
+                strengthEdit.ValueChanged += AfterAbilityEdit;
+                dexterityEdit.ValueChanged += AfterAbilityEdit;
+                constitutionEdit.ValueChanged += AfterAbilityEdit;
+                intelligenceEdit.ValueChanged += AfterAbilityEdit;
+                wisdomEdit.ValueChanged += AfterAbilityEdit;
+                charismaEdit.ValueChanged += AfterAbilityEdit;
                 _eventsInitialized = true;
             }
 
@@ -175,6 +386,18 @@ namespace Mundasia.Interface
             _characterSheet.Controls.Add(raceText);
             _characterSheet.Controls.Add(characterClassIcon);
             _characterSheet.Controls.Add(characterClassText);
+            _characterSheet.Controls.Add(labelStrength);
+            _characterSheet.Controls.Add(abilityStrength);
+            _characterSheet.Controls.Add(labelDexterity);
+            _characterSheet.Controls.Add(abilityDexterity);
+            _characterSheet.Controls.Add(labelConstitution);
+            _characterSheet.Controls.Add(abilityConstitution);
+            _characterSheet.Controls.Add(labelIntelligence);
+            _characterSheet.Controls.Add(abilityIntelligence);
+            _characterSheet.Controls.Add(labelWisdom);
+            _characterSheet.Controls.Add(abilityWisdom);
+            _characterSheet.Controls.Add(labelCharisma);
+            _characterSheet.Controls.Add(abilityCharisma);
 
             _panel.Controls.Add(_characterSheet);
             _panel.Controls.Add(_editPanel);
@@ -317,6 +540,8 @@ namespace Mundasia.Interface
 
                     _populateRaceList();
                 }
+                _selectedRace = selectedRace;
+                UpdateAbilityScores();
             }
         }
 
@@ -456,6 +681,303 @@ namespace Mundasia.Interface
         }
         #endregion
 
+        private static void EditAbilityScores(object sender, EventArgs e)
+        {
+            if (_currentEdit == CurrentEdit.AbilityScores) return;
+
+            _editPanel.Controls.Clear();
+
+            strengthEditLabel.Text = "Strength";
+            dexterityEditLabel.Text = "Dexterity";
+            constitutionEditLabel.Text = "Constitution";
+            intelligenceEditLabel.Text = "Intelligence";
+            wisdomEditLabel.Text = "Wisdom";
+            charismaEditLabel.Text = "Charisma";
+
+            StyleLabel(strengthEditLabel);         
+            StyleLabel(dexterityEditLabel);
+            StyleLabel(constitutionEditLabel);
+            StyleLabel(intelligenceEditLabel);
+            StyleLabel(wisdomEditLabel);
+            StyleLabel(charismaEditLabel);
+
+            strengthEditLabel.TextAlign = ContentAlignment.MiddleLeft;
+            dexterityEditLabel.TextAlign = ContentAlignment.MiddleLeft;
+            constitutionEditLabel.TextAlign = ContentAlignment.MiddleLeft;
+            intelligenceEditLabel.TextAlign = ContentAlignment.MiddleLeft;
+            wisdomEditLabel.TextAlign = ContentAlignment.MiddleLeft;
+            charismaEditLabel.TextAlign = ContentAlignment.MiddleLeft;
+
+            int width = Math.Max(Math.Max(Math.Max(strengthEditLabel.Width, dexterityEditLabel.Width), Math.Max(constitutionEditLabel.Width, intelligenceEditLabel.Width)), Math.Max(wisdomEditLabel.Width, charismaEditLabel.Width));
+            strengthEditLabel.Width = width;
+            dexterityEditLabel.Width = width;
+            constitutionEditLabel.Width = width;
+            intelligenceEditLabel.Width = width;
+            wisdomEditLabel.Width = width;
+            charismaEditLabel.Width = width;
+
+            strengthEdit.Minimum = 3;
+            dexterityEdit.Minimum = 3;
+            constitutionEdit.Minimum = 3;
+            intelligenceEdit.Minimum = 3;
+            wisdomEdit.Minimum = 3;
+            charismaEdit.Minimum = 3;
+
+            strengthEdit.Maximum = 16;
+            dexterityEdit.Maximum = 16;
+            constitutionEdit.Maximum = 16;
+            intelligenceEdit.Maximum = 16;
+            wisdomEdit.Maximum = 16;
+            charismaEdit.Maximum = 16;
+
+            StyleLabel(strengthEdit);
+            StyleLabel(dexterityEdit);
+            StyleLabel(constitutionEdit);
+            StyleLabel(intelligenceEdit);
+            StyleLabel(wisdomEdit);
+            StyleLabel(charismaEdit);
+
+            strengthEditLabel.Height = strengthEdit.Height;
+            dexterityEditLabel.Height = dexterityEdit.Height;
+            constitutionEditLabel.Height = constitutionEdit.Height;
+            intelligenceEditLabel.Height = intelligenceEdit.Height;
+            wisdomEditLabel.Height = wisdomEdit.Height;
+            charismaEditLabel.Height = charismaEdit.Height;
+
+            strengthEditLabel.Location = new Point(padding, padding);
+            dexterityEditLabel.Location = new Point(padding, strengthEditLabel.Location.Y + strengthEditLabel.Height + padding);
+            constitutionEditLabel.Location = new Point(padding, dexterityEditLabel.Location.Y + dexterityEditLabel.Height + padding);
+            intelligenceEditLabel.Location = new Point(padding, constitutionEditLabel.Location.Y + constitutionEditLabel.Height + padding);
+            wisdomEditLabel.Location = new Point(padding, intelligenceEditLabel.Location.Y + intelligenceEditLabel.Height + padding);
+            charismaEditLabel.Location = new Point(padding, wisdomEditLabel.Location.Y + wisdomEditLabel.Height + padding);
+
+            strengthEdit.Location = new Point(strengthEditLabel.Width + padding * 2, strengthEditLabel.Location.Y);
+            dexterityEdit.Location = new Point(dexterityEditLabel.Width + padding * 2, dexterityEditLabel.Location.Y);
+            constitutionEdit.Location = new Point(constitutionEditLabel.Width + padding * 2, constitutionEditLabel.Location.Y);
+            intelligenceEdit.Location = new Point(intelligenceEditLabel.Width + padding * 2, intelligenceEditLabel.Location.Y);
+            wisdomEdit.Location = new Point(wisdomEditLabel.Width + padding * 2, wisdomEditLabel.Location.Y);
+            charismaEdit.Location = new Point(charismaEditLabel.Width + padding * 2, charismaEditLabel.Location.Y);
+
+            pointsLeft.Location = new Point(padding * 3, charismaEditLabel.Location.Y + charismaEditLabel.Height + padding);
+            StyleLabel(pointsLeft);
+            AfterAbilityEdit(sender, e);
+
+            _editPanel.Controls.Add(strengthEditLabel);
+            _editPanel.Controls.Add(dexterityEditLabel);
+            _editPanel.Controls.Add(constitutionEditLabel);
+            _editPanel.Controls.Add(intelligenceEditLabel);
+            _editPanel.Controls.Add(wisdomEditLabel);
+            _editPanel.Controls.Add(charismaEditLabel);
+
+            _editPanel.Controls.Add(strengthEdit);
+            _editPanel.Controls.Add(dexterityEdit);
+            _editPanel.Controls.Add(constitutionEdit);
+            _editPanel.Controls.Add(intelligenceEdit);
+            _editPanel.Controls.Add(wisdomEdit);
+            _editPanel.Controls.Add(charismaEdit);
+
+            _editPanel.Controls.Add(pointsLeft);
+
+            _currentEdit = CurrentEdit.AbilityScores;
+        }
+
+        private static void AfterAbilityEdit(object sender, EventArgs e)
+        {
+            _strengthScore = (int)strengthEdit.Value;
+            _dexterityScore = (int)dexterityEdit.Value;
+            _constitutionScore = (int)constitutionEdit.Value;
+            _intelligenceScore = (int)intelligenceEdit.Value;
+            _wisdomScore = (int)wisdomEdit.Value;
+            _charismaScore = (int)charismaEdit.Value;
+
+            int _strengthCostAdjust = 0;
+            int _dexterityCostAdjust = 0;
+            int _constitutionCostAdjust = 0;
+            int _wisdomCostAdjust = 0;
+            int _intelligenceCostAdjust = 0;
+            int _charismaCostAdjust = 0;
+            if (_selectedRace != null &&
+                _selectedRace.OtherBonusStats > 0)
+            {
+                int bonuses = _selectedRace.OtherBonusStats;
+                List<int> scores = new List<int>();
+                if (_selectedRace.Strength == 0) scores.Add(_strengthScore);
+                if (_selectedRace.Dexterity == 0) scores.Add(_dexterityScore);
+                if (_selectedRace.Constitution == 0) scores.Add(_constitutionScore);
+                if (_selectedRace.Intelligence == 0) scores.Add(_intelligenceScore);
+                if (_selectedRace.Wisdom == 0) scores.Add(_wisdomScore);
+                if (_selectedRace.Charisma == 0) scores.Add(_charismaScore);
+
+                scores.Sort();
+                while(bonuses > 0)
+                {
+                    if(_strengthScore == scores[scores.Count - bonuses] &&
+                        _strengthCostAdjust == 0)
+                    {
+                        _strengthCostAdjust--;
+                    }
+                    else if(_dexterityScore == scores[scores.Count - bonuses] &&
+                        _dexterityCostAdjust == 0)
+                    {
+                        _dexterityCostAdjust--;
+                    }
+                    else if(_constitutionScore == scores[scores.Count - bonuses] &&
+                        _constitutionCostAdjust == 0)
+                    {
+                        _constitutionCostAdjust--;
+                    }
+                    else if(_intelligenceScore == scores[scores.Count - bonuses] &&
+                        _intelligenceCostAdjust == 0)
+                    {
+                        _intelligenceCostAdjust--;
+                    }
+                    else if(_wisdomScore == scores[scores.Count - bonuses] &&
+                        _wisdomCostAdjust == 0)
+                    {
+                        _wisdomCostAdjust--;
+                    }
+                    else if(_charismaScore == scores[scores.Count - bonuses] &&
+                        _charismaCostAdjust == 0)
+                    {
+                        _charismaCostAdjust--;
+                    }
+                    bonuses--;
+                }
+            }
+
+
+            int points = 40 - 
+                        AbilityScoreCosts[_strengthScore + _strengthCostAdjust] - 
+                        AbilityScoreCosts[_dexterityScore + _dexterityCostAdjust] - 
+                        AbilityScoreCosts[_constitutionScore + _constitutionCostAdjust] - 
+                        AbilityScoreCosts[_intelligenceScore + _intelligenceCostAdjust] - 
+                        AbilityScoreCosts[_wisdomScore + _wisdomCostAdjust] - 
+                        AbilityScoreCosts[_charismaScore + _charismaCostAdjust];
+
+            pointsLeft.Text = points.ToString() + " points remain";
+            pointsLeft.Size = pointsLeft.PreferredSize;
+
+            UpdateAbilityScores();
+        }
+
+        private static void UpdateAbilityScores()
+        {
+            if (_selectedRace != null)
+            {
+                labelStrengthScore.Text = (_strengthScore + _selectedRace.Strength).ToString();
+                if((_strengthScore + _selectedRace.Strength) >= 10)
+                {
+                    labelStrengthMod.Text = "+" + ((_strengthScore + _selectedRace.Strength - 10) / 2).ToString();
+                }
+                else
+                {
+                    labelStrengthMod.Text = ((_strengthScore + _selectedRace.Strength - 11) / 2).ToString();
+                }
+                labelDexterityScore.Text = (_dexterityScore + _selectedRace.Dexterity).ToString();
+                if ((_dexterityScore + _selectedRace.Dexterity) >= 10)
+                {
+                    labelDexterityMod.Text = "+" + ((_dexterityScore + _selectedRace.Dexterity - 10) / 2).ToString();
+                }
+                else
+                {
+                    labelDexterityMod.Text = ((_dexterityScore + _selectedRace.Dexterity - 11) / 2).ToString();
+                }
+                labelConstitutionScore.Text = (_constitutionScore + _selectedRace.Constitution).ToString();
+                if ((_constitutionScore + _selectedRace.Constitution) >= 10)
+                {
+                    labelConstitutionMod.Text = "+" + ((_constitutionScore + _selectedRace.Constitution - 10) / 2).ToString();
+                }
+                else
+                {
+                    labelConstitutionMod.Text = ((_constitutionScore + _selectedRace.Constitution - 11) / 2).ToString();
+                }
+                labelIntelligenceScore.Text = (_intelligenceScore + _selectedRace.Intelligence).ToString();
+                if ((_intelligenceScore + _selectedRace.Intelligence) >= 10)
+                {
+                    labelIntelligenceMod.Text = "+" + ((_intelligenceScore + _selectedRace.Intelligence - 10) / 2).ToString();
+                }
+                else
+                {
+                    labelIntelligenceMod.Text = ((_intelligenceScore + _selectedRace.Intelligence - 11) / 2).ToString();
+                }
+                labelWisdomScore.Text = (_wisdomScore + _selectedRace.Wisdom).ToString();
+                if ((_wisdomScore + _selectedRace.Wisdom) >= 10)
+                {
+                    labelWisdomMod.Text = "+" + ((_wisdomScore + _selectedRace.Wisdom - 10) / 2).ToString();
+                }
+                else
+                {
+                    labelWisdomMod.Text = ((_wisdomScore + _selectedRace.Wisdom - 11) / 2).ToString();
+                }
+                labelCharismaScore.Text = (_charismaScore + _selectedRace.Charisma).ToString();
+                if ((_charismaScore + _selectedRace.Charisma) >= 10)
+                {
+                    labelCharismaMod.Text = "+" + ((_charismaScore + _selectedRace.Charisma - 10) / 2).ToString();
+                }
+                else
+                {
+                    labelCharismaMod.Text = ((_charismaScore + _selectedRace.Charisma - 11) / 2).ToString();
+                }
+            }
+            else
+            {
+                labelStrengthScore.Text = _strengthScore.ToString();
+                if (_strengthScore >= 10)
+                {
+                    labelStrengthMod.Text = "+" + ((_strengthScore - 10) / 2).ToString();
+                }
+                else
+                {
+                    labelStrengthMod.Text = ((_strengthScore - 11) / 2).ToString();
+                }
+                labelDexterityScore.Text = _dexterityScore.ToString();
+                if (_dexterityScore >= 10)
+                {
+                    labelDexterityMod.Text = "+" + ((_dexterityScore - 10) / 2).ToString();
+                }
+                else
+                {
+                    labelDexterityMod.Text = ((_dexterityScore - 11) / 2).ToString();
+                }
+                labelConstitutionScore.Text = _constitutionScore.ToString();
+                if (_constitutionScore >= 10)
+                {
+                    labelConstitutionMod.Text = "+" + ((_constitutionScore - 10) / 2).ToString();
+                }
+                else
+                {
+                    labelConstitutionMod.Text = ((_constitutionScore - 11) / 2).ToString();
+                }
+                labelIntelligenceScore.Text = _intelligenceScore.ToString();
+                if (_intelligenceScore >= 10)
+                {
+                    labelIntelligenceMod.Text = "+" + ((_intelligenceScore - 10) / 2).ToString();
+                }
+                else
+                {
+                    labelIntelligenceMod.Text = ((_intelligenceScore - 11) / 2).ToString();
+                }
+                labelWisdomScore.Text = _wisdomScore.ToString();
+                if (_wisdomScore >= 10)
+                {
+                    labelWisdomMod.Text = "+" + ((_wisdomScore - 10) / 2).ToString();
+                }
+                else
+                {
+                    labelWisdomMod.Text = ((_wisdomScore - 11) / 2).ToString();
+                }
+                labelCharismaScore.Text = _charismaScore.ToString();
+                if (_charismaScore >= 10)
+                {
+                    labelCharismaMod.Text = "+" + ((_charismaScore - 10) / 2).ToString();
+                }
+                else
+                {
+                    labelCharismaMod.Text = ((_charismaScore - 11) / 2).ToString();
+                }
+            }
+        }
+
         private static void _form_Resize(object sender, EventArgs e)
         {
             _panel.Size = _form.ClientRectangle.Size;
@@ -496,13 +1018,38 @@ namespace Mundasia.Interface
         private enum CurrentEdit
         {
             None,
+            AbilityScores,
             Background,
             Class,
             Gender,
             Race
         }
 
+        private static Font abilityModFont = new Font(FontFamily.GenericSansSerif, 18.0f);
+        private static Font abilityScoreFont = new Font(FontFamily.GenericSansSerif, 8.0f);
         private static Font labelFont = new Font(FontFamily.GenericSansSerif, 12.0f);
+
+        private static void StyleAbilityMod(Label toStyle)
+        {
+            toStyle.BackColor = Color.Black;
+            toStyle.ForeColor = Color.White;
+            toStyle.Font = abilityModFont;
+            toStyle.Size = labelStrengthMod.PreferredSize;
+            toStyle.Width = abilityStrength.Width - 20;
+            toStyle.Location = new Point(10, 10);
+            toStyle.TextAlign = ContentAlignment.MiddleCenter;
+        }
+
+        private static void StyleAbilityScore(Label toStyle)
+        {
+            toStyle.BackColor = Color.Black;
+            toStyle.ForeColor = Color.White;
+            toStyle.Font = abilityScoreFont;
+            toStyle.Size = labelStrengthScore.PreferredSize;
+            toStyle.Width = abilityStrength.Width - 40;
+            toStyle.TextAlign = ContentAlignment.MiddleCenter;
+            toStyle.Location = new Point(21, 62 - labelStrengthScore.Height);
+        }
 
         private static void StyleLabel(Control toStyle)
         {
@@ -534,5 +1081,26 @@ namespace Mundasia.Interface
             item.ForeColor = Color.White;
             item.Font = labelFont;
         }
+
+        private static Dictionary<int, int> AbilityScoreCosts = new Dictionary<int, int>()
+        {
+            { 0, 0 },
+            { 1, 0 },
+            { 2, 0 },
+            { 3, 0 },
+            { 4, 0 },
+            { 5, 0 },
+            { 6, 0 },
+            { 7, 1 },
+            { 8, 2 },
+            { 9, 3 },
+            { 10, 4 },
+            { 11, 5 },
+            { 12, 6 },
+            { 13, 8 },
+            { 14, 10 },
+            { 15, 12 },
+            { 16, 14 },
+        };
     }
 }

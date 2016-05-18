@@ -88,6 +88,8 @@ namespace Mundasia.Objects
                 }
 
                 _iconFileName = split[15];
+
+                OtherBonusStats = int.Parse(split[16]);
             }
             else
             {
@@ -311,7 +313,15 @@ namespace Mundasia.Objects
         /// </summary>
         public Dictionary<int, int> PlayableHairStyles;
 
+        /// <summary>
+        /// The file name of the icon that represents this class.
+        /// </summary>
         private string _iconFileName;
+
+        /// <summary>
+        /// Bonus stats that can be applied at the player's discretion.
+        /// </summary>
+        public int OtherBonusStats;
 
         public Image _icon;
 
