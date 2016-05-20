@@ -77,6 +77,12 @@ namespace Mundasia.Objects
                 _iconFileName = split[10];
 
                 Description = uint.Parse(split[11]);
+
+                string[] saves = split[12].Split(listDelim);
+                foreach(string save in saves)
+                {
+                    if(!String.IsNullOrWhiteSpace(save)) ProficientSaves.Add(uint.Parse(save));
+                }
             }
         }
 
@@ -114,6 +120,8 @@ namespace Mundasia.Objects
         }
 
         public int HitDie;
+
+        public List<uint> ProficientSaves = new List<uint>();
 
         public int SkillChoices;
 

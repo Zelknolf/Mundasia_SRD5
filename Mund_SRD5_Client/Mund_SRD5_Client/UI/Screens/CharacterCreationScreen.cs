@@ -138,6 +138,13 @@ namespace Mundasia.Interface
         static Label charismaEditLabel = new Label();
         static NumericUpDown charismaEdit = new NumericUpDown();
 
+        static ListView strengthSkills = new ListView();
+        static ListView dexteritySkills = new ListView();
+        static ListView constitutionSkills = new ListView();
+        static ListView intelligenceSkills = new ListView();
+        static ListView wisdomSkills = new ListView();
+        static ListView charismaSkills = new ListView();
+
         static ListView genderBox = new ListView();
         static ListView backgroundBox = new ListView();
         static ListView characterClassBox = new ListView();
@@ -232,6 +239,10 @@ namespace Mundasia.Interface
             StyleAbilityScore(labelStrengthScore);
             abilityStrength.Controls.Add(labelStrengthScore);
 
+            strengthSkills.Location = new Point(abilityStrength.Width + padding * 2, labelStrength.Location.Y + padding);
+            strengthSkills.Size = new Size(_characterSheet.ClientRectangle.Width - abilityStrength.Width - padding * 3, abilityStrength.Height + labelStrengthScore.Height);
+            StyleListView(strengthSkills);
+
             // dexterity
             abilityDexterity.Size = new Size(64, 64);
             abilityDexterity.BackgroundImage = IconAbilityScore;
@@ -249,6 +260,10 @@ namespace Mundasia.Interface
             labelDexterityScore.Text = "6";
             StyleAbilityScore(labelDexterityScore);
             abilityDexterity.Controls.Add(labelDexterityScore);
+
+            dexteritySkills.Location = new Point(abilityDexterity.Width + padding * 2, labelDexterity.Location.Y + padding);
+            dexteritySkills.Size = new Size(_characterSheet.ClientRectangle.Width - abilityDexterity.Width - padding * 3, abilityDexterity.Height + labelDexterityScore.Height);
+            StyleListView(dexteritySkills);
 
             // constitution
             abilityConstitution.Size = new Size(64, 64);
@@ -268,6 +283,10 @@ namespace Mundasia.Interface
             StyleAbilityScore(labelConstitutionScore);
             abilityConstitution.Controls.Add(labelConstitutionScore);
 
+            constitutionSkills.Location = new Point(abilityConstitution.Width + padding * 2, labelConstitution.Location.Y + padding);
+            constitutionSkills.Size = new Size(_characterSheet.ClientRectangle.Width - abilityConstitution.Width - padding * 3, abilityConstitution.Height + labelConstitutionScore.Height);
+            StyleListView(constitutionSkills);
+
             // intelligence
             abilityIntelligence.Size = new Size(64, 64);
             abilityIntelligence.BackgroundImage = IconAbilityScore;
@@ -285,6 +304,10 @@ namespace Mundasia.Interface
             labelIntelligenceScore.Text = "6";
             StyleAbilityScore(labelIntelligenceScore);
             abilityIntelligence.Controls.Add(labelIntelligenceScore);
+
+            intelligenceSkills.Location = new Point(abilityIntelligence.Width + padding * 2, labelIntelligence.Location.Y + padding);
+            intelligenceSkills.Size = new Size(_characterSheet.ClientRectangle.Width - abilityIntelligence.Width - padding * 3, abilityIntelligence.Height + labelIntelligenceScore.Height);
+            StyleListView(intelligenceSkills);
 
             // wisdom
             abilityWisdom.Size = new Size(64, 64);
@@ -304,6 +327,10 @@ namespace Mundasia.Interface
             StyleAbilityScore(labelWisdomScore);
             abilityWisdom.Controls.Add(labelWisdomScore);
 
+            wisdomSkills.Location = new Point(abilityWisdom.Width + padding * 2, labelWisdom.Location.Y + padding);
+            wisdomSkills.Size = new Size(_characterSheet.ClientRectangle.Width - abilityWisdom.Width - padding * 3, abilityWisdom.Height + labelWisdomScore.Height);
+            StyleListView(wisdomSkills);
+
             // charisma
             abilityCharisma.Size = new Size(64, 64);
             abilityCharisma.BackgroundImage = IconAbilityScore;
@@ -321,6 +348,10 @@ namespace Mundasia.Interface
             labelCharismaScore.Text = "6";
             StyleAbilityScore(labelCharismaScore);
             abilityCharisma.Controls.Add(labelCharismaScore);
+
+            charismaSkills.Location = new Point(abilityCharisma.Width + padding * 2, labelCharisma.Location.Y + padding);
+            charismaSkills.Size = new Size(_characterSheet.ClientRectangle.Width - abilityCharisma.Width - padding * 3, abilityCharisma.Height + labelCharismaScore.Height);
+            StyleListView(charismaSkills);
 
             if (!_eventsInitialized)
             {
@@ -388,16 +419,22 @@ namespace Mundasia.Interface
             _characterSheet.Controls.Add(characterClassText);
             _characterSheet.Controls.Add(labelStrength);
             _characterSheet.Controls.Add(abilityStrength);
+            _characterSheet.Controls.Add(strengthSkills);
             _characterSheet.Controls.Add(labelDexterity);
             _characterSheet.Controls.Add(abilityDexterity);
+            _characterSheet.Controls.Add(dexteritySkills);
             _characterSheet.Controls.Add(labelConstitution);
             _characterSheet.Controls.Add(abilityConstitution);
+            _characterSheet.Controls.Add(constitutionSkills);
             _characterSheet.Controls.Add(labelIntelligence);
             _characterSheet.Controls.Add(abilityIntelligence);
+            _characterSheet.Controls.Add(intelligenceSkills);
             _characterSheet.Controls.Add(labelWisdom);
             _characterSheet.Controls.Add(abilityWisdom);
+            _characterSheet.Controls.Add(wisdomSkills);
             _characterSheet.Controls.Add(labelCharisma);
             _characterSheet.Controls.Add(abilityCharisma);
+            _characterSheet.Controls.Add(charismaSkills);
 
             _panel.Controls.Add(_characterSheet);
             _panel.Controls.Add(_editPanel);
