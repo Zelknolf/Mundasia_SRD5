@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using System.Drawing;
 using System.IO;
 
 namespace Mundasia.Objects
@@ -36,12 +37,14 @@ namespace Mundasia.Objects
                 {
                     Description = uint.MaxValue;
                 }
+                _iconFileName = split[4];
             }
             else
             {
                 Id = uint.MaxValue;
                 Name = "Error: "+fileLine;
                 Description = uint.MaxValue;
+                _icon = NullIcon;
             }
         }
 
@@ -80,6 +83,32 @@ namespace Mundasia.Objects
         /// An unsigned int referring to the ability score that the skill uses.
         /// </summary>
         public uint Ability;
+
+        private string _iconFileName;
+
+        private Image _icon;
+
+        private static Image _nullIcon;
+
+        public Image Icon
+        {
+            get
+            {
+                if (_icon != null) return _icon;
+                _icon = Image.FromFile(System.IO.Directory.GetCurrentDirectory() + "\\Images\\Skills\\" + _iconFileName + ".png");
+                return _icon;
+            }
+        }
+        
+        public static Image NullIcon
+        {
+            get
+            {
+                if (_nullIcon != null) return _nullIcon;
+                _nullIcon = Image.FromFile(System.IO.Directory.GetCurrentDirectory() + "\\Images\\Skills\\NoSkill.png");
+                return _nullIcon;
+            }
+        }
 
         /// <summary>
         /// Static storage for cached skills.
