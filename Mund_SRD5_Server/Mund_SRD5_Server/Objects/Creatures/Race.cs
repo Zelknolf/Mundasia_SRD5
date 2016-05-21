@@ -63,28 +63,40 @@ namespace Mundasia.Objects
                     FreeSkills = 0;
                 }
 
-                AutomaticSkills = new List<int>();
+                AutomaticSkills = new List<Skill>();
                 string[] autoSkills = split[12].Split('[');
                 foreach(string autoSkill in autoSkills)
                 {
-                    int sk;
-                    if (Int32.TryParse(autoSkill, out sk)) AutomaticSkills.Add(sk);
+                    uint sk;
+                    if (uint.TryParse(autoSkill, out sk))
+                    {
+                        Skill foundSkill = Skill.GetSkill(sk);
+                        if (foundSkill != null) AutomaticSkills.Add(foundSkill);
+                    }
                 }
 
-                SelectedSkill = new List<int>();
+                SelectedSkill = new List<Skill>();
                 string[] selSkills = split[13].Split('[');
                 foreach(string selSkill in selSkills)
                 {
-                    int sk;
-                    if (Int32.TryParse(selSkill, out sk)) SelectedSkill.Add(sk);
+                    uint sk;
+                    if (uint.TryParse(selSkill, out sk))
+                    {
+                        Skill foundSkill = Skill.GetSkill(sk);
+                        if(foundSkill != null) SelectedSkill.Add(foundSkill);
+                    }
                 }
 
-                Powers = new List<int>();
+                Powers = new List<Power>();
                 string[] pows = split[14].Split('[');
                 foreach(string pow in pows)
                 {
-                    int sk;
-                    if (Int32.TryParse(pow, out sk)) Powers.Add(sk);
+                    uint pw;
+                    if (uint.TryParse(pow, out pw))
+                    {
+                        Power foundPower = Power.GetPower(pw);
+                        if(foundPower != null) Powers.Add(foundPower);
+                    }
                 }
 
                 _iconFileName = split[15];
@@ -99,7 +111,7 @@ namespace Mundasia.Objects
             }
         }
 
-        public Race(uint id, uint description, string name, int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma, int height, int movement, int freeSkills, List<int> automaticSkills, List<int> freeSkillOptions, List<int> powers)
+        public Race(uint id, uint description, string name, int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma, int height, int movement, int freeSkills, List<Skill> automaticSkills, List<Skill> freeSkillOptions, List<Power> powers)
         {
             Id = id;
             Description = description;
@@ -281,17 +293,17 @@ namespace Mundasia.Objects
         /// <summary>
         /// Skills that are automatically granted to members of this race.
         /// </summary>
-        public List<int> AutomaticSkills;
+        public List<Skill> AutomaticSkills;
 
         /// <summary>
         /// A list of skills that members of this race may pick the free skill from.
         /// </summary>
-        public List<int> SelectedSkill;
+        public List<Skill> SelectedSkill;
 
         /// <summary>
         /// A list of powers that members of this race receive.
         /// </summary>
-        public List<int> Powers;
+        public List<Power> Powers;
 
         /// <summary>
         /// The race's available skin colors.
