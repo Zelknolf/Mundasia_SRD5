@@ -18,6 +18,7 @@ namespace Mundasia.Interface
     {
         public CharacterCreationScreen() {}
 
+        #region Static Storage
         static Size MiniIconSize = new Size(10, 10);
         static Size IconSize = new Size(64, 64);
 
@@ -151,6 +152,13 @@ namespace Mundasia.Interface
         static ListView characterClassBox = new ListView();
         static ListView raceBox = new ListView();
 
+        static Label raceSkillsLabel = new Label();
+        static ListView raceSkills = new ListView();
+        static Label classSkillsLabel = new Label();
+        static ListView classSkills = new ListView();
+        static Label classToolsLabel = new Label();
+        static ListView classTools = new ListView();
+
         private static bool _eventsInitialized = false;
 
         private static int _strengthScore = 6;
@@ -161,10 +169,16 @@ namespace Mundasia.Interface
         private static int _charismaScore = 6;
 
         private static Race _selectedRace;
-
         private static CharacterClass _selectedClass;
         private static CharacterClass _selectedSubClass;
+        private static Background _selectedBackground;
 
+        private static List<Skill> _raceSkills = new List<Skill>();
+        private static List<Skill> _classSkills = new List<Skill>();
+        private static List<Skill> _classTools = new List<Skill>();
+        #endregion
+
+        #region Initialization
         public static void Set(Form primaryForm)
         {
             _form = primaryForm;
@@ -245,6 +259,7 @@ namespace Mundasia.Interface
 
             strengthSkills.Location = new Point(abilityStrength.Width + padding * 2, labelStrength.Location.Y + padding);
             strengthSkills.Size = new Size(_characterSheet.ClientRectangle.Width - abilityStrength.Width - padding * 3, abilityStrength.Height + labelStrengthScore.Height);
+            strengthSkills.ItemSelectionChanged += NoSelection;
             StyleListView(strengthSkills, true);
 
             // dexterity
@@ -267,6 +282,7 @@ namespace Mundasia.Interface
 
             dexteritySkills.Location = new Point(abilityDexterity.Width + padding * 2, labelDexterity.Location.Y + padding);
             dexteritySkills.Size = new Size(_characterSheet.ClientRectangle.Width - abilityDexterity.Width - padding * 3, abilityDexterity.Height + labelDexterityScore.Height);
+            dexteritySkills.ItemSelectionChanged += NoSelection;
             StyleListView(dexteritySkills, true);
 
             // constitution
@@ -289,6 +305,7 @@ namespace Mundasia.Interface
 
             constitutionSkills.Location = new Point(abilityConstitution.Width + padding * 2, labelConstitution.Location.Y + padding);
             constitutionSkills.Size = new Size(_characterSheet.ClientRectangle.Width - abilityConstitution.Width - padding * 3, abilityConstitution.Height + labelConstitutionScore.Height);
+            constitutionSkills.ItemSelectionChanged += NoSelection;
             StyleListView(constitutionSkills, true);
 
             // intelligence
@@ -311,6 +328,7 @@ namespace Mundasia.Interface
 
             intelligenceSkills.Location = new Point(abilityIntelligence.Width + padding * 2, labelIntelligence.Location.Y + padding);
             intelligenceSkills.Size = new Size(_characterSheet.ClientRectangle.Width - abilityIntelligence.Width - padding * 3, abilityIntelligence.Height + labelIntelligenceScore.Height);
+            intelligenceSkills.ItemSelectionChanged += NoSelection;
             StyleListView(intelligenceSkills, true);
 
             // wisdom
@@ -333,6 +351,7 @@ namespace Mundasia.Interface
 
             wisdomSkills.Location = new Point(abilityWisdom.Width + padding * 2, labelWisdom.Location.Y + padding);
             wisdomSkills.Size = new Size(_characterSheet.ClientRectangle.Width - abilityWisdom.Width - padding * 3, abilityWisdom.Height + labelWisdomScore.Height);
+            wisdomSkills.ItemSelectionChanged += NoSelection;
             StyleListView(wisdomSkills, true);
 
             // charisma
@@ -355,6 +374,7 @@ namespace Mundasia.Interface
 
             charismaSkills.Location = new Point(abilityCharisma.Width + padding * 2, labelCharisma.Location.Y + padding);
             charismaSkills.Size = new Size(_characterSheet.ClientRectangle.Width - abilityCharisma.Width - padding * 3, abilityCharisma.Height + labelCharismaScore.Height);
+            charismaSkills.ItemSelectionChanged += NoSelection;
             StyleListView(charismaSkills, true);
 
             if (!_eventsInitialized)
@@ -396,7 +416,6 @@ namespace Mundasia.Interface
                 labelCharismaScore.Click += EditAbilityScores;
                 abilityCharisma.Click += EditAbilityScores;
 
-
                 strengthEdit.Value = _strengthScore;
                 dexterityEdit.Value = _dexterityScore;
                 constitutionEdit.Value = _constitutionScore;
@@ -410,6 +429,17 @@ namespace Mundasia.Interface
                 intelligenceEdit.ValueChanged += AfterAbilityEdit;
                 wisdomEdit.ValueChanged += AfterAbilityEdit;
                 charismaEdit.ValueChanged += AfterAbilityEdit;
+
+                strengthSkills.MouseDown += EditSkills;
+                dexteritySkills.MouseDown += EditSkills;
+                constitutionSkills.MouseDown += EditSkills;
+                intelligenceSkills.MouseDown += EditSkills;
+                wisdomSkills.MouseDown += EditSkills;
+                charismaSkills.MouseDown += EditSkills;
+
+                raceSkills.ItemSelectionChanged += ToggleRaceSkill;
+                classSkills.ItemSelectionChanged += ToggleClassSkill;
+                classTools.ItemSelectionChanged += ToggleClassTool;
                 _eventsInitialized = true;
             }
 
@@ -452,6 +482,15 @@ namespace Mundasia.Interface
             _form.Resize -= _form_Resize;
             _form.Controls.Remove(_panel);
         }
+
+        private static void NoSelection(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            if(e.IsSelected)
+            {
+                e.Item.Selected = false;
+            }
+        }
+        #endregion
 
         #region Gender Selection
         private static void GenderBox_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
@@ -510,7 +549,7 @@ namespace Mundasia.Interface
         }
         #endregion
 
-        #region Background
+        #region Background Selection
         private static void BackgroundBox_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
             if(e.IsSelected)
@@ -521,7 +560,10 @@ namespace Mundasia.Interface
                     backgroundText.Text = e.Item.Name;
                     backgroundIcon.BackgroundImage = background.Icon;
 
+                    _selectedBackground = background;
+
                     _populateBackgroundList();
+                    UpdateSkills();
                 }
             }
         }
@@ -546,8 +588,14 @@ namespace Mundasia.Interface
 
         private static void _populateBackgroundList()
         {
+            uint topItemIndex = uint.MaxValue;
+            if (backgroundBox.TopItem != null)
+            {
+                topItemIndex = (uint)backgroundBox.TopItem.Tag;
+            }
+            ListViewItem topItem = null;
+            backgroundBox.BeginUpdate();
             backgroundBox.Items.Clear();
-
             ImageList imgs = new ImageList();
             imgs.ImageSize = IconSize;
             imgs.ColorDepth = ColorDepth.Depth32Bit;
@@ -564,9 +612,16 @@ namespace Mundasia.Interface
                 imgs.Images.Add(bkgrd.Icon);
                 imageIndex++;
                 StyleListViewItem(toAdd);
+                if (bkgrd == _selectedBackground) toAdd.BackColor = SelectedRowColor;
                 backgroundBox.Items.Add(toAdd);
+                if (bkgrd.Id == topItemIndex) topItem = toAdd;
             }
             backgroundBox.SmallImageList = imgs;
+            backgroundBox.EndUpdate();
+            if(topItem != null)
+            {
+                backgroundBox.TopItem = topItem;
+            }
         }
         #endregion
 
@@ -580,11 +635,11 @@ namespace Mundasia.Interface
                 {
                     raceText.Text = e.Item.Name;
                     raceIcon.BackgroundImage = selectedRace.Icon;
-
+                    _selectedRace = selectedRace;
                     _populateRaceList();
                 }
-                _selectedRace = selectedRace;
                 UpdateAbilityScores();
+                UpdateSkills();
             }
         }
 
@@ -608,6 +663,13 @@ namespace Mundasia.Interface
 
         private static void _populateRaceList()
         {
+            uint topItemIndex = uint.MaxValue;
+            if (raceBox.TopItem != null)
+            {
+                topItemIndex = (uint)raceBox.TopItem.Tag;
+            }
+            ListViewItem topItem = null;
+            raceBox.BeginUpdate();
             raceBox.Items.Clear();
             ImageList imgs = new ImageList();
             imgs.ImageSize = IconSize;
@@ -625,9 +687,13 @@ namespace Mundasia.Interface
                 imgs.Images.Add(race.Icon);
                 imageIndex++;
                 StyleListViewItem(toAdd);
+                if (race == _selectedRace) toAdd.BackColor = SelectedRowColor;
                 raceBox.Items.Add(toAdd);
+                if (topItemIndex == race.Id) topItem = toAdd;
             }
             raceBox.SmallImageList = imgs;
+            raceBox.EndUpdate();
+            if(topItem != null) raceBox.TopItem = topItem;
         }
         #endregion
 
@@ -642,15 +708,7 @@ namespace Mundasia.Interface
                     characterClassText.Text = e.Item.Name;
                     characterClassIcon.BackgroundImage = selectedClass.Icon;
 
-                    if(selectedClass.SubClassLevel == 1)
-                    {
-                        EditCharacterSubClass(selectedClass);
-                    }
-                    else
-                    {
-                        _populateCharacterClassList();
-                    }
-                    if(selectedClass.HitDie == 0)
+                    if (selectedClass.HitDie == 0)
                     {
                         _selectedSubClass = selectedClass;
                     }
@@ -658,6 +716,14 @@ namespace Mundasia.Interface
                     {
                         _selectedClass = selectedClass;
                         UpdateSkills();
+                    }
+                    if (selectedClass.SubClassLevel == 1)
+                    {
+                        EditCharacterSubClass(selectedClass);
+                    }
+                    else
+                    {
+                        _populateCharacterClassList();
                     }
                 }
             }
@@ -683,6 +749,13 @@ namespace Mundasia.Interface
 
         private static void _populateCharacterClassList()
         {
+            uint topItemIndex = uint.MaxValue;
+            if (characterClassBox.TopItem != null)
+            {
+                topItemIndex = (uint)characterClassBox.TopItem.Tag;
+            }
+            ListViewItem topItem = null;
+            characterClassBox.BeginUpdate();
             characterClassBox.Items.Clear();
             ImageList imgs = new ImageList();
             imgs.ImageSize = IconSize;
@@ -702,10 +775,14 @@ namespace Mundasia.Interface
                     imgs.Images.Add(cl.Icon);
                     imageIndex++;
                     StyleListViewItem(toAdd);
+                    if (cl == _selectedClass) toAdd.BackColor = SelectedRowColor;
                     characterClassBox.Items.Add(toAdd);
+                    if (topItemIndex == cl.Id) topItem = toAdd;
                 }
             }
             characterClassBox.SmallImageList = imgs;
+            characterClassBox.EndUpdate();
+            if (topItem != null) characterClassBox.TopItem = topItem;
         }
 
         public static void EditCharacterSubClass(CharacterClass selClass)
@@ -733,6 +810,7 @@ namespace Mundasia.Interface
         }
         #endregion
 
+        #region Ability Scores
         private static void EditAbilityScores(object sender, EventArgs e)
         {
             if (_currentEdit == CurrentEdit.AbilityScores) return;
@@ -918,7 +996,7 @@ namespace Mundasia.Interface
             if (_selectedRace != null)
             {
                 labelStrengthScore.Text = (_strengthScore + _selectedRace.Strength).ToString();
-                if((_strengthScore + _selectedRace.Strength) >= 10)
+                if ((_strengthScore + _selectedRace.Strength) >= 10)
                 {
                     labelStrengthMod.Text = "+" + ((_strengthScore + _selectedRace.Strength - 10) / 2).ToString();
                 }
@@ -1031,6 +1109,269 @@ namespace Mundasia.Interface
             }
         }
 
+        private static Dictionary<int, int> AbilityScoreCosts = new Dictionary<int, int>()
+        {
+            { 0, 0 },
+            { 1, 0 },
+            { 2, 0 },
+            { 3, 0 },
+            { 4, 0 },
+            { 5, 0 },
+            { 6, 0 },
+            { 7, 1 },
+            { 8, 2 },
+            { 9, 3 },
+            { 10, 4 },
+            { 11, 5 },
+            { 12, 6 },
+            { 13, 8 },
+            { 14, 10 },
+            { 15, 12 },
+            { 16, 14 },
+        };
+        #endregion
+
+        #region Skills
+        private static void ToggleRaceSkill(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            if(e.IsSelected)
+            {
+                Skill sk = Skill.GetSkill((uint)e.Item.Tag);
+                if(sk != null)
+                {
+                    if (_raceSkills.Contains(sk))
+                    {
+                        _raceSkills.Remove(sk);
+                    }
+                    else
+                    {
+                        _raceSkills.Add(sk);
+                    }
+                }
+                UpdateSkills();
+                PopulateSkillEdits();
+            }
+        }
+
+        private static void ToggleClassSkill(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            if(e.IsSelected)
+            {
+                Skill sk = Skill.GetSkill((uint)e.Item.Tag);
+                if(sk != null)
+                {
+                    if (_classSkills.Contains(sk))
+                    {
+                        _classSkills.Remove(sk);
+                    }
+                    else
+                    {
+                        _classSkills.Add(sk);
+                    }
+                }
+                UpdateSkills();
+                PopulateSkillEdits();
+            }
+        }
+
+        private static void ToggleClassTool(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            if(e.IsSelected)
+            {
+                Skill sk = Skill.GetSkill((uint)e.Item.Tag);
+                if(sk != null)
+                {
+                    if (_classTools.Contains(sk))
+                    {
+                        _classTools.Remove(sk);
+                    }
+                    else
+                    {
+                        _classTools.Add(sk);
+                    }
+                    UpdateSkills();
+                    PopulateSkillEdits();
+                }
+            }
+        }
+
+        private static void EditSkills(object sender, EventArgs e)
+        {
+            if (_currentEdit == CurrentEdit.Skill) return;
+
+            _editPanel.Controls.Clear();
+
+            if(_selectedRace == null)
+            {
+                raceSkillsLabel.Text = "Racial Skills (No Class Selected)";
+            }
+            else
+            {
+                raceSkillsLabel.Text = "Racial Skills (" + (_selectedRace.FreeSkills - _raceSkills.Count) + " Remaining)";
+            }
+            StyleLabel(raceSkillsLabel);
+            raceSkillsLabel.Width = _editPanel.ClientRectangle.Width - padding * 2;
+
+            if(_selectedClass == null)
+            {
+                classSkillsLabel.Text = "Class Skills (No Class Selected)";
+                classToolsLabel.Text = "Class Tools (No Class Selected)";
+            }
+            else
+            {
+                classSkillsLabel.Text = "Class Skills (" + (_selectedClass.SkillChoices - _classSkills.Count) + " Remaining)";
+                classToolsLabel.Text = "Class Tools (" + (_selectedClass.ToolChoices - _classTools.Count) + " Remaining)";
+            }
+            StyleLabel(classSkillsLabel);
+            StyleLabel(classToolsLabel);
+            classSkillsLabel.Width = _editPanel.ClientRectangle.Width - padding * 2;
+            classToolsLabel.Width = _editPanel.ClientRectangle.Width - padding * 2;
+
+            raceSkills.Width = _editPanel.ClientRectangle.Width - padding * 2;
+            classSkills.Width = _editPanel.ClientRectangle.Width - padding * 2;
+            classTools.Width = _editPanel.ClientRectangle.Width - padding * 2;
+            raceSkills.Height = (_editPanel.ClientRectangle.Height - padding * 4 - raceSkillsLabel.Height * 3) / 3;
+            classSkills.Height = (_editPanel.ClientRectangle.Height - padding * 4 - raceSkillsLabel.Height * 3) / 3;
+            classTools.Height = (_editPanel.ClientRectangle.Height - padding * 4 - raceSkillsLabel.Height * 3) / 3;
+            raceSkillsLabel.Location = new Point(padding, padding);
+            raceSkills.Location = new Point(padding, raceSkillsLabel.Location.Y + raceSkillsLabel.Height);
+            classSkillsLabel.Location = new Point(padding, raceSkills.Location.Y + raceSkills.Height + padding);
+            classSkills.Location = new Point(padding, classSkillsLabel.Location.Y + classSkillsLabel.Height);
+            classToolsLabel.Location = new Point(padding, classSkills.Location.Y + classSkills.Height + padding);
+            classTools.Location = new Point(padding, classToolsLabel.Location.Y + classToolsLabel.Height);
+
+            StyleListView(raceSkills, false);
+            StyleListView(classSkills, false);
+            StyleListView(classTools, false);
+
+            PopulateSkillEdits();
+            
+            _editPanel.Controls.Add(raceSkillsLabel);
+            _editPanel.Controls.Add(raceSkills);
+            _editPanel.Controls.Add(classSkillsLabel);
+            _editPanel.Controls.Add(classSkills);
+            _editPanel.Controls.Add(classToolsLabel);
+            _editPanel.Controls.Add(classTools);
+
+            _currentEdit = CurrentEdit.Skill;
+        }
+
+        private static void PopulateSkillEdits()
+        {
+            if (_selectedRace != null)
+            { 
+                raceSkillsLabel.Text = "Racial Skills (" + (_selectedRace.FreeSkills - _raceSkills.Count) + " Remaining)";
+            }
+            if (_selectedClass != null)
+            {
+                classSkillsLabel.Text = "Class Skills (" + (_selectedClass.SkillChoices - _classSkills.Count) + " Remaining)";
+                classToolsLabel.Text = "Class Tools (" + (_selectedClass.ToolChoices - _classTools.Count) + " Remaining)";
+            }
+
+            uint topItemIndex = uint.MaxValue;
+            if(raceSkills.TopItem != null)
+            {
+                topItemIndex = (uint)raceSkills.TopItem.Tag;
+            }
+            ListViewItem topItem = null;
+            raceSkills.BeginUpdate();
+            raceSkills.Items.Clear();
+            if (_selectedRace != null)
+            {
+                ImageList imgs = new ImageList();
+                imgs.ImageSize = IconSize;
+                imgs.ColorDepth = ColorDepth.Depth32Bit;
+                int imageIndex = 0;
+
+                foreach (Skill sk in _selectedRace.SelectedSkill)
+                {
+                    ListViewItem toAdd = new ListViewItem(new string[] { String.Empty, sk.Name });
+                    toAdd.Name = sk.Name;
+                    toAdd.Tag = sk.Id;
+                    toAdd.ToolTipText = StringLibrary.GetString(sk.Description);
+                    toAdd.ImageIndex = imageIndex;
+                    imgs.Images.Add(sk.Icon);
+                    imageIndex++;
+                    StyleListViewItem(toAdd);
+                    if (_raceSkills.Contains(sk)) toAdd.BackColor = SelectedRowColor;
+                    raceSkills.Items.Add(toAdd);
+                    if(sk.Id == topItemIndex) topItem = toAdd;
+                }
+                raceSkills.SmallImageList = imgs;
+            }
+            raceSkills.EndUpdate();
+            if (topItem != null) raceSkills.TopItem = topItem;
+
+            topItemIndex = uint.MaxValue;
+            if (classSkills.TopItem != null)
+            {
+                topItemIndex = (uint)classSkills.TopItem.Tag;
+            }
+            topItem = null;
+            classSkills.BeginUpdate();
+            classSkills.Items.Clear();
+            if (_selectedClass != null)
+            {
+                ImageList imgs = new ImageList();
+                imgs.ImageSize = IconSize;
+                imgs.ColorDepth = ColorDepth.Depth32Bit;
+                int imageIndex = 0;
+
+                foreach (Skill sk in _selectedClass.AvailableSkills)
+                {
+                    ListViewItem toAdd = new ListViewItem(new string[] { String.Empty, sk.Name });
+                    toAdd.Name = sk.Name;
+                    toAdd.Tag = sk.Id;
+                    toAdd.ToolTipText = StringLibrary.GetString(sk.Description);
+                    toAdd.ImageIndex = imageIndex;
+                    imgs.Images.Add(sk.Icon);
+                    imageIndex++;
+                    StyleListViewItem(toAdd);
+                    if (_classSkills.Contains(sk)) toAdd.BackColor = SelectedRowColor;
+                    classSkills.Items.Add(toAdd);
+                    if (sk.Id == topItemIndex) topItem = toAdd;
+                }
+                classSkills.SmallImageList = imgs;
+            }
+            classSkills.EndUpdate();
+            if (topItem != null) classSkills.TopItem = topItem;
+
+            topItemIndex = uint.MaxValue;
+            if (classTools.TopItem != null)
+            {
+                topItemIndex = (uint)classTools.TopItem.Tag;
+            }
+            topItem = null;
+            classTools.BeginUpdate();
+            classTools.Items.Clear();
+            if (_selectedClass != null)
+            {
+                ImageList imgs = new ImageList();
+                imgs.ImageSize = IconSize;
+                imgs.ColorDepth = ColorDepth.Depth32Bit;
+                int imageIndex = 0;
+
+                foreach (Skill sk in _selectedClass.AvailableTools)
+                {
+                    ListViewItem toAdd = new ListViewItem(new string[] { String.Empty, sk.Name });
+                    toAdd.Name = sk.Name;
+                    toAdd.Tag = sk.Id;
+                    toAdd.ToolTipText = StringLibrary.GetString(sk.Description);
+                    toAdd.ImageIndex = imageIndex;
+                    imgs.Images.Add(sk.Icon);
+                    imageIndex++;
+                    StyleListViewItem(toAdd);
+                    if (_classTools.Contains(sk)) toAdd.BackColor = SelectedRowColor;
+                    classTools.Items.Add(toAdd);
+                    if (sk.Id == topItemIndex) topItem = toAdd;
+                }
+
+                classTools.SmallImageList = imgs;
+            }
+            classTools.EndUpdate();
+            if (topItem != null) classTools.TopItem = topItem;
+        }
+
         private static void UpdateSkills()
         {
             strengthSkills.Items.Clear();
@@ -1088,6 +1429,13 @@ namespace Mundasia.Interface
             wisdomSave = ((wisdomSave - 10) / 2);
             charismaSave = ((charismaSave - 10) / 2);
 
+            int strengthMod = strengthSave + 2;
+            int dexterityMod = dexteritySave + 2;
+            int constitutionMod = constitutionSave + 2;
+            int intelligenceMod = intelligenceSave + 2;
+            int wisdomMod = wisdomSave + 2;
+            int charismaMod = charismaSave + 2;
+
             if(_selectedClass != null)
             {
                 if (_selectedClass.ProficientSaves.Contains(0)) strengthSave += 2;
@@ -1121,8 +1469,84 @@ namespace Mundasia.Interface
             toAdd = new ListViewItem(new string[] { String.Empty, "Saving Throw", charismaSave > 0 ? "+ " + charismaSave.ToString() : charismaSave.ToString() });
             StyleListViewItem(toAdd);
             charismaSkills.Items.Add(toAdd);
+
+            if(_selectedBackground != null)
+            {
+                AddSkillToDisplay(Skill.GetSkill(_selectedBackground.SkillProf1), strengthMod, dexterityMod, constitutionMod, intelligenceMod, wisdomMod, charismaMod);
+                AddSkillToDisplay(Skill.GetSkill(_selectedBackground.SkillProf2), strengthMod, dexterityMod, constitutionMod, intelligenceMod, wisdomMod, charismaMod);
+            }
+            if (_selectedRace != null)
+            {
+                foreach (Skill sk in _selectedRace.AutomaticSkills)
+                {
+                    AddSkillToDisplay(sk, strengthMod, dexterityMod, constitutionMod, intelligenceMod, wisdomMod, charismaMod);
+                }
+            }
+
+            foreach(Skill sk in _classSkills)
+            {
+                AddSkillToDisplay(sk, strengthMod, dexterityMod, constitutionMod, intelligenceMod, wisdomMod, charismaMod);
+            }
+
+            foreach(Skill sk in _raceSkills)
+            {
+                AddSkillToDisplay(sk, strengthMod, dexterityMod, constitutionMod, intelligenceMod, wisdomMod, charismaMod);
+            }
+
+            if(_selectedBackground != null)
+            {
+                AddSkillToDisplay(Skill.GetSkill(_selectedBackground.ToolProf), strengthMod, dexterityMod, constitutionMod, intelligenceMod, wisdomMod, charismaMod);
+            }
+
+            foreach(Skill sk in _classTools)
+            {
+                AddSkillToDisplay(sk, strengthMod, dexterityMod, constitutionMod, intelligenceMod, wisdomMod, charismaMod);
+            }
         }
 
+        private static void AddSkillToDisplay(Skill sk, int strengthMod, int dexterityMod, int constitutionMod, int intelligenceMod, int wisdomMod, int charismaMod)
+        {
+            if (sk != null)
+            {
+                ListViewItem toAdd = null;
+                switch (sk.Ability)
+                {
+                    case 0:
+                        toAdd = new ListViewItem(new string[] { String.Empty, sk.Name, strengthMod > 0 ? "+ " + strengthMod.ToString() : strengthMod.ToString() });
+                        StyleListViewItem(toAdd);
+                        strengthSkills.Items.Add(toAdd);
+                        break;
+                    case 1:
+                        toAdd = new ListViewItem(new string[] { String.Empty, sk.Name, dexterityMod > 0 ? "+ " + dexterityMod.ToString() : dexterityMod.ToString() });
+                        StyleListViewItem(toAdd);
+                        dexteritySkills.Items.Add(toAdd);
+                        break;
+                    case 2:
+                        toAdd = new ListViewItem(new string[] { String.Empty, sk.Name, constitutionMod > 0 ? "+ " + constitutionMod.ToString() : constitutionMod.ToString() });
+                        StyleListViewItem(toAdd);
+                        constitutionSkills.Items.Add(toAdd);
+                        break;
+                    case 3:
+                        toAdd = new ListViewItem(new string[] { String.Empty, sk.Name, intelligenceMod > 0 ? "+ " + intelligenceMod.ToString() : intelligenceMod.ToString() });
+                        StyleListViewItem(toAdd);
+                        intelligenceSkills.Items.Add(toAdd);
+                        break;
+                    case 4:
+                        toAdd = new ListViewItem(new string[] { String.Empty, sk.Name, wisdomMod > 0 ? "+ " + wisdomMod.ToString() : wisdomMod.ToString() });
+                        StyleListViewItem(toAdd);
+                        wisdomSkills.Items.Add(toAdd);
+                        break;
+                    case 5:
+                        toAdd = new ListViewItem(new string[] { String.Empty, sk.Name, charismaMod > 0 ? "+ " + charismaMod.ToString() : charismaMod.ToString() });
+                        StyleListViewItem(toAdd);
+                        charismaSkills.Items.Add(toAdd);
+                        break;
+                }
+            }
+        }
+        #endregion
+
+        #region Styles, Sizing, and Color
         private static void _form_Resize(object sender, EventArgs e)
         {
             _panel.Size = _form.ClientRectangle.Size;
@@ -1167,12 +1591,15 @@ namespace Mundasia.Interface
             Background,
             Class,
             Gender,
-            Race
+            Race,
+            Skill
         }
 
         private static Font abilityModFont = new Font(FontFamily.GenericSansSerif, 18.0f);
         private static Font abilityScoreFont = new Font(FontFamily.GenericSansSerif, 8.0f);
         private static Font labelFont = new Font(FontFamily.GenericSansSerif, 12.0f);
+
+        private static Color SelectedRowColor = Color.FromArgb(25, 25, 25);
 
         private static void StyleAbilityMod(Label toStyle)
         {
@@ -1236,26 +1663,6 @@ namespace Mundasia.Interface
             item.ForeColor = Color.White;
             item.Font = labelFont;
         }
-
-        private static Dictionary<int, int> AbilityScoreCosts = new Dictionary<int, int>()
-        {
-            { 0, 0 },
-            { 1, 0 },
-            { 2, 0 },
-            { 3, 0 },
-            { 4, 0 },
-            { 5, 0 },
-            { 6, 0 },
-            { 7, 1 },
-            { 8, 2 },
-            { 9, 3 },
-            { 10, 4 },
-            { 11, 5 },
-            { 12, 6 },
-            { 13, 8 },
-            { 14, 10 },
-            { 15, 12 },
-            { 16, 14 },
-        };
+        #endregion
     }
 }
