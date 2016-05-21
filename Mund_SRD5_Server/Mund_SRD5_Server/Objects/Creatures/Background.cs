@@ -69,7 +69,7 @@ namespace Mundasia.Objects
 
         private string _iconFileName;
 
-        public Image _icon;
+        private Image _icon;
 
         private static Image _nullIcon;
 
