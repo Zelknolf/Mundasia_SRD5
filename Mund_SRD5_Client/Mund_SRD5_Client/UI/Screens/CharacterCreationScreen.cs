@@ -18,6 +18,7 @@ namespace Mundasia.Interface
     {
         public CharacterCreationScreen() {}
 
+        static Size MiniIconSize = new Size(10, 10);
         static Size IconSize = new Size(64, 64);
 
         private static int selectionHeight = 250;
@@ -161,6 +162,9 @@ namespace Mundasia.Interface
 
         private static Race _selectedRace;
 
+        private static CharacterClass _selectedClass;
+        private static CharacterClass _selectedSubClass;
+
         public static void Set(Form primaryForm)
         {
             _form = primaryForm;
@@ -241,7 +245,7 @@ namespace Mundasia.Interface
 
             strengthSkills.Location = new Point(abilityStrength.Width + padding * 2, labelStrength.Location.Y + padding);
             strengthSkills.Size = new Size(_characterSheet.ClientRectangle.Width - abilityStrength.Width - padding * 3, abilityStrength.Height + labelStrengthScore.Height);
-            StyleListView(strengthSkills);
+            StyleListView(strengthSkills, true);
 
             // dexterity
             abilityDexterity.Size = new Size(64, 64);
@@ -263,7 +267,7 @@ namespace Mundasia.Interface
 
             dexteritySkills.Location = new Point(abilityDexterity.Width + padding * 2, labelDexterity.Location.Y + padding);
             dexteritySkills.Size = new Size(_characterSheet.ClientRectangle.Width - abilityDexterity.Width - padding * 3, abilityDexterity.Height + labelDexterityScore.Height);
-            StyleListView(dexteritySkills);
+            StyleListView(dexteritySkills, true);
 
             // constitution
             abilityConstitution.Size = new Size(64, 64);
@@ -285,7 +289,7 @@ namespace Mundasia.Interface
 
             constitutionSkills.Location = new Point(abilityConstitution.Width + padding * 2, labelConstitution.Location.Y + padding);
             constitutionSkills.Size = new Size(_characterSheet.ClientRectangle.Width - abilityConstitution.Width - padding * 3, abilityConstitution.Height + labelConstitutionScore.Height);
-            StyleListView(constitutionSkills);
+            StyleListView(constitutionSkills, true);
 
             // intelligence
             abilityIntelligence.Size = new Size(64, 64);
@@ -307,7 +311,7 @@ namespace Mundasia.Interface
 
             intelligenceSkills.Location = new Point(abilityIntelligence.Width + padding * 2, labelIntelligence.Location.Y + padding);
             intelligenceSkills.Size = new Size(_characterSheet.ClientRectangle.Width - abilityIntelligence.Width - padding * 3, abilityIntelligence.Height + labelIntelligenceScore.Height);
-            StyleListView(intelligenceSkills);
+            StyleListView(intelligenceSkills, true);
 
             // wisdom
             abilityWisdom.Size = new Size(64, 64);
@@ -329,7 +333,7 @@ namespace Mundasia.Interface
 
             wisdomSkills.Location = new Point(abilityWisdom.Width + padding * 2, labelWisdom.Location.Y + padding);
             wisdomSkills.Size = new Size(_characterSheet.ClientRectangle.Width - abilityWisdom.Width - padding * 3, abilityWisdom.Height + labelWisdomScore.Height);
-            StyleListView(wisdomSkills);
+            StyleListView(wisdomSkills, true);
 
             // charisma
             abilityCharisma.Size = new Size(64, 64);
@@ -351,7 +355,7 @@ namespace Mundasia.Interface
 
             charismaSkills.Location = new Point(abilityCharisma.Width + padding * 2, labelCharisma.Location.Y + padding);
             charismaSkills.Size = new Size(_characterSheet.ClientRectangle.Width - abilityCharisma.Width - padding * 3, abilityCharisma.Height + labelCharismaScore.Height);
-            StyleListView(charismaSkills);
+            StyleListView(charismaSkills, true);
 
             if (!_eventsInitialized)
             {
@@ -439,6 +443,8 @@ namespace Mundasia.Interface
             _panel.Controls.Add(_characterSheet);
             _panel.Controls.Add(_editPanel);
             _form.Controls.Add(_panel);
+
+            UpdateSkills();
         }
 
         public static void Clear()
@@ -468,7 +474,7 @@ namespace Mundasia.Interface
             genderBox.Height = _editPanel.Height - (padding * 2);
             genderBox.Width = _editPanel.Width - (padding * 2);
             genderBox.Location = new Point(padding, padding);
-            StyleListView(genderBox);
+            StyleListView(genderBox, false);
 
             _populateGenderList();
 
@@ -529,7 +535,7 @@ namespace Mundasia.Interface
             backgroundBox.Height = _editPanel.Height - (padding * 2);
             backgroundBox.Width = _editPanel.Width - (padding * 2);
             backgroundBox.Location = new Point(padding, padding);
-            StyleListView(backgroundBox);
+            StyleListView(backgroundBox, false);
 
             _populateBackgroundList();
 
@@ -591,7 +597,7 @@ namespace Mundasia.Interface
             raceBox.Height = _editPanel.Height - (padding * 2);
             raceBox.Width = _editPanel.Width - (padding * 2);
             raceBox.Location = new Point(padding, padding);
-            StyleListView(raceBox);
+            StyleListView(raceBox, false);
 
             _populateRaceList();
 
@@ -644,6 +650,15 @@ namespace Mundasia.Interface
                     {
                         _populateCharacterClassList();
                     }
+                    if(selectedClass.HitDie == 0)
+                    {
+                        _selectedSubClass = selectedClass;
+                    }
+                    else
+                    {
+                        _selectedClass = selectedClass;
+                        UpdateSkills();
+                    }
                 }
             }
         }
@@ -657,7 +672,7 @@ namespace Mundasia.Interface
             characterClassBox.Height = _editPanel.Height - (padding * 2);
             characterClassBox.Width = _editPanel.Width - (padding * 2);
             characterClassBox.Location = new Point(padding, padding);
-            StyleListView(characterClassBox);
+            StyleListView(characterClassBox, false);
 
             _populateCharacterClassList();
 
@@ -895,6 +910,7 @@ namespace Mundasia.Interface
             pointsLeft.Size = pointsLeft.PreferredSize;
 
             UpdateAbilityScores();
+            UpdateSkills();
         }
 
         private static void UpdateAbilityScores()
@@ -1015,6 +1031,98 @@ namespace Mundasia.Interface
             }
         }
 
+        private static void UpdateSkills()
+        {
+            strengthSkills.Items.Clear();
+            dexteritySkills.Items.Clear();
+            constitutionSkills.Items.Clear();
+            intelligenceSkills.Items.Clear();
+            wisdomSkills.Items.Clear();
+            charismaSkills.Items.Clear();
+
+            int strengthSave = _strengthScore;
+            int dexteritySave = _dexterityScore;
+            int constitutionSave = _constitutionScore;
+            int intelligenceSave = _intelligenceScore;
+            int wisdomSave = _wisdomScore;
+            int charismaSave = _charismaScore;
+
+            if(_selectedRace != null)
+            {
+                strengthSave += _selectedRace.Strength;
+                dexteritySave += _selectedRace.Dexterity;
+                constitutionSave += _selectedRace.Constitution;
+                intelligenceSave += _selectedRace.Intelligence;
+                wisdomSave += _selectedRace.Wisdom;
+                charismaSave += _selectedRace.Charisma;
+            }
+            if (strengthSave < 10)
+            {
+                strengthSave -= 1; 
+            }
+            if (dexteritySave < 10)
+            {
+                dexteritySave -= 1;
+            }
+            if (constitutionSave < 10)
+            {
+                constitutionSave -= 1;
+            }
+            if (intelligenceSave < 10)
+            {
+                intelligenceSave -= 1;
+            }
+            if (wisdomSave < 10)
+            {
+                wisdomSave -= 1;
+            }
+            if (charismaSave < 10)
+            {
+                charismaSave -= 1;
+            }
+
+            strengthSave = ((strengthSave - 10) / 2);
+            dexteritySave = ((dexteritySave - 10) / 2);
+            constitutionSave = ((constitutionSave - 10) / 2);
+            intelligenceSave = ((intelligenceSave - 10) / 2);
+            wisdomSave = ((wisdomSave - 10) / 2);
+            charismaSave = ((charismaSave - 10) / 2);
+
+            if(_selectedClass != null)
+            {
+                if (_selectedClass.ProficientSaves.Contains(0)) strengthSave += 2;
+                if (_selectedClass.ProficientSaves.Contains(1)) dexteritySave += 2;
+                if (_selectedClass.ProficientSaves.Contains(2)) constitutionSave += 2;
+                if (_selectedClass.ProficientSaves.Contains(3)) intelligenceSave += 2;
+                if (_selectedClass.ProficientSaves.Contains(4)) wisdomSave += 2;
+                if (_selectedClass.ProficientSaves.Contains(5)) charismaSave += 2;
+            }
+
+            ListViewItem toAdd = new ListViewItem(new string[] { String.Empty, "Saving Throw", strengthSave > 0 ? "+ " + strengthSave.ToString() : strengthSave.ToString() });
+            StyleListViewItem(toAdd);
+            strengthSkills.Items.Add(toAdd);
+
+            toAdd = new ListViewItem(new string[] { String.Empty, "Saving Throw", dexteritySave > 0 ? "+ " + dexteritySave.ToString() : dexteritySave.ToString() });
+            StyleListViewItem(toAdd);
+            dexteritySkills.Items.Add(toAdd);
+
+            toAdd = new ListViewItem(new string[] { String.Empty, "Saving Throw", constitutionSave > 0 ? "+ " + constitutionSave.ToString() : constitutionSave.ToString() });
+            StyleListViewItem(toAdd);
+            constitutionSkills.Items.Add(toAdd);
+
+            toAdd = new ListViewItem(new string[] { String.Empty, "Saving Throw", intelligenceSave > 0 ? "+ " + intelligenceSave.ToString() : intelligenceSave.ToString() });
+            StyleListViewItem(toAdd);
+            intelligenceSkills.Items.Add(toAdd);
+
+            toAdd = new ListViewItem(new string[] { String.Empty, "Saving Throw", wisdomSave > 0 ? "+ " + wisdomSave.ToString() : wisdomSave.ToString() });
+            StyleListViewItem(toAdd);
+            wisdomSkills.Items.Add(toAdd);
+
+            toAdd = new ListViewItem(new string[] { String.Empty, "Saving Throw", charismaSave > 0 ? "+ " + charismaSave.ToString() : charismaSave.ToString() });
+            StyleListViewItem(toAdd);
+            charismaSkills.Items.Add(toAdd);
+        }
+
         private static void _form_Resize(object sender, EventArgs e)
         {
             _panel.Size = _form.ClientRectangle.Size;
@@ -1096,11 +1204,12 @@ namespace Mundasia.Interface
             toStyle.Size = toStyle.PreferredSize;
         }
 
-        private static void StyleListView(ListView listView)
+        private static void StyleListView(ListView listView, bool threeColumns)
         {
             listView.Clear();
             listView.Columns.Add("");
             listView.Columns.Add("");
+            if (threeColumns) listView.Columns.Add("");
             listView.View = View.Details;
             listView.FullRowSelect = true;
             listView.BackColor = Color.Black;
@@ -1108,8 +1217,17 @@ namespace Mundasia.Interface
             listView.HeaderStyle = ColumnHeaderStyle.None;
             listView.ShowItemToolTips = true;
             listView.Font = labelFont;
-            listView.Columns[0].Width = IconSize.Width + 2;
-            listView.Columns[1].Width = listView.ClientRectangle.Width - SystemInformation.VerticalScrollBarWidth - IconSize.Width - 2;
+            if (threeColumns)
+            {
+                listView.Columns[0].Width = MiniIconSize.Width + 2;
+                listView.Columns[1].Width = ((listView.ClientRectangle.Width - SystemInformation.VerticalScrollBarWidth - IconSize.Width - 2) * 8) / 10;
+                listView.Columns[2].Width = ((listView.ClientRectangle.Width - SystemInformation.VerticalScrollBarWidth - IconSize.Width - 2) * 2) / 10;
+            }
+            else
+            {
+                listView.Columns[0].Width = IconSize.Width + 2;
+                listView.Columns[1].Width = listView.ClientRectangle.Width - SystemInformation.VerticalScrollBarWidth - IconSize.Width - 2;
+            }
         }
 
         private static void StyleListViewItem(ListViewItem item)
