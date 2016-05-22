@@ -1,15 +1,15 @@
 12000|The barbarian is a savage fighter whose solid physique and skillset make them suited for demanding surroundings. They rely on savage violence and stubborn tenacity to overcome obstacles in their path. They use primative weapons and simple tactics, but their intensity and fortitude in battle make them a formidable opponent.
-12001|Bard
-12002|Cleric
-12003|Druid
-12004|Fighter
-12005|Monk
-12006|Paladin
-12007|Ranger
-12008|Rogue
-12009|Sorcerer
-12010|Warlock
-12011|Wizard
+12001|The bard is a performer whose silver tongue, charismatic personality and sharp wit can get them both into and out of trouble. Fast instincts and innate magical talents combined with inspiring musical abilities make them a welcome companion in nearly any group. They use weapons made for finesse and speed, while their knowledge of the world is wide and their wanderlust is often wider.
+12002|The cleric is the devoted hand of their chosen deity. In exchange for furthering the goals of their god they are granted divine spells and abilities capable of both healing their companions and inflicting woe upon foes as well as the ability to destroy undead as they grow strong in their faith. They use simple weapons and are often determined and able combatants.
+12003|The druid is a devoted guardian of nature, granted their power from gods or forces integral to the world. They are granted primal spells and abilities that reflect the wilds from which they come, allowing them to take the form of beasts in battle or seek the help of the natural world around them. The wear no metal, but use many simple and special weapons.
+12004|The fighter sharpens their martial skills for various types of combat scenarios. Their strength and fortitude allow them to cleave through enemies in battle. Continued training allows greater feats of martial prowess while teaching them tactics. This focus and training allows a wide choice in weapons and armor.
+12005|The monk focuses the mind and body through intense discipline and meditation. Martial arts gives them a mastery of combat styles that use unarmed strikes.They wear no armor and can use simple weaponry, but tend to turn their body into a finely tuned weapon able to deal devastating blows.
+12006|The paladin is a resolute challenger of evil and injustice, who dedicate themselves to a higher cause. They will usually be found first at the front-line of combat and the last to leave it. They strive to exemplify purity and discipline, in exchange for boons granted by their deity. Their training allows them to use most armors and martial type weaponry.
+12007|The ranger is a hardy individual who often stands between the civilized people and the wilds. Skillful hunters and trackers that have sharp senses, they tend to study a particular enemy till they understand it fully. They choose from a selection of simple or martial weapons and light or medium armors and shields.
+12008|The Rogue is a shrewd character with quick reflexes and clever aptitude. Which side of the law they walk is often a coin-toss. Whether trained as treasure seekers or cut-purse they offer a wide variety of skills to any party. They use simple weapons or those designed for finesse and distance to take down their opponents.
+12009|The Sorcerer is a charming caster, who wields potent magic. This magic comes naturally from within, fueled from some event or link in their ancestry that infuses them with arcane power, as they grow in skill they learn to shape and twist that power to suit their needs. They forego armor and can only use a small selection of weaponry.
+12010|The warlock is one who has made a pact with a fiend in exchange for their arcane powers. They tend to be a bit wild and do not work well in tightly structured groups. They can wear light armor and use simple weapons.
+12011|The Wizard is the paramount wielder of magic spells, studied diligently from arcane sources. Always seeking knowledge and and the power that comes with it, what they do with it, is as varied as the caster. They forego armor and can only use a small selection of weaponry.
 
 12100|Path of the Berzerker
 12110|College of Lore
