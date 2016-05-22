@@ -18,7 +18,7 @@ namespace Mundasia.Interface
     {
         public CharacterCreationScreen() {}
 
-        #region Static Storage
+        #region Static Storage of Controls
         static Size MiniIconSize = new Size(10, 10);
         static Size IconSize = new Size(64, 64);
 
@@ -88,6 +88,8 @@ namespace Mundasia.Interface
                 return _abilityScoreIcon;
             }
         }
+        static Panel alignmentIcon = new Panel();
+        static Label alignmentText = new Label();
         static Panel genderIcon = new Panel();
         static Label genderText = new Label();
         static Panel backgroundIcon = new Panel();
@@ -147,6 +149,7 @@ namespace Mundasia.Interface
         static ListView wisdomSkills = new ListView();
         static ListView charismaSkills = new ListView();
 
+        static ListView alignmentBox = new ListView();
         static ListView genderBox = new ListView();
         static ListView backgroundBox = new ListView();
         static ListView characterClassBox = new ListView();
@@ -159,8 +162,12 @@ namespace Mundasia.Interface
         static Label classToolsLabel = new Label();
         static ListView classTools = new ListView();
 
-        private static bool _eventsInitialized = false;
+        private static TextBox nameEdit = new TextBox();
 
+        private static bool _eventsInitialized = false;
+        #endregion
+
+        #region Storage of Incomplete Character
         private static int _strengthScore = 6;
         private static int _dexterityScore = 6;
         private static int _constitutionScore = 6;
@@ -172,6 +179,7 @@ namespace Mundasia.Interface
         private static CharacterClass _selectedClass;
         private static CharacterClass _selectedSubClass;
         private static Background _selectedBackground;
+        private static Alignment _selectedAlignment;
 
         private static List<Skill> _raceSkills = new List<Skill>();
         private static List<Skill> _classSkills = new List<Skill>();
@@ -183,12 +191,15 @@ namespace Mundasia.Interface
         {
             _form = primaryForm;
             _form.Resize += _form_Resize;
-
+            
             _characterSheet.Height = _form.ClientRectangle.Height - (padding * 2);
             _characterSheet.Width = (_form.ClientRectangle.Width - (padding * 3)) / 2;
             _characterSheet.Location = new Point(padding, padding);
             _characterSheet.BackColor = Color.Black;
             _characterSheet.BorderStyle = BorderStyle.FixedSingle;
+            _characterSheet.AutoScroll = true;
+
+            int availableCharSheetWidth = _characterSheet.Width - System.Windows.Forms.SystemInformation.VerticalScrollBarWidth;
 
             _editPanel.Height = _characterSheet.Height;
             _editPanel.Width = _characterSheet.Width;
@@ -199,22 +210,38 @@ namespace Mundasia.Interface
             _panel.Size = _form.ClientRectangle.Size;
             _panel.BackColor = Color.Black;
 
+            nameEdit.Text = "<No Name>";
+            nameEdit.Font = abilityModFont;
+            nameEdit.Location = new Point(padding, padding);
+            StyleLabel(nameEdit);
+            nameEdit.Size = new Size((availableCharSheetWidth - (padding * 2)) / 2, nameEdit.PreferredHeight);
+
+            alignmentIcon.Size = IconSize;
+            alignmentIcon.Location = new Point(nameEdit.Location.X + nameEdit.Width + padding, padding);
+            alignmentIcon.BackgroundImage = Alignment.NullAlignmentImage;
+
+            alignmentText.Text = "No Alignment Selected";
+            alignmentText.Location = new Point(alignmentIcon.Location.X + alignmentIcon.Width + padding, alignmentIcon.Location.Y);
+            alignmentText.TextAlign = ContentAlignment.MiddleCenter;
+            StyleLabel(alignmentText);
+            alignmentText.Size = new Size((availableCharSheetWidth - (alignmentIcon.Width * 2) - (padding * 5)) / 2, 64);
+
             genderIcon.Size = new Size(64, 64);
-            genderIcon.Location = new Point(padding, padding);
+            genderIcon.Location = new Point(padding, alignmentIcon.Location.Y + alignmentIcon.Height + padding);
             genderIcon.BackgroundImage = IconNoGender;
 
             genderText.Text = "No sprite type selected";
-            genderText.Location = new Point(genderIcon.Location.X + genderIcon.Width + padding, padding);
+            genderText.Location = new Point(genderIcon.Location.X + genderIcon.Width + padding, genderIcon.Location.Y);
             genderText.TextAlign = ContentAlignment.MiddleCenter;
             StyleLabel(genderText);
-            genderText.Size = new Size((_characterSheet.Width - (genderIcon.Width * 2) - (padding * 5)) / 2, 64);
+            genderText.Size = new Size((availableCharSheetWidth - (genderIcon.Width * 2) - (padding * 5)) / 2, 64);
 
             backgroundIcon.Size = new Size(64, 64);
-            backgroundIcon.Location = new Point(genderText.Location.X + genderText.Size.Width + padding, padding);
+            backgroundIcon.Location = new Point(genderText.Location.X + genderText.Size.Width + padding, genderIcon.Location.Y);
             backgroundIcon.BackgroundImage = Background.NullBackgroundImage;
 
             backgroundText.Text = "No background selected";
-            backgroundText.Location = new Point(backgroundIcon.Location.X + backgroundIcon.Size.Width + padding, padding);
+            backgroundText.Location = new Point(backgroundIcon.Location.X + backgroundIcon.Size.Width + padding, genderIcon.Location.Y);
             backgroundText.TextAlign = ContentAlignment.MiddleCenter;
             StyleLabel(backgroundText);
             backgroundText.Size = genderText.Size;
@@ -258,7 +285,7 @@ namespace Mundasia.Interface
             abilityStrength.Controls.Add(labelStrengthScore);
 
             strengthSkills.Location = new Point(abilityStrength.Width + padding * 2, labelStrength.Location.Y + padding);
-            strengthSkills.Size = new Size(_characterSheet.ClientRectangle.Width - abilityStrength.Width - padding * 3, abilityStrength.Height + labelStrengthScore.Height);
+            strengthSkills.Size = new Size(availableCharSheetWidth - abilityStrength.Width - padding * 3, abilityStrength.Height + labelStrengthScore.Height);
             strengthSkills.ItemSelectionChanged += NoSelection;
             StyleListView(strengthSkills, true);
 
@@ -281,7 +308,7 @@ namespace Mundasia.Interface
             abilityDexterity.Controls.Add(labelDexterityScore);
 
             dexteritySkills.Location = new Point(abilityDexterity.Width + padding * 2, labelDexterity.Location.Y + padding);
-            dexteritySkills.Size = new Size(_characterSheet.ClientRectangle.Width - abilityDexterity.Width - padding * 3, abilityDexterity.Height + labelDexterityScore.Height);
+            dexteritySkills.Size = new Size(availableCharSheetWidth - abilityDexterity.Width - padding * 3, abilityDexterity.Height + labelDexterityScore.Height);
             dexteritySkills.ItemSelectionChanged += NoSelection;
             StyleListView(dexteritySkills, true);
 
@@ -304,7 +331,7 @@ namespace Mundasia.Interface
             abilityConstitution.Controls.Add(labelConstitutionScore);
 
             constitutionSkills.Location = new Point(abilityConstitution.Width + padding * 2, labelConstitution.Location.Y + padding);
-            constitutionSkills.Size = new Size(_characterSheet.ClientRectangle.Width - abilityConstitution.Width - padding * 3, abilityConstitution.Height + labelConstitutionScore.Height);
+            constitutionSkills.Size = new Size(availableCharSheetWidth - abilityConstitution.Width - padding * 3, abilityConstitution.Height + labelConstitutionScore.Height);
             constitutionSkills.ItemSelectionChanged += NoSelection;
             StyleListView(constitutionSkills, true);
 
@@ -327,7 +354,7 @@ namespace Mundasia.Interface
             abilityIntelligence.Controls.Add(labelIntelligenceScore);
 
             intelligenceSkills.Location = new Point(abilityIntelligence.Width + padding * 2, labelIntelligence.Location.Y + padding);
-            intelligenceSkills.Size = new Size(_characterSheet.ClientRectangle.Width - abilityIntelligence.Width - padding * 3, abilityIntelligence.Height + labelIntelligenceScore.Height);
+            intelligenceSkills.Size = new Size(availableCharSheetWidth - abilityIntelligence.Width - padding * 3, abilityIntelligence.Height + labelIntelligenceScore.Height);
             intelligenceSkills.ItemSelectionChanged += NoSelection;
             StyleListView(intelligenceSkills, true);
 
@@ -350,7 +377,7 @@ namespace Mundasia.Interface
             abilityWisdom.Controls.Add(labelWisdomScore);
 
             wisdomSkills.Location = new Point(abilityWisdom.Width + padding * 2, labelWisdom.Location.Y + padding);
-            wisdomSkills.Size = new Size(_characterSheet.ClientRectangle.Width - abilityWisdom.Width - padding * 3, abilityWisdom.Height + labelWisdomScore.Height);
+            wisdomSkills.Size = new Size(availableCharSheetWidth - abilityWisdom.Width - padding * 3, abilityWisdom.Height + labelWisdomScore.Height);
             wisdomSkills.ItemSelectionChanged += NoSelection;
             StyleListView(wisdomSkills, true);
 
@@ -373,12 +400,15 @@ namespace Mundasia.Interface
             abilityCharisma.Controls.Add(labelCharismaScore);
 
             charismaSkills.Location = new Point(abilityCharisma.Width + padding * 2, labelCharisma.Location.Y + padding);
-            charismaSkills.Size = new Size(_characterSheet.ClientRectangle.Width - abilityCharisma.Width - padding * 3, abilityCharisma.Height + labelCharismaScore.Height);
+            charismaSkills.Size = new Size(availableCharSheetWidth - abilityCharisma.Width - padding * 3, abilityCharisma.Height + labelCharismaScore.Height);
             charismaSkills.ItemSelectionChanged += NoSelection;
             StyleListView(charismaSkills, true);
 
             if (!_eventsInitialized)
             {
+                alignmentIcon.Click += EditAlignment;
+                alignmentText.Click += EditAlignment;
+                alignmentBox.ItemSelectionChanged += AlignmentBox_ItemSelectionChanged;
                 genderIcon.Click += EditGender;
                 genderText.Click += EditGender;
                 genderBox.ItemSelectionChanged += GenderBox_ItemSelectionChanged;
@@ -443,6 +473,9 @@ namespace Mundasia.Interface
                 _eventsInitialized = true;
             }
 
+            _characterSheet.Controls.Add(nameEdit);
+            _characterSheet.Controls.Add(alignmentIcon);
+            _characterSheet.Controls.Add(alignmentText);
             _characterSheet.Controls.Add(genderIcon);
             _characterSheet.Controls.Add(genderText);
             _characterSheet.Controls.Add(backgroundIcon);
@@ -489,6 +522,76 @@ namespace Mundasia.Interface
             {
                 e.Item.Selected = false;
             }
+        }
+        #endregion
+
+        #region Alignment Selection
+        private static void AlignmentBox_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            if (e.IsSelected)
+            {
+                Alignment selectedAlignment = Alignment.GetAlignment((uint)e.Item.Tag);
+                if (selectedAlignment != null)
+                {
+                    alignmentText.Text = e.Item.Name;
+                    alignmentIcon.BackgroundImage = selectedAlignment.Icon;
+                    _selectedAlignment = selectedAlignment;
+                }
+                _populateAlignmentList();
+            }
+        }
+
+        public static void EditAlignment(object sender, EventArgs e)
+        {
+            if (_currentEdit == CurrentEdit.Alignment) return;
+
+            _editPanel.Controls.Clear();
+
+            alignmentBox.Height = _editPanel.Height - (padding * 2);
+            alignmentBox.Width = _editPanel.Width - (padding * 2);
+            alignmentBox.Location = new Point(padding, padding);
+            StyleListView(alignmentBox, false);
+
+            _populateAlignmentList();
+
+            _editPanel.Controls.Add(alignmentBox);
+
+            _currentEdit = CurrentEdit.Alignment;
+        }
+
+        private static void _populateAlignmentList()
+        {
+            uint topItemIndex = uint.MaxValue;
+            if (alignmentBox.TopItem != null)
+            {
+                topItemIndex = (uint)alignmentBox.TopItem.Tag;
+            }
+            ListViewItem topItem = null;
+            alignmentBox.BeginUpdate();
+            alignmentBox.Items.Clear();
+            ImageList imgs = new ImageList();
+            imgs.ImageSize = IconSize;
+            imgs.ColorDepth = ColorDepth.Depth32Bit;
+
+            int imageIndex = 0;
+
+            foreach (Alignment alignment in Alignment.GetAlignments())
+            {
+                ListViewItem toAdd = new ListViewItem(new string[] { "", alignment.Name });
+                toAdd.Name = alignment.Name;
+                toAdd.ImageIndex = imageIndex;
+                toAdd.Tag = alignment.Id;
+                toAdd.ToolTipText = StringLibrary.GetString(alignment.Description);
+                imgs.Images.Add(alignment.Icon);
+                imageIndex++;
+                StyleListViewItem(toAdd);
+                if (alignment == _selectedAlignment) toAdd.BackColor = SelectedRowColor;
+                alignmentBox.Items.Add(toAdd);
+                if (topItemIndex == alignment.Id) topItem = toAdd;
+            }
+            alignmentBox.SmallImageList = imgs;
+            alignmentBox.EndUpdate();
+            if (topItem != null) alignmentBox.TopItem = topItem;
         }
         #endregion
 
@@ -1588,6 +1691,7 @@ namespace Mundasia.Interface
         {
             None,
             AbilityScores,
+            Alignment,
             Background,
             Class,
             Gender,

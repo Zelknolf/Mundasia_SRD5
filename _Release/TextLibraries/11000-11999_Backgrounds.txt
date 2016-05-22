@@ -37,3 +37,13 @@
 11036|Though your work is closely related to hunters, it takes a dramatically different shape. You do relatively little stalking of your own, but rather take to guessing where the animals you want are likely to go, and find ways to make that trip unfortunate for them. It tends to be a life focused on small and tricky animals, though from time to time also means trying to trap a creature for being a menace.\n\nThe act of setting your traps demands that you pass the woods relatively unnoticed and relatively unmolested, and requires that you be able to identify the signs of animals passing through, granting you proficiency with Stealth and Survival. Your need to construct devices to immobilize or kill your prey has taught you proficiency with Tinkering.
 11037|More than a few speak of people like you with a sneer, and say scolding things for your lack of a home or for not waving the banner of some local lord, but you've found that you can carry everything you need, and take advantage of the mobility that grants you, traveling to where ever things seem best for the time.\n\nCrossing long distances so often has made you quite fit and granted proficiency with Athletics, and much of your time on the road focuses on finding and preparing food, which has granted you proficiency with Survival and Cooking.
 11038|You work in textiles, producing fabrics for specific purposes. From time to time, you're even called on to produce art in your weaving, though most of your business comes from peoples' collective desire to not be naked all the time.\n\nYour profession has given you quick hands and nimble fingers, and thus proficiency with Sleight of Hand, and your need to be aware of plants and their properties to produce those clothes has given you a proficiency in Nature. Of course, you're also proficient at Weaving, and hold it as your primary profession.
+
+11900|Lawful Good
+11901|Neutral Good
+11902|Chaotic Good
+11903|Lawful Neutral
+11904|True Neutral
+11905|Chaotic Neutral
+11906|Lawful Evil
+11907|Neutral Evil
+11908|Chaotic Evil

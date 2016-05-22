@@ -1,0 +1,9 @@
+0|Lawful Good|1|0|1|0|11900|NoAlignment
+1|Neutral Good|0|0|1|0|11901|NoAlignment
+2|Chaotic Good|0|1|1|0|11902|NoAlignment
+3|Lawful Neutral|1|0|0|0|11903|NoAlignment
+4|True Neutral|0|0|0|0|11904|NoAlignment
+5|Chaotic Neutral|0|1|0|0|11905|NoAlignment
+6|Lawful Evil|1|0|0|1|11906|NoAlignment
+7|Neutral Evil|0|0|0|1|11907|NoAlignment
+8|Chaotic Evil|0|1|0|1|11908|NoAlignment

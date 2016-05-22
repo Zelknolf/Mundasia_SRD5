@@ -26,12 +26,12 @@ namespace Mundasia.Client
             splash.Show();
 
 
-            if (!Connect())
-            {
-                error = "Unable to acquire information from the server.";
-                splash.Close();
-                return false;
-            }
+            //if (!Connect())
+            //{
+            //    error = "Unable to acquire information from the server.";
+            //    splash.Close();
+            //    return false;
+            //}
             splash.progress.PerformStep();
             if (!LocalLoad())
             {
@@ -69,6 +69,8 @@ namespace Mundasia.Client
         public static bool LocalLoad()
         {
             StringLibrary.Load();
+            splash.progress.PerformStep();
+            Alignment.Load();
             splash.progress.PerformStep();
             Skill.Load();
             splash.progress.PerformStep();
