@@ -302,3 +302,18 @@
 301|Wish|1|9|0
 302|Word of Recall|1|6|0
 303|Zone of Truth|3|2|0
+304|Animal Friendship|3|2|0
+305|Branding Smite|4|2|0
+306|Complusion|3|4|0
+307|Counterspell|0|3|0
+308|Druidcraft|7|0|0
+309|Eldritch Blast|4|0|0
+310|Find Familiar|1|1|1
+311|Fire Bolt|4|0|0
+312|Goodberry|7|1|0
+313|Guardian of Faith|1|4|0
+314|Hellish Rebuke|4|1|0
+315|Hunter's Mark|2|1|0
+316|Poison Spray|1|0|0
+317|Spare the Dying|6|0|0
+318|Vicious Mockery|3|0|0
