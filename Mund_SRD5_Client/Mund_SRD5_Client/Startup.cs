@@ -89,6 +89,8 @@ namespace Mundasia.Client
             SpellList.Load();
             splash.progress.PerformStep();
             CharacterClass.Load();
+
+            ClothColor.LoadColors();
             return true;
         }
     }
