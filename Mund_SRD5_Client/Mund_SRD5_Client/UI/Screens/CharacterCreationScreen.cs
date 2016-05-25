@@ -19,6 +19,8 @@ namespace Mundasia.Interface
         public CharacterCreationScreen() {}
 
         #region Static Storage of Controls
+        private const int maxClothesSample = 3;
+
         static Size MiniIconSize = new Size(10, 10);
         static Size IconSize = new Size(64, 64);
 
@@ -164,6 +166,18 @@ namespace Mundasia.Interface
 
         private static TextBox nameEdit = new TextBox();
 
+        private static PlayScene scene = new PlayScene();
+        private static Label dispCharChangeClothes = new Label();
+        private static Label dispCharChangeClothColorA = new Label();
+        private static Label dispCharChangeClothColorB = new Label();
+        private static Label dispCharHair = new Label();
+        private static Label dispCharHairColor = new Label();
+        private static Label dispCharSkinColor = new Label();
+
+        private static DisplayCharacter displayChar = new DisplayCharacter();
+
+        private static bool _displayInitialized = false;
+
         private static bool _eventsInitialized = false;
         #endregion
 
@@ -184,6 +198,8 @@ namespace Mundasia.Interface
         private static List<Skill> _raceSkills = new List<Skill>();
         private static List<Skill> _classSkills = new List<Skill>();
         private static List<Skill> _classTools = new List<Skill>();
+
+        private static int _selectedGender = -1;
         #endregion
 
         #region Initialization
@@ -602,10 +618,144 @@ namespace Mundasia.Interface
             {
                 genderText.Text = e.Item.Name;
                 genderIcon.BackgroundImage = (int)e.Item.Tag == 0 ? IconFeminine : IconMasculine;
-
-                _populateGenderList();
+                _selectedGender = (int)e.Item.Tag;
+                EditAppearance();
             }
         }
+
+        private static void Empty_Event(object sender, EventArgs e) { }
+
+        private static void ChangeClothes(object sender, EventArgs e)
+        {
+            scene.Remove(displayChar);
+            displayChar.Clothes++;
+            if (displayChar.Clothes > maxClothesSample) displayChar.Clothes = 0;
+            scene.Add(displayChar);
+        }
+
+        private static void ChangeClothesPrimaryColor(object sender, EventArgs e)
+        {
+            scene.Remove(displayChar);
+            displayChar.ClothColorA++;
+            if (!ClothColor.Dark.ContainsKey(displayChar.ClothColorA)) displayChar.ClothColorA = 0;
+            scene.Add(displayChar);
+        }
+
+        private static void ChangeClothesSecondaryColor(object sender, EventArgs e)
+        {
+            scene.Remove(displayChar);
+            displayChar.ClothColorB++;
+            if (!ClothColor.Dark.ContainsKey(displayChar.ClothColorB)) displayChar.ClothColorB = 0;
+            scene.Add(displayChar);
+        }
+
+        private static void ChangeHairStyle(object sender, EventArgs e)
+        {
+            scene.Remove(displayChar);
+            displayChar.Hair++;
+            if (displayChar.Hair > _selectedRace.PlayableHairStyles[_selectedGender]) displayChar.Hair = 0;
+            scene.Add(displayChar);
+        }
+
+        private static void ChangeHairColor(object sender, EventArgs e)
+        {
+            scene.Remove(displayChar);
+            displayChar.HairColor++;
+            if (displayChar.HairColor >= _selectedRace.HairColors.Count) displayChar.HairColor = 0;
+            scene.Add(displayChar);
+        }
+        
+        private static void ChangeSkinColor(object sender, EventArgs e)
+        {
+            scene.Remove(displayChar);
+            displayChar.SkinColor++;
+            if (displayChar.SkinColor >= _selectedRace.SkinColors.Count) displayChar.SkinColor = 0;
+            scene.Add(displayChar);
+        }
+
+        private static void EditAppearance()
+        {
+            if (_selectedRace == null) return;
+
+            _editPanel.Controls.Clear();
+
+            scene.Size = new Size(200, 200);
+            scene.Location = new Point(padding, Math.Max(0, (_editPanel.ClientRectangle.Height - 200) / 2));
+
+            dispCharChangeClothes.Text = "Change Clothes";
+            dispCharChangeClothes.Location = new Point(scene.Location.X + scene.Width + padding, scene.Location.Y);
+            StyleLabel(dispCharChangeClothes);
+
+            dispCharChangeClothColorA.Text = "Change Clothes Primary Color";
+            dispCharChangeClothColorA.Location = new Point(dispCharChangeClothes.Location.X, dispCharChangeClothes.Location.Y + dispCharChangeClothes.Height + padding);
+            StyleLabel(dispCharChangeClothColorA);
+
+            dispCharChangeClothColorB.Text = "Change Clothes Secondary Color";
+            dispCharChangeClothColorB.Location = new Point(dispCharChangeClothColorA.Location.X, dispCharChangeClothColorA.Location.Y + dispCharChangeClothColorA.Height + padding);
+            StyleLabel(dispCharChangeClothColorB);
+
+            dispCharHair.Text = "Change Hair Style";
+            dispCharHair.Location = new Point(dispCharChangeClothColorB.Location.X, dispCharChangeClothColorB.Location.Y + dispCharChangeClothColorB.Height + padding);
+            StyleLabel(dispCharHair);
+
+            dispCharHairColor.Text = "Change Hair Color";
+            dispCharHairColor.Location = new Point(dispCharHair.Location.X, dispCharHair.Location.Y + dispCharHair.Height + padding);
+            StyleLabel(dispCharHairColor);
+
+            dispCharSkinColor.Text = "Change Skin Color";
+            dispCharSkinColor.Location = new Point(dispCharHairColor.Location.X, dispCharHairColor.Location.Y + dispCharHairColor.Height + padding);
+            StyleLabel(dispCharSkinColor);
+
+            if (!_displayInitialized)
+            {
+                displayChar.CharacterId = 0;
+                displayChar.CharacterRace = _selectedRace.Id;
+                displayChar.Facing = Direction.South;
+                displayChar.Clothes = 0;
+                displayChar.ClothColorA = 0;
+                displayChar.ClothColorB = 0;
+                displayChar.Hair = 0;
+                displayChar.HairColor = 0;
+                displayChar.Height = _selectedRace.Height;
+                displayChar.Sex = _selectedGender;
+                displayChar.SkinColor = 0;
+                displayChar.x = 10;
+                displayChar.y = 10;
+                displayChar.z = 10;
+
+                scene.ViewCenterX = 10;
+                scene.ViewCenterY = 10;
+                scene.ViewCenterZ = 12;
+
+                scene.Add(new Tile(0, Direction.DirectionLess, 1, 9, 9, 10));
+                scene.Add(new Tile(0, Direction.DirectionLess, 1, 9, 10, 10));
+                scene.Add(new Tile(0, Direction.DirectionLess, 1, 9, 11, 10));
+                scene.Add(new Tile(0, Direction.DirectionLess, 1, 10, 9, 10));
+                scene.Add(new Tile(0, Direction.DirectionLess, 1, 10, 10, 10));
+                scene.Add(new Tile(0, Direction.DirectionLess, 1, 10, 11, 10));
+                scene.Add(new Tile(0, Direction.DirectionLess, 1, 11, 9, 10));
+                scene.Add(new Tile(0, Direction.DirectionLess, 1, 11, 10, 10));
+                scene.Add(new Tile(0, Direction.DirectionLess, 1, 11, 11, 10));
+
+                scene.TileSelected += Empty_Event;
+                dispCharChangeClothes.Click += ChangeClothes;
+                dispCharChangeClothColorA.Click += ChangeClothesPrimaryColor;
+                dispCharChangeClothColorB.Click += ChangeClothesSecondaryColor;
+                dispCharHair.Click += ChangeHairStyle;
+                dispCharHairColor.Click += ChangeHairColor;
+                dispCharSkinColor.Click += ChangeSkinColor;
+                scene.Add(displayChar);
+                _displayInitialized = true;
+            }
+
+            _editPanel.Controls.Add(scene);
+            _editPanel.Controls.Add(dispCharChangeClothes);
+            _editPanel.Controls.Add(dispCharChangeClothColorA);
+            _editPanel.Controls.Add(dispCharChangeClothColorB);
+            _editPanel.Controls.Add(dispCharHair);
+            _editPanel.Controls.Add(dispCharHairColor);
+            _editPanel.Controls.Add(dispCharSkinColor);
+    }
 
         public static void EditGender(object sender, EventArgs e)
         {
