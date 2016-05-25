@@ -405,7 +405,18 @@ namespace Mundasia.Objects
             // -------------------------------------------
             #region Get an Image
             Bitmap Day = new Bitmap(System.Drawing.Image.FromFile(System.IO.Directory.GetCurrentDirectory() + "\\Images\\Characters\\"+ CharacterRace +"\\" + Sex + "\\stand" + facingSuffix + ".png"));
-            if(Hair > 0)
+            for (int c = 0; c < Day.Width; c++)
+            {
+                for (int cc = 0; cc < Day.Height; cc++)
+                {
+                    Color px = Day.GetPixel(c, cc);
+                    if (px.A != 0)
+                    {
+                        Day.SetPixel(c, cc, ConvertPixel(px));
+                    }
+                }
+            }
+            if (Hair > 0)
             {
                 Bitmap HairBottom = new Bitmap(System.Drawing.Image.FromFile(System.IO.Directory.GetCurrentDirectory() + "\\Images\\Characters\\" + CharacterRace + "\\" + Sex + "\\Hair\\stand_" + Hair + facingSuffix + "_b.png"));
                 for (int c = 0; c < Day.Width; c++)
@@ -446,6 +457,24 @@ namespace Mundasia.Objects
                         if (px.A != 0)
                         {
                             Day.SetPixel(c, cc, ConvertPixel(px));
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (Clothes > 0)
+                {
+                    Bitmap ClothesImage = new Bitmap(System.Drawing.Image.FromFile(System.IO.Directory.GetCurrentDirectory() + "\\Images\\Characters\\" + CharacterRace + "\\" + Sex + "\\Clothes\\stand_" + Clothes + facingSuffix + ".png"));
+                    for (int c = 0; c < ClothesImage.Width; c++)
+                    {
+                        for (int cc = 0; cc < ClothesImage.Height; cc++)
+                        {
+                            Color px = ClothesImage.GetPixel(c, cc);
+                            if (px.A != 0)
+                            {
+                                Day.SetPixel(c, cc, ConvertPixel(px));
+                            }
                         }
                     }
                 }
