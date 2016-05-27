@@ -616,10 +616,28 @@ namespace Mundasia.Interface
         {
             if(e.IsSelected)
             {
+                e.Item.Selected = false; // Because we'll get extra simultaneous events if we don't do this.
                 genderText.Text = e.Item.Name;
                 genderIcon.BackgroundImage = (int)e.Item.Tag == 0 ? IconFeminine : IconMasculine;
                 _selectedGender = (int)e.Item.Tag;
-                EditAppearance();
+                if (_selectedRace != null)
+                {
+                    scene.Remove(displayChar);
+                    displayChar.CharacterRace = _selectedRace.Id;
+                    displayChar.Clothes = 0;
+                    displayChar.ClothColorA = 0;
+                    displayChar.ClothColorB = 0;
+                    displayChar.Hair = 0;
+                    displayChar.HairColor = 0;
+                    displayChar.Height = _selectedRace.Height;
+                    displayChar.Sex = _selectedGender;
+                    displayChar.SkinColor = 0;
+                    EditAppearance();
+                }
+                else
+                {
+                    _populateGenderList();
+                }
             }
         }
 
@@ -708,17 +726,7 @@ namespace Mundasia.Interface
 
             if (!_displayInitialized)
             {
-                displayChar.CharacterId = 0;
-                displayChar.CharacterRace = _selectedRace.Id;
                 displayChar.Facing = Direction.South;
-                displayChar.Clothes = 0;
-                displayChar.ClothColorA = 0;
-                displayChar.ClothColorB = 0;
-                displayChar.Hair = 0;
-                displayChar.HairColor = 0;
-                displayChar.Height = _selectedRace.Height;
-                displayChar.Sex = _selectedGender;
-                displayChar.SkinColor = 0;
                 displayChar.x = 10;
                 displayChar.y = 10;
                 displayChar.z = 10;
@@ -744,9 +752,10 @@ namespace Mundasia.Interface
                 dispCharHair.Click += ChangeHairStyle;
                 dispCharHairColor.Click += ChangeHairColor;
                 dispCharSkinColor.Click += ChangeSkinColor;
-                scene.Add(displayChar);
                 _displayInitialized = true;
             }
+
+            scene.Add(displayChar);
 
             _editPanel.Controls.Add(scene);
             _editPanel.Controls.Add(dispCharChangeClothes);
@@ -755,6 +764,8 @@ namespace Mundasia.Interface
             _editPanel.Controls.Add(dispCharHair);
             _editPanel.Controls.Add(dispCharHairColor);
             _editPanel.Controls.Add(dispCharSkinColor);
+
+            _currentEdit = CurrentEdit.Appearance;
     }
 
         public static void EditGender(object sender, EventArgs e)
@@ -886,10 +897,28 @@ namespace Mundasia.Interface
                 Race selectedRace = Race.GetRace((uint)e.Item.Tag);
                 if (selectedRace != null)
                 {
+                    e.Item.Selected = false; // Because we'll get extra simultaneous events if we don't do this.
                     raceText.Text = e.Item.Name;
                     raceIcon.BackgroundImage = selectedRace.Icon;
                     _selectedRace = selectedRace;
-                    _populateRaceList();
+                    if (_selectedGender > -1)
+                    {
+                        scene.Remove(displayChar);
+                        displayChar.CharacterRace = _selectedRace.Id;
+                        displayChar.Clothes = 0;
+                        displayChar.ClothColorA = 0;
+                        displayChar.ClothColorB = 0;
+                        displayChar.Hair = 0;
+                        displayChar.HairColor = 0;
+                        displayChar.Height = _selectedRace.Height;
+                        displayChar.Sex = _selectedGender;
+                        displayChar.SkinColor = 0;
+                        EditAppearance();
+                    }
+                    else
+                    { 
+                        _populateRaceList();
+                    }
                 }
                 UpdateAbilityScores();
                 UpdateSkills();
@@ -1842,6 +1871,7 @@ namespace Mundasia.Interface
             None,
             AbilityScores,
             Alignment,
+            Appearance,
             Background,
             Class,
             Gender,
