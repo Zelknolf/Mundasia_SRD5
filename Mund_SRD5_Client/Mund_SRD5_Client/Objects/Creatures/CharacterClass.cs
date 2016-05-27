@@ -141,6 +141,12 @@ namespace Mundasia.Objects
 
         public Dictionary<uint, List<Spell>> SpellList;
 
+        public List<int> SpellsKnown;
+
+        public List<int> CantripsKnown;
+
+        public Dictionary<int, List<int>> SpellSlots;
+
         public static void Load()
         {
             string file = System.IO.Directory.GetCurrentDirectory() + "\\DataArrays\\Classes.txt";
@@ -161,6 +167,71 @@ namespace Mundasia.Objects
                 {
                     CharacterClass scl = CharacterClass.GetClass(subClassId);
                     if (scl != null) cl.SubClasses.Add(scl);
+                }
+            }
+        }
+
+        public static void LoadSpellProgression()
+        {
+            string file = System.IO.Directory.GetCurrentDirectory() + "\\DataArrays\\Spell_Progression.txt";
+            FileStream strLib = File.Open(file, FileMode.Open);
+            using (StreamReader read = new StreamReader(strLib, Encoding.UTF7))
+            {
+                while(read.Peek() >= 0)
+                {
+                    string spellLine = read.ReadLine();
+                    string[] spellSplit = spellLine.Split(delim);
+                    if(spellSplit.Length == 0)
+                    {
+                        continue;
+                    }
+                    CharacterClass chClass = GetClass(uint.Parse(spellSplit[0]));
+                    if(chClass == null)
+                    {
+                        continue;
+                    }
+                    if (chClass.SpellSlots == null) chClass.SpellSlots = new Dictionary<int, List<int>>();
+                    if (chClass.CantripsKnown == null) chClass.CantripsKnown = new List<int>();
+                    int c = 1;
+                    while(c < spellSplit.Length)
+                    {
+                        string[] levelSplit = spellSplit[c].Split(listDelim);
+                        if(levelSplit.Length == 0)
+                        {
+                            continue;
+                        }
+                        int level = Int32.Parse(levelSplit[0]);
+                        if(level == -1)
+                        {
+                            chClass.SpellsKnown = new List<int>();
+                            int i = 1;
+                            while(i < levelSplit.Length)
+                            {
+                                chClass.SpellsKnown.Add(Int32.Parse(levelSplit[i]));
+                                i++;
+                            }
+                        }
+                        else if(level == 0)
+                        {
+                            int i = 1;
+                            while(i < levelSplit.Length)
+                            {
+                                chClass.CantripsKnown.Add(Int32.Parse(levelSplit[i]));
+                                i++;
+                            }
+                        }
+                        else
+                        {
+                            if (!chClass.SpellSlots.ContainsKey(level)) chClass.SpellSlots.Add(level, new List<int>());
+                            int i = 1;
+                            while(i < levelSplit.Length)
+                            {
+                                chClass.SpellSlots[level].Add(Int32.Parse(levelSplit[i]));
+                                i++;
+                            }
+                        }
+                        c++;
+                    }
                 }
             }
         }
