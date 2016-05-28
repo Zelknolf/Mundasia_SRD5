@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using System.Drawing;
 using System.IO;
 
 namespace Mundasia.Objects
@@ -42,6 +43,10 @@ namespace Mundasia.Objects
                 {
                     if (ritual > 0) Ritual = true;
                 }
+
+                Description = uint.Parse(split[5]);
+
+                
             }
             else
             {
@@ -86,6 +91,25 @@ namespace Mundasia.Objects
         /// Whether or not the spell may be cast as a ritual.
         /// </summary>
         public bool Ritual;
+
+        /// <summary>
+        /// String reference for the descriptive text of the spell
+        /// </summary>
+        public uint Description;
+
+        private string _iconFileName;
+
+        private Image _icon;
+
+        public Image Icon
+        {
+            get
+            {
+                if (_icon != null) return _icon;
+                _icon = Image.FromFile(System.IO.Directory.GetCurrentDirectory() + "\\Images\\Spells\\" + _iconFileName + ".png");
+                return _icon;
+            }
+        }
 
         /// <summary>
         /// Caching for loaded powers.

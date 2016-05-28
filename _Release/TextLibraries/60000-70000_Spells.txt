@@ -1,0 +1,319 @@
+60000|Acid Arrow
+60001|Acid Splash
+60002|Aid
+60003|Alarm
+60004|Alter Self
+60005|Animal Messenger
+60006|Animal Shapes
+60007|Animate Dead
+60008|Animate Objects
+60009|Antilife Shell
+60010|Antimagic Field
+60011|Antipathy/Sympathy
+60012|Arcane Eye
+60013|Arcane Hand
+60014|Arcane Lock
+60015|Arcane Sword
+60016|Arcanist's Magic Aura
+60017|Astral Projection
+60018|Augury
+60019|Awaken
+60020|Bane
+60021|Banishment
+60022|Barkskin
+60023|Beacon of Hope
+60024|Bestow Curse
+60025|Black Tentacles
+60026|Blade Barrier
+60027|Bless
+60028|Blight
+60029|Blindness/Deafness
+60030|Blink
+60031|Blur
+60032|Burning Hands
+60033|Call Lightning
+60034|Calm Emotions
+60035|Chain Lightning
+60036|Charm Person
+60037|Chill Touch
+60038|Circle of Death
+60039|Clairvoyance
+60040|Clone
+60041|Cloudkill
+60042|Color Spray
+60043|Command
+60044|Commune
+60045|Commune with Nature
+60046|Comprehend Languages
+60047|Cone of Cold
+60048|Confusion
+60049|Conjure Animals
+60050|Conjure Celestial
+60051|Conjure Elemental
+60052|Conjure Fey
+60053|Conjure Minor Elementals
+60054|Conjure Woodland Beings
+60055|Contact Other Plane
+60056|Contagion
+60057|Contingency
+60058|Continual Flame
+60059|Control Water
+60060|Control Weather
+60061|Create Food and Water
+60062|Create or Destroy Water
+60063|Create Undead
+60064|Creation
+60065|Cure Wounds
+60066|Dancing Lights
+60067|Darkness
+60068|Darkvision
+60069|Daylight
+60070|Death Ward
+60071|Delayed Blast Fireball
+60072|Demiplane
+60073|Detect Evil and Good
+60074|Detect Magic
+60075|Detect Poison and Disease
+60076|Detect Thoughts
+60077|Dimension Door
+60078|Disguise Self
+60079|Disintegrate
+60080|Dispel Evil and Good
+60081|Dispel Magic
+60082|Divination
+60083|Divine Favor
+60084|Divine Word
+60085|Dominate Beast
+60086|Dominate Monster
+60087|Dominate Person
+60088|Dream
+60089|Earthquake
+60090|Enhance Ability
+60091|Enlarge/Reduce
+60092|Entangle
+60093|Enthrall
+60094|Etherealness
+60095|Expeditious Retreat
+60096|Eyebite
+60097|Fabricate
+60098|Faerie Fire
+60099|Faithful Hound
+60100|False Life
+60101|Fear
+60102|Feather Fall
+60103|Feeblemind
+60104|Find Steed
+60105|Find the Path
+60106|Find Traps
+60107|Finger of Death
+60108|Fireball
+60109|Fire Shield
+60110|Fire Storm
+60111|Flame Blade
+60112|Flame Strike
+60113|Flaming Sphere
+60114|Flesh to Stone
+60115|Floating Disk
+60116|Fly
+60117|Fog Cloud
+60118|Forbiddance
+60119|Forcecage
+60120|Foresight
+60121|Freedom of Movement
+60122|Freezing Sphere
+60123|Gaseous Form
+60124|Gate
+60125|Geas
+60126|Gentle Repose
+60127|Giant Insect
+60128|Glibness
+60129|Globe of Invulnerability
+60130|Glyph of Warding
+60131|Grease
+60132|Greater Invisibility
+60133|Greater Restoration
+60134|Guards and Wards
+60135|Guidance
+60136|Guiding Bolt
+60137|Gust of Wind
+60138|Hallow
+60139|Hallucinatory Terrain
+60140|Harm
+60141|Haste
+60142|Heal
+60143|Healing Word
+60144|Heat Metal
+60145|Heroes' Feast
+60146|Heroism
+60147|Hideous Laughter
+60148|Hold Monster
+60149|Hold Person
+60150|Holy Aura
+60151|Hypnotic Pattern
+60152|Ice Storm
+60153|Identify
+60154|Illusory Script
+60155|Imprisonment
+60156|Incendiary Cloud
+60157|Inflict Wounds
+60158|Insect Plague
+60159|Instant Summons
+60160|Invisibility
+60161|Irresistible Dance
+60162|Jump
+60163|Knock
+60164|Legend Lore
+60165|Lesser Restoration
+60166|Levitate
+60167|Light
+60168|Lightning Bolt
+60169|Locate Animals or Plants
+60170|Locate Creature
+60171|Locate Object
+60172|Longstrider
+60173|Mage Armor
+60174|Mage Hand
+60175|Magic Circle
+60176|Magic Jar
+60177|Magic Missile
+60178|Magic Mouth
+60179|Magic Weapon
+60180|Magnificent Mansion
+60181|Major Image
+60182|Mass Cure Wounds
+60183|Mass Heal
+60184|Mass Healing Word
+60185|Mass Suggestion
+60186|Maze
+60187|Meld into Stone
+60188|Mending
+60189|Message
+60190|Meteor Swarm
+60191|Mind Blank
+60192|Minor Illusion
+60193|Mirage Arcane
+60194|Mirror Image
+60195|Mislead
+60196|Misty Step
+60197|Modify Memory
+60198|Moonbeam
+60199|Move Earth
+60200|Nondetection
+60201|Pass Without Trace
+60202|Passwall
+60203|Phantasmal Killer
+60204|Phantom Steed
+60205|Planar Ally
+60206|Planar Binding
+60207|Plane Shift
+60208|Plant Growth
+60209|Polymorph
+60210|Power Word Kill
+60211|Power Word Stun
+60212|Prayer of Healing
+60213|Prestidigitation
+60214|Prismatic Spray
+60215|Prismatic Wall
+60216|Private Sanctum
+60217|Produce Flame
+60218|Programmed Illusion
+60219|Project Image
+60220|Protection from Energy
+60221|Protection from Evil and Good
+60222|Protection from Poison
+60223|Purify Food and Drink
+60224|Raise Dead
+60225|Ray of Enfeeblement
+60226|Ray of Frost
+60227|Regenerate
+60228|Reincarnate
+60229|Remove Curse
+60230|Resilient Sphere
+60231|Resistance
+60232|Resurrection
+60233|Reverse Gravity
+60234|Revivify
+60235|Rope Trick
+60236|Sacred Flame
+60237|Sanctuary
+60238|Scorching Ray
+60239|Scrying
+60240|Secret Chest
+60241|See Invisibility
+60242|Seeming
+60243|Sending
+60244|Sequester
+60245|Shapechange
+60246|Shatter
+60247|Shield
+60248|Shield of Faith
+60249|Shillelagh
+60250|Shocking Grasp
+60251|Silence
+60252|Silent Image
+60253|Simulacrum
+60254|Sleep
+60255|Sleet Storm
+60256|Slow
+60257|Speak with Animals
+60258|Speak with Dead
+60259|Speak with Plants
+60260|Spider Climb
+60261|Spike Growth
+60262|Spirit Guardians
+60263|Spiritual Weapon
+60264|Stinking Cloud
+60265|Stone Shape
+60266|Stoneskin
+60267|Storm of Vengeance
+60268|Suggestion
+60269|Sunbeam
+60270|Sunburst
+60271|Symbol
+60272|Telekinesis
+60273|Telepathic Bond
+60274|Teleport
+60275|Teleportation Circle
+60276|Thaumaturgy
+60277|Thunderwave
+60278|Time Stop
+60279|Tiny Hut
+60280|Tongues
+60281|Transport via Plants
+60282|Tree Stride
+60283|True Polymorph
+60284|True Resurrection
+60285|True Seeing
+60286|True Strike
+60287|Unseen Servant
+60288|Vampiric Touch
+60289|Wall of Fire
+60290|Wall of Force
+60291|Wall of Ice
+60292|Wall of Stone
+60293|Wall of Thorns
+60294|Warding Bond
+60295|Water Breathing
+60296|Water Walk
+60297|Web
+60298|Weird
+60299|Wind Walk
+60300|Wind Wall
+60301|Wish
+60302|Word of Recall
+60303|Zone of Truth
+60304|Animal Friendship
+60305|Branding Smite
+60306|Complusion
+60307|Counterspell
+60308|Druidcraft
+60309|Eldritch Blast
+60310|Find Familiar
+60311|Fire Bolt
+60312|Goodberry
+60313|Guardian of Faith
+60314|Hellish Rebuke
+60315|Hunter's Mark
+60316|Poison Spray
+60317|Spare the Dying
+60318|Vicious Mockery

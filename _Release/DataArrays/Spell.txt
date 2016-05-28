@@ -1,319 +1,319 @@
-0|Acid Arrow|4|2|0
-1|Acid Splash|1|0|0
-2|Aid|0|2|0
-3|Alarm|0|1|1
-4|Alter Self|7|2|0
-5|Animal Messenger|3|2|1
-6|Animal Shapes|7|8|0
-7|Animate Dead|6|3|0
-8|Animate Objects|7|5|0
-9|Antilife Shell|0|5|0
-10|Antimagic Field|0|8|0
-11|Antipathy/Sympathy|3|8|0
-12|Arcane Eye|2|4|0
-13|Arcane Hand|4|5|0
-14|Arcane Lock|0|2|0
-15|Arcane Sword|4|7|0
-16|Arcanist's Magic Aura|5|2|0
-17|Astral Projection|6|9|0
-18|Augury|2|2|1
-19|Awaken|7|5|0
-20|Bane|3|1|0
-21|Banishment|0|4|0
-22|Barkskin|7|2|0
-23|Beacon of Hope|7|2|0
-24|Bestow Curse|6|3|0
-25|Black Tentacles|1|4|0
-26|Blade Barrier|4|6|0
-27|Bless|3|1|0
-28|Blight|6|4|0
-29|Blindness/Deafness|6|2|0
-30|Blink|7|3|0
-31|Blur|5|2|0
-32|Burning Hands|4|1|0
-33|Call Lightning|1|3|0
-34|Calm Emotions|3|2|0
-35|Chain Lightning|4|6|0
-36|Charm Person|3|1|0
-37|Chill Touch|6|0|0
-38|Circle of Death|6|6|0
-39|Clairvoyance|2|3|0
-40|Clone|6|8|0
-41|Cloudkill|1|5|0
-42|Color Spray|5|1|0
-43|Command|3|1|0
-44|Commune|2|5|1
-45|Commune with Nature|2|5|1
-46|Comprehend Languages|2|1|1
-47|Cone of Cold|4|5|0
-48|Confusion|3|4|0
-49|Conjure Animals|1|3|0
-50|Conjure Celestial|1|7|0
-51|Conjure Elemental|1|5|0
-52|Conjure Fey|1|6|0
-53|Conjure Minor Elementals|1|4|0
-54|Conjure Woodland Beings|1|4|0
-55|Contact Other Plane|2|5|1
-56|Contagion|6|5|0
-57|Contingency|4|6|0
-58|Continual Flame|4|2|0
-59|Control Water|7|4|0
-60|Control Weather|7|8|0
-61|Create Food and Water|1|3|0
-62|Create or Destroy Water|7|1|0
-63|Create Undead|6|6|0
-64|Creation|5|5|0
-65|Cure Wounds|4|1|0
-66|Dancing Lights|4|0|0
-67|Darkness|4|2|0
-68|Darkvision|7|2|0
-69|Daylight|4|3|0
-70|Death Ward|0|4|0
-71|Delayed Blast Fireball|4|7|0
-72|Demiplane|1|8|0
-73|Detect Evil and Good|2|1|0
-74|Detect Magic|2|1|1
-75|Detect Poison and Disease|2|1|1
-76|Detect Thoughts|2|2|0
-77|Dimension Door|1|4|0
-78|Disguise Self|5|1|0
-79|Disintegrate|7|6|0
-80|Dispel Evil and Good|0|5|0
-81|Dispel Magic|0|3|0
-82|Divination|2|4|1
-83|Divine Favor|4|1|0
-84|Divine Word|4|7|0
-85|Dominate Beast|3|4|0
-86|Dominate Monster|3|8|0
-87|Dominate Person|3|5|0
-88|Dream|5|5|0
-89|Earthquake|4|8|0
-90|Enhance Ability|7|2|0
-91|Enlarge/Reduce|7|2|0
-92|Entangle|1|1|0
-93|Enthrall|3|2|0
-94|Etherealness|7|7|0
-95|Expeditious Retreat|7|1|0
-96|Eyebite|6|6|0
-97|Fabricate|7|4|0
-98|Faerie Fire|4|1|0
-99|Faithful Hound|1|4|0
-100|False Life|6|1|0
-101|Fear|5|3|0
-102|Feather Fall|7|1|0
-103|Feeblemind|3|8|0
-104|Find Steed|1|2|0
-105|Find the Path|2|6|0
-106|Find Traps|2|2|0
-107|Finger of Death|6|7|0
-108|Fireball|4|3|0
-109|Fire Shield|4|4|0
-110|Fire Storm|4|7|0
-111|Flame Blade|4|2|0
-112|Flame Strike|4|5|0
-113|Flaming Sphere|1|2|0
-114|Flesh to Stone|7|6|0
-115|Floating Disk|1|1|1
-116|Fly|7|3|0
-117|Fog Cloud|1|1|0
-118|Forbiddance|0|6|1
-119|Forcecage|4|7|0
-120|Foresight|2|9|0
-121|Freedom of Movement|0|4|0
-122|Freezing Sphere|4|6|0
-123|Gaseous Form|7|3|0
-124|Gate|1|9|0
-125|Geas|3|5|0
-126|Gentle Repose|6|2|1
-127|Giant Insect|7|4|0
-128|Glibness|7|8|0
-129|Globe of Invulnerability|0|6|0
-130|Glyph of Warding|0|3|0
-131|Grease|1|1|0
-132|Greater Invisibility|5|4|0
-133|Greater Restoration|0|5|0
-134|Guards and Wards|0|6|0
-135|Guidance|2|0|0
-136|Guiding Bolt|4|1|0
-137|Gust of Wind|4|2|0
-138|Hallow|4|5|0
-139|Hallucinatory Terrain|5|4|0
-140|Harm|7|6|0
-141|Haste|7|3|0
-142|Heal|4|6|0
-143|Healing Word|4|1|0
-144|Heat Metal|7|2|0
-145|Heroes' Feast|1|6|0
-146|Heroism|3|1|0
-147|Hideous Laughter|3|1|0
-148|Hold Monster|3|5|0
-149|Hold Person|3|2|0
-150|Holy Aura|0|8|0
-151|Hypnotic Pattern|5|3|0
-152|Ice Storm|4|4|0
-153|Identify|2|1|1
-154|Illusory Script|5|1|1
-155|Imprisonment|0|9|0
-156|Incendiary Cloud|1|8|0
-157|Inflict Wounds|6|1|0
-158|Insect Plague|1|5|0
-159|Instant Summons|1|6|1
-160|Invisibility|5|2|0
-161|Irresistible Dance|3|6|0
-162|Jump|7|1|0
-163|Knock|7|2|0
-164|Legend Lore|2|5|0
-165|Lesser Restoration|0|2|0
-166|Levitate|7|2|0
-167|Light|4|0|0
-168|Lightning Bolt|4|3|0
-169|Locate Animals or Plants|2|2|1
-170|Locate Creature|2|4|0
-171|Locate Object|2|2|0
-172|Longstrider|7|1|0
-173|Mage Armor|0|1|0
-174|Mage Hand|1|0|0
-175|Magic Circle|0|3|0
-176|Magic Jar|6|6|0
-177|Magic Missile|4|1|0
-178|Magic Mouth|5|2|1
-179|Magic Weapon|7|2|0
-180|Magnificent Mansion|1|7|0
-181|Major Image|5|3|0
-182|Mass Cure Wounds|4|5|0
-183|Mass Heal|4|9|0
-184|Mass Healing Word|4|3|0
-185|Mass Suggestion|3|6|0
-186|Maze|1|8|0
-187|Meld into Stone|7|3|1
-188|Mending|7|0|0
-189|Message|7|0|0
-190|Meteor Swarm|4|9|0
-191|Mind Blank|0|8|0
-192|Minor Illusion|5|0|0
-193|Mirage Arcane|5|7|0
-194|Mirror Image|5|2|0
-195|Mislead|5|5|0
-196|Misty Step|1|2|0
-197|Modify Memory|3|5|0
-198|Moonbeam|4|2|0
-199|Move Earth|7|6|0
-200|Nondetection|0|3|0
-201|Pass Without Trace|0|2|0
-202|Passwall|7|5|0
-203|Phantasmal Killer|5|4|0
-204|Phantom Steed|5|3|1
-205|Planar Ally|1|6|0
-206|Planar Binding|0|5|0
-207|Plane Shift|1|7|0
-208|Plant Growth|7|3|0
-209|Polymorph|7|4|0
-210|Power Word Kill|3|9|0
-211|Power Word Stun|3|8|0
-212|Prayer of Healing|4|2|0
-213|Prestidigitation|7|0|0
-214|Prismatic Spray|4|7|0
-215|Prismatic Wall|0|9|0
-216|Private Sanctum|0|4|0
-217|Produce Flame|1|0|0
-218|Programmed Illusion|5|6|0
-219|Project Image|5|7|0
-220|Protection from Energy|0|3|0
-221|Protection from Evil and Good|0|1|0
-222|Protection from Poison|0|2|0
-223|Purify Food and Drink|7|1|1
-224|Raise Dead|6|5|0
-225|Ray of Enfeeblement|6|2|0
-226|Ray of Frost|4|0|0
-227|Regenerate|7|7|0
-228|Reincarnate|7|5|0
-229|Remove Curse|0|3|0
-230|Resilient Sphere|4|4|0
-231|Resistance|0|0|0
-232|Resurrection|6|7|0
-233|Reverse Gravity|7|7|0
-234|Revivify|6|3|0
-235|Rope Trick|7|2|0
-236|Sacred Flame|4|0|0
-237|Sanctuary|0|1|0
-238|Scorching Ray|4|2|0
-239|Scrying|2|5|0
-240|Secret Chest|1|4|0
-241|See Invisibility|2|2|0
-242|Seeming|5|5|0
-243|Sending|4|3|0
-244|Sequester|7|7|0
-245|Shapechange|7|9|0
-246|Shatter|4|2|0
-247|Shield|0|1|0
-248|Shield of Faith|0|1|0
-249|Shillelagh|7|0|0
-250|Shocking Grasp|4|0|0
-251|Silence|5|2|1
-252|Silent Image|5|1|0
-253|Simulacrum|5|7|0
-254|Sleep|3|1|0
-255|Sleet Storm|1|3|0
-256|Slow|7|3|0
-257|Speak with Animals|2|1|1
-258|Speak with Dead|6|3|0
-259|Speak with Plants|7|3|0
-260|Spider Climb|7|2|0
-261|Spike Growth|7|2|0
-262|Spirit Guardians|1|3|0
-263|Spiritual Weapon|4|2|0
-264|Stinking Cloud|1|3|0
-265|Stone Shape|7|4|0
-266|Stoneskin|0|4|0
-267|Storm of Vengeance|1|9|0
-268|Suggestion|3|2|0
-269|Sunbeam|4|6|0
-270|Sunburst|4|8|0
-271|Symbol|0|7|0
-272|Telekinesis|7|5|0
-273|Telepathic Bond|2|5|1
-274|Teleport|1|7|0
-275|Teleportation Circle|1|5|0
-276|Thaumaturgy|7|0|0
-277|Thunderwave|4|1|0
-278|Time Stop|7|9|0
-279|Tiny Hut|4|3|1
-280|Tongues|2|3|0
-281|Transport via Plants|1|6|0
-282|Tree Stride|1|5|0
-283|True Polymorph|7|9|0
-284|True Resurrection|6|9|0
-285|True Seeing|2|6|0
-286|True Strike|2|0|0
-287|Unseen Servant|1|1|1
-288|Vampiric Touch|6|3|0
-289|Wall of Fire|4|4|0
-290|Wall of Force|4|5|0
-291|Wall of Ice|4|6|0
-292|Wall of Stone|4|5|0
-293|Wall of Thorns|1|6|0
-294|Warding Bond|0|2|0
-295|Water Breathing|7|3|1
-296|Water Walk|7|3|1
-297|Web|1|2|0
-298|Weird|5|9|0
-299|Wind Walk|7|6|0
-300|Wind Wall|4|3|0
-301|Wish|1|9|0
-302|Word of Recall|1|6|0
-303|Zone of Truth|3|2|0
-304|Animal Friendship|3|2|0
-305|Branding Smite|4|2|0
-306|Complusion|3|4|0
-307|Counterspell|0|3|0
-308|Druidcraft|7|0|0
-309|Eldritch Blast|4|0|0
-310|Find Familiar|1|1|1
-311|Fire Bolt|4|0|0
-312|Goodberry|7|1|0
-313|Guardian of Faith|1|4|0
-314|Hellish Rebuke|4|1|0
-315|Hunter's Mark|2|1|0
-316|Poison Spray|1|0|0
-317|Spare the Dying|6|0|0
-318|Vicious Mockery|3|0|0
+0|Acid Arrow|4|2|0|60000|NoSpell
+1|Acid Splash|1|0|0|60001|NoSpell
+2|Aid|0|2|0|60002|NoSpell
+3|Alarm|0|1|1|60003|NoSpell
+4|Alter Self|7|2|0|60004|NoSpell
+5|Animal Messenger|3|2|1|60005|NoSpell
+6|Animal Shapes|7|8|0|60006|NoSpell
+7|Animate Dead|6|3|0|60007|NoSpell
+8|Animate Objects|7|5|0|60008|NoSpell
+9|Antilife Shell|0|5|0|60009|NoSpell
+10|Antimagic Field|0|8|0|60010|NoSpell
+11|Antipathy/Sympathy|3|8|0|60011|NoSpell
+12|Arcane Eye|2|4|0|60012|NoSpell
+13|Arcane Hand|4|5|0|60013|NoSpell
+14|Arcane Lock|0|2|0|60014|NoSpell
+15|Arcane Sword|4|7|0|60015|NoSpell
+16|Arcanist's Magic Aura|5|2|0|60016|NoSpell
+17|Astral Projection|6|9|0|60017|NoSpell
+18|Augury|2|2|1|60018|NoSpell
+19|Awaken|7|5|0|60019|NoSpell
+20|Bane|3|1|0|60020|NoSpell
+21|Banishment|0|4|0|60021|NoSpell
+22|Barkskin|7|2|0|60022|NoSpell
+23|Beacon of Hope|7|2|0|60023|NoSpell
+24|Bestow Curse|6|3|0|60024|NoSpell
+25|Black Tentacles|1|4|0|60025|NoSpell
+26|Blade Barrier|4|6|0|60026|NoSpell
+27|Bless|3|1|0|60027|NoSpell
+28|Blight|6|4|0|60028|NoSpell
+29|Blindness/Deafness|6|2|0|60029|NoSpell
+30|Blink|7|3|0|60030|NoSpell
+31|Blur|5|2|0|60031|NoSpell
+32|Burning Hands|4|1|0|60032|NoSpell
+33|Call Lightning|1|3|0|60033|NoSpell
+34|Calm Emotions|3|2|0|60034|NoSpell
+35|Chain Lightning|4|6|0|60035|NoSpell
+36|Charm Person|3|1|0|60036|NoSpell
+37|Chill Touch|6|0|0|60037|NoSpell
+38|Circle of Death|6|6|0|60038|NoSpell
+39|Clairvoyance|2|3|0|60039|NoSpell
+40|Clone|6|8|0|60040|NoSpell
+41|Cloudkill|1|5|0|60041|NoSpell
+42|Color Spray|5|1|0|60042|NoSpell
+43|Command|3|1|0|60043|NoSpell
+44|Commune|2|5|1|60044|NoSpell
+45|Commune with Nature|2|5|1|60045|NoSpell
+46|Comprehend Languages|2|1|1|60046|NoSpell
+47|Cone of Cold|4|5|0|60047|NoSpell
+48|Confusion|3|4|0|60048|NoSpell
+49|Conjure Animals|1|3|0|60049|NoSpell
+50|Conjure Celestial|1|7|0|60050|NoSpell
+51|Conjure Elemental|1|5|0|60051|NoSpell
+52|Conjure Fey|1|6|0|60052|NoSpell
+53|Conjure Minor Elementals|1|4|0|60053|NoSpell
+54|Conjure Woodland Beings|1|4|0|60054|NoSpell
+55|Contact Other Plane|2|5|1|60055|NoSpell
+56|Contagion|6|5|0|60056|NoSpell
+57|Contingency|4|6|0|60057|NoSpell
+58|Continual Flame|4|2|0|60058|NoSpell
+59|Control Water|7|4|0|60059|NoSpell
+60|Control Weather|7|8|0|60060|NoSpell
+61|Create Food and Water|1|3|0|60061|NoSpell
+62|Create or Destroy Water|7|1|0|60062|NoSpell
+63|Create Undead|6|6|0|60063|NoSpell
+64|Creation|5|5|0|60064|NoSpell
+65|Cure Wounds|4|1|0|60065|NoSpell
+66|Dancing Lights|4|0|0|60066|NoSpell
+67|Darkness|4|2|0|60067|NoSpell
+68|Darkvision|7|2|0|60068|NoSpell
+69|Daylight|4|3|0|60069|NoSpell
+70|Death Ward|0|4|0|60070|NoSpell
+71|Delayed Blast Fireball|4|7|0|60071|NoSpell
+72|Demiplane|1|8|0|60072|NoSpell
+73|Detect Evil and Good|2|1|0|60073|NoSpell
+74|Detect Magic|2|1|1|60074|NoSpell
+75|Detect Poison and Disease|2|1|1|60075|NoSpell
+76|Detect Thoughts|2|2|0|60076|NoSpell
+77|Dimension Door|1|4|0|60077|NoSpell
+78|Disguise Self|5|1|0|60078|NoSpell
+79|Disintegrate|7|6|0|60079|NoSpell
+80|Dispel Evil and Good|0|5|0|60080|NoSpell
+81|Dispel Magic|0|3|0|60081|NoSpell
+82|Divination|2|4|1|60082|NoSpell
+83|Divine Favor|4|1|0|60083|NoSpell
+84|Divine Word|4|7|0|60084|NoSpell
+85|Dominate Beast|3|4|0|60085|NoSpell
+86|Dominate Monster|3|8|0|60086|NoSpell
+87|Dominate Person|3|5|0|60087|NoSpell
+88|Dream|5|5|0|60088|NoSpell
+89|Earthquake|4|8|0|60089|NoSpell
+90|Enhance Ability|7|2|0|60090|NoSpell
+91|Enlarge/Reduce|7|2|0|60091|NoSpell
+92|Entangle|1|1|0|60092|NoSpell
+93|Enthrall|3|2|0|60093|NoSpell
+94|Etherealness|7|7|0|60094|NoSpell
+95|Expeditious Retreat|7|1|0|60095|NoSpell
+96|Eyebite|6|6|0|60096|NoSpell
+97|Fabricate|7|4|0|60097|NoSpell
+98|Faerie Fire|4|1|0|60098|NoSpell
+99|Faithful Hound|1|4|0|60099|NoSpell
+100|False Life|6|1|0|60100|NoSpell
+101|Fear|5|3|0|60101|NoSpell
+102|Feather Fall|7|1|0|60102|NoSpell
+103|Feeblemind|3|8|0|60103|NoSpell
+104|Find Steed|1|2|0|60104|NoSpell
+105|Find the Path|2|6|0|60105|NoSpell
+106|Find Traps|2|2|0|60106|NoSpell
+107|Finger of Death|6|7|0|60107|NoSpell
+108|Fireball|4|3|0|60108|NoSpell
+109|Fire Shield|4|4|0|60109|NoSpell
+110|Fire Storm|4|7|0|60110|NoSpell
+111|Flame Blade|4|2|0|60111|NoSpell
+112|Flame Strike|4|5|0|60112|NoSpell
+113|Flaming Sphere|1|2|0|60113|NoSpell
+114|Flesh to Stone|7|6|0|60114|NoSpell
+115|Floating Disk|1|1|1|60115|NoSpell
+116|Fly|7|3|0|60116|NoSpell
+117|Fog Cloud|1|1|0|60117|NoSpell
+118|Forbiddance|0|6|1|60118|NoSpell
+119|Forcecage|4|7|0|60119|NoSpell
+120|Foresight|2|9|0|60120|NoSpell
+121|Freedom of Movement|0|4|0|60121|NoSpell
+122|Freezing Sphere|4|6|0|60122|NoSpell
+123|Gaseous Form|7|3|0|60123|NoSpell
+124|Gate|1|9|0|60124|NoSpell
+125|Geas|3|5|0|60125|NoSpell
+126|Gentle Repose|6|2|1|60126|NoSpell
+127|Giant Insect|7|4|0|60127|NoSpell
+128|Glibness|7|8|0|60128|NoSpell
+129|Globe of Invulnerability|0|6|0|60129|NoSpell
+130|Glyph of Warding|0|3|0|60130|NoSpell
+131|Grease|1|1|0|60131|NoSpell
+132|Greater Invisibility|5|4|0|60132|NoSpell
+133|Greater Restoration|0|5|0|60133|NoSpell
+134|Guards and Wards|0|6|0|60134|NoSpell
+135|Guidance|2|0|0|60135|NoSpell
+136|Guiding Bolt|4|1|0|60136|NoSpell
+137|Gust of Wind|4|2|0|60137|NoSpell
+138|Hallow|4|5|0|60138|NoSpell
+139|Hallucinatory Terrain|5|4|0|60139|NoSpell
+140|Harm|7|6|0|60140|NoSpell
+141|Haste|7|3|0|60141|NoSpell
+142|Heal|4|6|0|60142|NoSpell
+143|Healing Word|4|1|0|60143|NoSpell
+144|Heat Metal|7|2|0|60144|NoSpell
+145|Heroes' Feast|1|6|0|60145|NoSpell
+146|Heroism|3|1|0|60146|NoSpell
+147|Hideous Laughter|3|1|0|60147|NoSpell
+148|Hold Monster|3|5|0|60148|NoSpell
+149|Hold Person|3|2|0|60149|NoSpell
+150|Holy Aura|0|8|0|60150|NoSpell
+151|Hypnotic Pattern|5|3|0|60151|NoSpell
+152|Ice Storm|4|4|0|60152|NoSpell
+153|Identify|2|1|1|60153|NoSpell
+154|Illusory Script|5|1|1|60154|NoSpell
+155|Imprisonment|0|9|0|60155|NoSpell
+156|Incendiary Cloud|1|8|0|60156|NoSpell
+157|Inflict Wounds|6|1|0|60157|NoSpell
+158|Insect Plague|1|5|0|60158|NoSpell
+159|Instant Summons|1|6|1|60159|NoSpell
+160|Invisibility|5|2|0|60160|NoSpell
+161|Irresistible Dance|3|6|0|60161|NoSpell
+162|Jump|7|1|0|60162|NoSpell
+163|Knock|7|2|0|60163|NoSpell
+164|Legend Lore|2|5|0|60164|NoSpell
+165|Lesser Restoration|0|2|0|60165|NoSpell
+166|Levitate|7|2|0|60166|NoSpell
+167|Light|4|0|0|60167|NoSpell
+168|Lightning Bolt|4|3|0|60168|NoSpell
+169|Locate Animals or Plants|2|2|1|60169|NoSpell
+170|Locate Creature|2|4|0|60170|NoSpell
+171|Locate Object|2|2|0|60171|NoSpell
+172|Longstrider|7|1|0|60172|NoSpell
+173|Mage Armor|0|1|0|60173|NoSpell
+174|Mage Hand|1|0|0|60174|NoSpell
+175|Magic Circle|0|3|0|60175|NoSpell
+176|Magic Jar|6|6|0|60176|NoSpell
+177|Magic Missile|4|1|0|60177|NoSpell
+178|Magic Mouth|5|2|1|60178|NoSpell
+179|Magic Weapon|7|2|0|60179|NoSpell
+180|Magnificent Mansion|1|7|0|60180|NoSpell
+181|Major Image|5|3|0|60181|NoSpell
+182|Mass Cure Wounds|4|5|0|60182|NoSpell
+183|Mass Heal|4|9|0|60183|NoSpell
+184|Mass Healing Word|4|3|0|60184|NoSpell
+185|Mass Suggestion|3|6|0|60185|NoSpell
+186|Maze|1|8|0|60186|NoSpell
+187|Meld into Stone|7|3|1|60187|NoSpell
+188|Mending|7|0|0|60188|NoSpell
+189|Message|7|0|0|60189|NoSpell
+190|Meteor Swarm|4|9|0|60190|NoSpell
+191|Mind Blank|0|8|0|60191|NoSpell
+192|Minor Illusion|5|0|0|60192|NoSpell
+193|Mirage Arcane|5|7|0|60193|NoSpell
+194|Mirror Image|5|2|0|60194|NoSpell
+195|Mislead|5|5|0|60195|NoSpell
+196|Misty Step|1|2|0|60196|NoSpell
+197|Modify Memory|3|5|0|60197|NoSpell
+198|Moonbeam|4|2|0|60198|NoSpell
+199|Move Earth|7|6|0|60199|NoSpell
+200|Nondetection|0|3|0|60200|NoSpell
+201|Pass Without Trace|0|2|0|60201|NoSpell
+202|Passwall|7|5|0|60202|NoSpell
+203|Phantasmal Killer|5|4|0|60203|NoSpell
+204|Phantom Steed|5|3|1|60204|NoSpell
+205|Planar Ally|1|6|0|60205|NoSpell
+206|Planar Binding|0|5|0|60206|NoSpell
+207|Plane Shift|1|7|0|60207|NoSpell
+208|Plant Growth|7|3|0|60208|NoSpell
+209|Polymorph|7|4|0|60209|NoSpell
+210|Power Word Kill|3|9|0|60210|NoSpell
+211|Power Word Stun|3|8|0|60211|NoSpell
+212|Prayer of Healing|4|2|0|60212|NoSpell
+213|Prestidigitation|7|0|0|60213|NoSpell
+214|Prismatic Spray|4|7|0|60214|NoSpell
+215|Prismatic Wall|0|9|0|60215|NoSpell
+216|Private Sanctum|0|4|0|60216|NoSpell
+217|Produce Flame|1|0|0|60217|NoSpell
+218|Programmed Illusion|5|6|0|60218|NoSpell
+219|Project Image|5|7|0|60219|NoSpell
+220|Protection from Energy|0|3|0|60220|NoSpell
+221|Protection from Evil and Good|0|1|0|60221|NoSpell
+222|Protection from Poison|0|2|0|60222|NoSpell
+223|Purify Food and Drink|7|1|1|60223|NoSpell
+224|Raise Dead|6|5|0|60224|NoSpell
+225|Ray of Enfeeblement|6|2|0|60225|NoSpell
+226|Ray of Frost|4|0|0|60226|NoSpell
+227|Regenerate|7|7|0|60227|NoSpell
+228|Reincarnate|7|5|0|60228|NoSpell
+229|Remove Curse|0|3|0|60229|NoSpell
+230|Resilient Sphere|4|4|0|60230|NoSpell
+231|Resistance|0|0|0|60231|NoSpell
+232|Resurrection|6|7|0|60232|NoSpell
+233|Reverse Gravity|7|7|0|60233|NoSpell
+234|Revivify|6|3|0|60234|NoSpell
+235|Rope Trick|7|2|0|60235|NoSpell
+236|Sacred Flame|4|0|0|60236|NoSpell
+237|Sanctuary|0|1|0|60237|NoSpell
+238|Scorching Ray|4|2|0|60238|NoSpell
+239|Scrying|2|5|0|60239|NoSpell
+240|Secret Chest|1|4|0|60240|NoSpell
+241|See Invisibility|2|2|0|60241|NoSpell
+242|Seeming|5|5|0|60242|NoSpell
+243|Sending|4|3|0|60243|NoSpell
+244|Sequester|7|7|0|60244|NoSpell
+245|Shapechange|7|9|0|60245|NoSpell
+246|Shatter|4|2|0|60246|NoSpell
+247|Shield|0|1|0|60247|NoSpell
+248|Shield of Faith|0|1|0|60248|NoSpell
+249|Shillelagh|7|0|0|60249|NoSpell
+250|Shocking Grasp|4|0|0|60250|NoSpell
+251|Silence|5|2|1|60251|NoSpell
+252|Silent Image|5|1|0|60252|NoSpell
+253|Simulacrum|5|7|0|60253|NoSpell
+254|Sleep|3|1|0|60254|NoSpell
+255|Sleet Storm|1|3|0|60255|NoSpell
+256|Slow|7|3|0|60256|NoSpell
+257|Speak with Animals|2|1|1|60257|NoSpell
+258|Speak with Dead|6|3|0|60258|NoSpell
+259|Speak with Plants|7|3|0|60259|NoSpell
+260|Spider Climb|7|2|0|60260|NoSpell
+261|Spike Growth|7|2|0|60261|NoSpell
+262|Spirit Guardians|1|3|0|60262|NoSpell
+263|Spiritual Weapon|4|2|0|60263|NoSpell
+264|Stinking Cloud|1|3|0|60264|NoSpell
+265|Stone Shape|7|4|0|60265|NoSpell
+266|Stoneskin|0|4|0|60266|NoSpell
+267|Storm of Vengeance|1|9|0|60267|NoSpell
+268|Suggestion|3|2|0|60268|NoSpell
+269|Sunbeam|4|6|0|60269|NoSpell
+270|Sunburst|4|8|0|60270|NoSpell
+271|Symbol|0|7|0|60271|NoSpell
+272|Telekinesis|7|5|0|60272|NoSpell
+273|Telepathic Bond|2|5|1|60273|NoSpell
+274|Teleport|1|7|0|60274|NoSpell
+275|Teleportation Circle|1|5|0|60275|NoSpell
+276|Thaumaturgy|7|0|0|60276|NoSpell
+277|Thunderwave|4|1|0|60277|NoSpell
+278|Time Stop|7|9|0|60278|NoSpell
+279|Tiny Hut|4|3|1|60279|NoSpell
+280|Tongues|2|3|0|60280|NoSpell
+281|Transport via Plants|1|6|0|60281|NoSpell
+282|Tree Stride|1|5|0|60282|NoSpell
+283|True Polymorph|7|9|0|60283|NoSpell
+284|True Resurrection|6|9|0|60284|NoSpell
+285|True Seeing|2|6|0|60285|NoSpell
+286|True Strike|2|0|0|60286|NoSpell
+287|Unseen Servant|1|1|1|60287|NoSpell
+288|Vampiric Touch|6|3|0|60288|NoSpell
+289|Wall of Fire|4|4|0|60289|NoSpell
+290|Wall of Force|4|5|0|60290|NoSpell
+291|Wall of Ice|4|6|0|60291|NoSpell
+292|Wall of Stone|4|5|0|60292|NoSpell
+293|Wall of Thorns|1|6|0|60293|NoSpell
+294|Warding Bond|0|2|0|60294|NoSpell
+295|Water Breathing|7|3|1|60295|NoSpell
+296|Water Walk|7|3|1|60296|NoSpell
+297|Web|1|2|0|60297|NoSpell
+298|Weird|5|9|0|60298|NoSpell
+299|Wind Walk|7|6|0|60299|NoSpell
+300|Wind Wall|4|3|0|60300|NoSpell
+301|Wish|1|9|0|60301|NoSpell
+302|Word of Recall|1|6|0|60302|NoSpell
+303|Zone of Truth|3|2|0|60303|NoSpell
+304|Animal Friendship|3|2|0|60304|NoSpell
+305|Branding Smite|4|2|0|60305|NoSpell
+306|Complusion|3|4|0|60306|NoSpell
+307|Counterspell|0|3|0|60307|NoSpell
+308|Druidcraft|7|0|0|60308|NoSpell
+309|Eldritch Blast|4|0|0|60309|NoSpell
+310|Find Familiar|1|1|1|60310|NoSpell
+311|Fire Bolt|4|0|0|60311|NoSpell
+312|Goodberry|7|1|0|60312|NoSpell
+313|Guardian of Faith|1|4|0|60313|NoSpell
+314|Hellish Rebuke|4|1|0|60314|NoSpell
+315|Hunter's Mark|2|1|0|60315|NoSpell
+316|Poison Spray|1|0|0|60316|NoSpell
+317|Spare the Dying|6|0|0|60317|NoSpell
+318|Vicious Mockery|3|0|0|60318|NoSpell
