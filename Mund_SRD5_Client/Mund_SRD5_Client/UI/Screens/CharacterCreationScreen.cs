@@ -179,6 +179,18 @@ namespace Mundasia.Interface
         private static bool _displayInitialized = false;
 
         private static bool _eventsInitialized = false;
+
+        static Label charSheetCantripsLabel = new Label();
+        static ListView charSheetCantripsBox = new ListView();
+        static Label charSheetSpellBoxLabel = new Label();
+        static ListView charSheetSpellBox = new ListView();
+
+        static Label cantripsLabel = new Label();
+        static ListView CantripBox = new ListView();
+        static Label spellBoxLabel = new Label();
+        static ListView SpellBox = new ListView();
+
+        static Button done = new Button();
         #endregion
 
         #region Storage of Incomplete Character
@@ -198,6 +210,9 @@ namespace Mundasia.Interface
         private static List<Skill> _raceSkills = new List<Skill>();
         private static List<Skill> _classSkills = new List<Skill>();
         private static List<Skill> _classTools = new List<Skill>();
+
+        private static List<Spell> _cantrips = new List<Spell>();
+        private static List<Spell> _firstLevel = new List<Spell>();
 
         private static int _selectedGender = -1;
         #endregion
@@ -420,6 +435,28 @@ namespace Mundasia.Interface
             charismaSkills.ItemSelectionChanged += NoSelection;
             StyleListView(charismaSkills, true);
 
+            charSheetCantripsLabel.Text = "Cantrips";
+            StyleLabel(charSheetCantripsLabel);
+            charSheetCantripsLabel.Location = new Point(padding, charismaSkills.Location.Y + charismaSkills.Height + padding);
+
+            charSheetCantripsBox.Location = new Point(padding, charSheetCantripsLabel.Location.Y + charSheetCantripsLabel.Height);
+            charSheetCantripsBox.Size = new Size(availableCharSheetWidth - (padding * 2), 100);
+            charSheetCantripsBox.ItemSelectionChanged += NoSelection;
+            StyleListView(charSheetCantripsBox, true);
+
+            charSheetSpellBoxLabel.Text = "Spells Known";
+            StyleLabel(charSheetSpellBoxLabel);
+            charSheetSpellBoxLabel.Location = new Point(padding, charSheetCantripsBox.Location.Y + charSheetCantripsBox.Height + padding);
+
+            charSheetSpellBox.Location = new Point(padding, charSheetSpellBoxLabel.Location.Y + charSheetSpellBoxLabel.Height);
+            charSheetSpellBox.Size = new Size(availableCharSheetWidth - (padding * 2), 100);
+            charSheetSpellBox.ItemSelectionChanged += NoSelection;
+            StyleListView(charSheetSpellBox, true);
+
+            done.Text = "Create Character";
+            StyleLabel(done);
+            done.Location = new Point(availableCharSheetWidth - padding - done.Width, charSheetSpellBox.Location.Y + charSheetSpellBox.Height + padding);
+
             if (!_eventsInitialized)
             {
                 alignmentIcon.Click += EditAlignment;
@@ -486,6 +523,15 @@ namespace Mundasia.Interface
                 raceSkills.ItemSelectionChanged += ToggleRaceSkill;
                 classSkills.ItemSelectionChanged += ToggleClassSkill;
                 classTools.ItemSelectionChanged += ToggleClassTool;
+
+                charSheetCantripsBox.MouseDown += EditSpells;
+                charSheetSpellBox.MouseDown += EditSpells;
+
+                CantripBox.ItemSelectionChanged += CantripBox_ItemSelectionChanged;
+                SpellBox.ItemSelectionChanged += SpellBox_ItemSelectionChanged;
+
+                done.Click += Done_Click;
+
                 _eventsInitialized = true;
             }
 
@@ -518,6 +564,11 @@ namespace Mundasia.Interface
             _characterSheet.Controls.Add(labelCharisma);
             _characterSheet.Controls.Add(abilityCharisma);
             _characterSheet.Controls.Add(charismaSkills);
+            _characterSheet.Controls.Add(charSheetCantripsBox);
+            _characterSheet.Controls.Add(charSheetCantripsLabel);
+            _characterSheet.Controls.Add(charSheetSpellBox);
+            _characterSheet.Controls.Add(charSheetSpellBoxLabel);
+            _characterSheet.Controls.Add(done);
 
             _panel.Controls.Add(_characterSheet);
             _panel.Controls.Add(_editPanel);
@@ -979,6 +1030,231 @@ namespace Mundasia.Interface
         }
         #endregion
 
+        #region Cantrip Selection
+        private static void CantripBox_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            if (e.IsSelected)
+            {
+                Spell selectedSpell = Spell.GetSpell((uint)e.Item.Tag);
+                if (selectedSpell != null)
+                {
+                    e.Item.Selected = false; // Because we'll get extra simultaneous events if we don't do this.
+                    if (_cantrips.Contains(selectedSpell))
+                    {
+                        _cantrips.Remove(selectedSpell);
+                    }
+                    else
+                    {
+                        _cantrips.Add(selectedSpell);
+                    }                   
+                }
+                _populateSpellList();
+            }
+        }
+
+        private static void SpellBox_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            if(e.IsSelected)
+            {
+                Spell selectedSpell = Spell.GetSpell((uint)e.Item.Tag);
+                if(selectedSpell != null)
+                {
+                    e.Item.Selected = false;
+                    if(_firstLevel.Contains(selectedSpell))
+                    {
+                        _firstLevel.Remove(selectedSpell);
+                    }
+                    else
+                    {
+                        _firstLevel.Add(selectedSpell);
+                    }
+                }
+                _populateSpellList();
+            }
+        }
+
+        public static void EditSpells(object sender, EventArgs e)
+        {
+            if (_currentEdit == CurrentEdit.Spell) return;
+
+            _editPanel.Controls.Clear();
+
+            if(_selectedClass == null ||
+               _selectedClass.CantripsKnown == null ||
+               _selectedClass.CantripsKnown.Count == 0)
+            {
+                cantripsLabel.Text = "Must select a spellcasting class";
+                StyleLabel(cantripsLabel);
+                cantripsLabel.Location = new Point(padding, padding);
+                _currentEdit = CurrentEdit.Spell;
+                _editPanel.Controls.Add(cantripsLabel);
+                return;
+            }
+
+            cantripsLabel.Text = "Cantrips";
+            StyleLabel(cantripsLabel);
+            cantripsLabel.Width = _editPanel.ClientRectangle.Width - (padding * 2);
+
+            spellBoxLabel.Text = "Spells";
+            StyleLabel(spellBoxLabel);
+            spellBoxLabel.Width = _editPanel.ClientRectangle.Width - (padding * 2);
+
+            CantripBox.Size = new Size(_editPanel.ClientRectangle.Width - (padding * 2), (_editPanel.ClientRectangle.Height - (cantripsLabel.Height * 2) - (padding * 5)) / 2);
+            StyleListView(CantripBox, false);
+
+            SpellBox.Size = CantripBox.Size;
+            StyleListView(SpellBox, false);
+
+            cantripsLabel.Location = new Point(padding, padding);
+            CantripBox.Location = new Point(padding, cantripsLabel.Location.Y + cantripsLabel.Height + padding);
+            spellBoxLabel.Location = new Point(padding, CantripBox.Location.Y + CantripBox.Height + padding);
+            SpellBox.Location = new Point(padding, spellBoxLabel.Location.Y + spellBoxLabel.Height + padding);
+
+            _populateSpellList();
+
+            _editPanel.Controls.Add(cantripsLabel);
+            _editPanel.Controls.Add(CantripBox);
+            if (_selectedClass.SpellsKnown != null)
+            {
+                _editPanel.Controls.Add(spellBoxLabel);
+                _editPanel.Controls.Add(SpellBox);
+            }
+
+            _currentEdit = CurrentEdit.Spell;
+        }
+
+        private static void _populateSpellList()
+        {
+            if(_selectedClass.CantripsKnown != null &&
+                _selectedClass.CantripsKnown.Count > 0)
+            {
+                cantripsLabel.Text = "Cantrips Known, " + (_selectedClass.CantripsKnown[0] - _cantrips.Count) + " Remaining";
+            }
+            if (_selectedClass.SpellsKnown != null &&
+               _selectedClass.SpellsKnown.Count > 0)
+            {
+                spellBoxLabel.Text = "Spells Known, " + (_selectedClass.SpellsKnown[0] - _firstLevel.Count) + " Remaining";
+            }
+            uint topItemIndex = uint.MaxValue;
+            if (CantripBox.View == View.Details &&
+                CantripBox.TopItem != null)
+            {
+                topItemIndex = (uint)CantripBox.TopItem.Tag;
+            }
+
+            ListViewItem topItem;
+            int imageIndex = 0;
+            if (_selectedClass.SpellList != null &&
+                _selectedClass.SpellList.ContainsKey(0))
+            {
+                topItem = null;
+                CantripBox.BeginUpdate();
+                CantripBox.Items.Clear();
+                ImageList imgs = new ImageList();
+                imgs.ImageSize = IconSize;
+                imgs.ColorDepth = ColorDepth.Depth32Bit;
+                imageIndex = 0;
+                foreach (Spell spell in _selectedClass.SpellList[0])
+                {
+                    ListViewItem toAdd = new ListViewItem(new string[] { "", spell.Name });
+                    toAdd.Name = spell.Name;
+                    toAdd.ImageIndex = imageIndex;
+                    toAdd.Tag = spell.Id;
+                    toAdd.ToolTipText = StringLibrary.GetString(spell.Description);
+                    imgs.Images.Add(spell.Icon);
+                    imageIndex++;
+                    StyleListViewItem(toAdd);
+                    if (_cantrips.Contains(spell)) toAdd.BackColor = SelectedRowColor;
+                    CantripBox.Items.Add(toAdd);
+                    if (topItemIndex == spell.Id) topItem = toAdd;
+                }
+                CantripBox.SmallImageList = imgs;
+                CantripBox.EndUpdate();
+                if (topItem != null) CantripBox.TopItem = topItem;
+            }
+
+            if (_selectedClass.SpellList != null &&
+                _selectedClass.SpellList.ContainsKey(1))
+            {
+                topItemIndex = uint.MaxValue;
+                if (SpellBox.View == View.Details &&
+                    SpellBox.TopItem != null)
+                {
+                    topItemIndex = (uint)SpellBox.TopItem.Tag;
+                }
+                topItem = null;
+                SpellBox.BeginUpdate();
+                SpellBox.Items.Clear();
+                ImageList imgs = new ImageList();
+                imgs.ImageSize = IconSize;
+                imgs.ColorDepth = ColorDepth.Depth32Bit;
+                imageIndex = 0;
+                foreach (Spell spell in _selectedClass.SpellList[1])
+                {
+                    ListViewItem toAdd = new ListViewItem(new string[] { "", spell.Name });
+                    toAdd.Name = spell.Name;
+                    toAdd.ImageIndex = imageIndex;
+                    toAdd.Tag = spell.Id;
+                    toAdd.ToolTipText = StringLibrary.GetString(spell.Description);
+                    imgs.Images.Add(spell.Icon);
+                    imageIndex++;
+                    StyleListViewItem(toAdd);
+                    if (_firstLevel.Contains(spell)) toAdd.BackColor = SelectedRowColor;
+                    SpellBox.Items.Add(toAdd);
+                    if (topItemIndex == spell.Id) topItem = toAdd;
+                }
+                SpellBox.SmallImageList = imgs;
+                SpellBox.EndUpdate();
+                if (topItem != null) SpellBox.TopItem = topItem;
+            }
+
+            topItemIndex = uint.MaxValue;
+            if (charSheetCantripsBox.TopItem != null)
+            {
+                topItemIndex = (uint)charSheetCantripsBox.TopItem.Tag;
+            }
+            topItem = null;
+            charSheetCantripsBox.BeginUpdate();
+            charSheetCantripsBox.Items.Clear();
+            imageIndex = 0;
+            foreach (Spell spell in _cantrips)
+            {
+                ListViewItem toAdd = new ListViewItem(new string[] { "", spell.Name, spell.School.Name });
+                toAdd.Name = spell.Name;
+                toAdd.Tag = spell.Id;
+                toAdd.ToolTipText = StringLibrary.GetString(spell.Description);
+                StyleListViewItem(toAdd);
+                charSheetCantripsBox.Items.Add(toAdd);
+                if (topItemIndex == spell.Id) topItem = toAdd;
+            }
+            charSheetCantripsBox.EndUpdate();
+            if (topItem != null) charSheetCantripsBox.TopItem = topItem;
+
+            topItemIndex = uint.MaxValue;
+            if (charSheetSpellBox.TopItem != null)
+            {
+                topItemIndex = (uint)charSheetSpellBox.TopItem.Tag;
+            }
+            topItem = null;
+            charSheetSpellBox.BeginUpdate();
+            charSheetSpellBox.Items.Clear();
+            imageIndex = 0;
+            foreach (Spell spell in _firstLevel)
+            {
+                ListViewItem toAdd = new ListViewItem(new string[] { "", spell.Name, spell.School.Name });
+                toAdd.Name = spell.Name;
+                toAdd.Tag = spell.Id;
+                toAdd.ToolTipText = StringLibrary.GetString(spell.Description);
+                imageIndex++;
+                StyleListViewItem(toAdd);
+                charSheetSpellBox.Items.Add(toAdd);
+                if (topItemIndex == spell.Id) topItem = toAdd;
+            }
+            charSheetSpellBox.EndUpdate();
+            if (topItem != null) charSheetSpellBox.TopItem = topItem;
+        }
+        #endregion
+
         #region Character Class Selection
         private static void CharacterClassBox_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
@@ -997,6 +1273,8 @@ namespace Mundasia.Interface
                     else
                     {
                         _selectedClass = selectedClass;
+                        _classSkills.Clear();
+                        _classTools.Clear();
                         UpdateSkills();
                     }
                     if (selectedClass.SubClassLevel == 1)
@@ -1007,6 +1285,9 @@ namespace Mundasia.Interface
                     {
                         _populateCharacterClassList();
                     }
+                    _cantrips.Clear();
+                    _firstLevel.Clear();
+                    _populateSpellList();
                 }
             }
         }
@@ -1202,69 +1483,7 @@ namespace Mundasia.Interface
             _wisdomScore = (int)wisdomEdit.Value;
             _charismaScore = (int)charismaEdit.Value;
 
-            int _strengthCostAdjust = 0;
-            int _dexterityCostAdjust = 0;
-            int _constitutionCostAdjust = 0;
-            int _wisdomCostAdjust = 0;
-            int _intelligenceCostAdjust = 0;
-            int _charismaCostAdjust = 0;
-            if (_selectedRace != null &&
-                _selectedRace.OtherBonusStats > 0)
-            {
-                int bonuses = _selectedRace.OtherBonusStats;
-                List<int> scores = new List<int>();
-                if (_selectedRace.Strength == 0) scores.Add(_strengthScore);
-                if (_selectedRace.Dexterity == 0) scores.Add(_dexterityScore);
-                if (_selectedRace.Constitution == 0) scores.Add(_constitutionScore);
-                if (_selectedRace.Intelligence == 0) scores.Add(_intelligenceScore);
-                if (_selectedRace.Wisdom == 0) scores.Add(_wisdomScore);
-                if (_selectedRace.Charisma == 0) scores.Add(_charismaScore);
-
-                scores.Sort();
-                while(bonuses > 0)
-                {
-                    if(_strengthScore == scores[scores.Count - bonuses] &&
-                        _strengthCostAdjust == 0)
-                    {
-                        _strengthCostAdjust--;
-                    }
-                    else if(_dexterityScore == scores[scores.Count - bonuses] &&
-                        _dexterityCostAdjust == 0)
-                    {
-                        _dexterityCostAdjust--;
-                    }
-                    else if(_constitutionScore == scores[scores.Count - bonuses] &&
-                        _constitutionCostAdjust == 0)
-                    {
-                        _constitutionCostAdjust--;
-                    }
-                    else if(_intelligenceScore == scores[scores.Count - bonuses] &&
-                        _intelligenceCostAdjust == 0)
-                    {
-                        _intelligenceCostAdjust--;
-                    }
-                    else if(_wisdomScore == scores[scores.Count - bonuses] &&
-                        _wisdomCostAdjust == 0)
-                    {
-                        _wisdomCostAdjust--;
-                    }
-                    else if(_charismaScore == scores[scores.Count - bonuses] &&
-                        _charismaCostAdjust == 0)
-                    {
-                        _charismaCostAdjust--;
-                    }
-                    bonuses--;
-                }
-            }
-
-
-            int points = 40 - 
-                        AbilityScoreCosts[_strengthScore + _strengthCostAdjust] - 
-                        AbilityScoreCosts[_dexterityScore + _dexterityCostAdjust] - 
-                        AbilityScoreCosts[_constitutionScore + _constitutionCostAdjust] - 
-                        AbilityScoreCosts[_intelligenceScore + _intelligenceCostAdjust] - 
-                        AbilityScoreCosts[_wisdomScore + _wisdomCostAdjust] - 
-                        AbilityScoreCosts[_charismaScore + _charismaCostAdjust];
+            int points = GetRemainingPoints();
 
             pointsLeft.Text = points.ToString() + " points remain";
             pointsLeft.Size = pointsLeft.PreferredSize;
@@ -1876,7 +2095,8 @@ namespace Mundasia.Interface
             Class,
             Gender,
             Race,
-            Skill
+            Skill,
+            Spell
         }
 
         private static Font abilityModFont = new Font(FontFamily.GenericSansSerif, 18.0f);
@@ -1931,8 +2151,8 @@ namespace Mundasia.Interface
             if (threeColumns)
             {
                 listView.Columns[0].Width = MiniIconSize.Width + 2;
-                listView.Columns[1].Width = ((listView.ClientRectangle.Width - SystemInformation.VerticalScrollBarWidth - IconSize.Width - 2) * 8) / 10;
-                listView.Columns[2].Width = ((listView.ClientRectangle.Width - SystemInformation.VerticalScrollBarWidth - IconSize.Width - 2) * 2) / 10;
+                listView.Columns[1].Width = ((listView.ClientRectangle.Width - SystemInformation.VerticalScrollBarWidth - MiniIconSize.Width - 2) * 8) / 10;
+                listView.Columns[2].Width = listView.ClientRectangle.Width - SystemInformation.VerticalScrollBarWidth - MiniIconSize.Width - 2 - listView.Columns[1].Width;
             }
             else
             {
@@ -1946,6 +2166,203 @@ namespace Mundasia.Interface
             item.BackColor = Color.Black;
             item.ForeColor = Color.White;
             item.Font = labelFont;
+        }
+        #endregion
+
+        #region Validation
+        private static int GetRemainingPoints()
+        {
+            int _strengthCostAdjust = 0;
+            int _dexterityCostAdjust = 0;
+            int _constitutionCostAdjust = 0;
+            int _wisdomCostAdjust = 0;
+            int _intelligenceCostAdjust = 0;
+            int _charismaCostAdjust = 0;
+            if (_selectedRace != null &&
+                _selectedRace.OtherBonusStats > 0)
+            {
+                int bonuses = _selectedRace.OtherBonusStats;
+                List<int> scores = new List<int>();
+                if (_selectedRace.Strength == 0) scores.Add(_strengthScore);
+                if (_selectedRace.Dexterity == 0) scores.Add(_dexterityScore);
+                if (_selectedRace.Constitution == 0) scores.Add(_constitutionScore);
+                if (_selectedRace.Intelligence == 0) scores.Add(_intelligenceScore);
+                if (_selectedRace.Wisdom == 0) scores.Add(_wisdomScore);
+                if (_selectedRace.Charisma == 0) scores.Add(_charismaScore);
+
+                scores.Sort();
+                while (bonuses > 0)
+                {
+                    if (_strengthScore == scores[scores.Count - bonuses] &&
+                        _strengthCostAdjust == 0)
+                    {
+                        _strengthCostAdjust--;
+                    }
+                    else if (_dexterityScore == scores[scores.Count - bonuses] &&
+                        _dexterityCostAdjust == 0)
+                    {
+                        _dexterityCostAdjust--;
+                    }
+                    else if (_constitutionScore == scores[scores.Count - bonuses] &&
+                        _constitutionCostAdjust == 0)
+                    {
+                        _constitutionCostAdjust--;
+                    }
+                    else if (_intelligenceScore == scores[scores.Count - bonuses] &&
+                        _intelligenceCostAdjust == 0)
+                    {
+                        _intelligenceCostAdjust--;
+                    }
+                    else if (_wisdomScore == scores[scores.Count - bonuses] &&
+                        _wisdomCostAdjust == 0)
+                    {
+                        _wisdomCostAdjust--;
+                    }
+                    else if (_charismaScore == scores[scores.Count - bonuses] &&
+                        _charismaCostAdjust == 0)
+                    {
+                        _charismaCostAdjust--;
+                    }
+                    bonuses--;
+                }
+            }
+
+
+            return 40 - AbilityScoreCosts[_strengthScore + _strengthCostAdjust] -
+                        AbilityScoreCosts[_dexterityScore + _dexterityCostAdjust] -
+                        AbilityScoreCosts[_constitutionScore + _constitutionCostAdjust] -
+                        AbilityScoreCosts[_intelligenceScore + _intelligenceCostAdjust] -
+                        AbilityScoreCosts[_wisdomScore + _wisdomCostAdjust] -
+                        AbilityScoreCosts[_charismaScore + _charismaCostAdjust];
+        }
+
+        private static void Done_Click(object sender, EventArgs e)
+        {
+            List<string> errors = new List<string>();
+            List<string> warnings = new List<string>();
+
+            int abilityPoints = GetRemainingPoints();
+            if (abilityPoints < 0)
+            {
+                errors.Add("You have spent " + (abilityPoints * -1) + " too many points on ability scores.");
+            }
+            else if (abilityPoints > 0)
+            {
+                warnings.Add("You have " + abilityPoints + " points left to assign to ability scores.");
+            }
+
+            if (_selectedGender < 0)
+            {
+                errors.Add("You have not selected a gender.");
+            }
+
+            if(_selectedAlignment == null)
+            {
+                errors.Add("You have not selected an alignment.");
+            }
+
+            if(_selectedBackground == null)
+            {
+                errors.Add("You have not selected a background.");
+            }
+
+            if (_selectedRace == null)
+            {
+                errors.Add("You have not selected a race.");
+            }
+            else
+            {
+                int racialSkills = _selectedRace.FreeSkills - _raceSkills.Count;
+                if(racialSkills < 0)
+                {
+                    errors.Add("You have selected more racial skills than you're allowed.");
+                }
+                else if(racialSkills > 0)
+                {
+                    warnings.Add("You have not selected all of your racial skills.");
+                }
+            }
+
+            if (_selectedClass == null)
+            {
+                errors.Add("You have not selected a class.");
+            }
+            else
+            {
+                int classSkills = _selectedClass.SkillChoices - _classSkills.Count;
+                if(classSkills < 0)
+                {
+                    errors.Add("You have selected more class skills than you're allowed.");
+                }
+                else if(classSkills > 0)
+                {
+                    warnings.Add("You have not selected all of your class skills.");
+                }
+
+                int classTools = _selectedClass.ToolChoices - _classTools.Count;
+                if(classTools < 0)
+                {
+                    errors.Add("You have selected more class tools or instruments than you're allowed.");
+                }
+                else if(classTools > 0)
+                {
+                    warnings.Add("You have not selected all of your class tools or instruments.");
+                }
+
+                if(_selectedClass.CantripsKnown != null &&
+                   _selectedClass.CantripsKnown.Count > 0)
+                {
+                    int remainingCantrips = _selectedClass.CantripsKnown[0] - _cantrips.Count;
+                    if(remainingCantrips < 0)
+                    {
+                        errors.Add("You have selected more cantrips than you're allowed.");
+                    }
+                    else if(remainingCantrips > 0)
+                    {
+                        warnings.Add("You have not selected all of your cantrips.");
+                    }
+                }
+                if(_selectedClass.SpellsKnown != null &&
+                   _selectedClass.SpellsKnown.Count > 0)
+                {
+                    int remainingSpells = _selectedClass.SpellsKnown[0] - _firstLevel.Count;
+                    if(remainingSpells < 0)
+                    {
+                        errors.Add("You have selected more spells than you're allowed.");
+                    }
+                    else if(remainingSpells > 0)
+                    {
+                        warnings.Add("You have not selected all of your spells.");
+                    }
+                }
+            }
+
+            if(errors.Count > 0)
+            {
+                StringBuilder errorMessage = new StringBuilder();
+                errorMessage.AppendLine("You may not create this character.");
+                foreach(string error in errors)
+                {
+                    errorMessage.AppendLine(" - " + error);
+                }
+                MessageBox.Show(errorMessage.ToString());
+                return;
+            }
+            else if(warnings.Count > 0)
+            {
+                StringBuilder warningMessage = new StringBuilder();
+                warningMessage.AppendLine("You can make this character, but it will be less powerful than a character is expected to be.");
+                foreach(string warning in warnings)
+                {
+                    warningMessage.AppendLine(" - " + warning);
+                }
+                MessageBox.Show(warningMessage.ToString());
+                return;
+            }
+            else
+            {
+                MessageBox.Show("Client validation passed. This looks like a normal character.");
+            }
         }
         #endregion
     }
