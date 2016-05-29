@@ -46,7 +46,7 @@ namespace Mundasia.Objects
 
                 Description = uint.Parse(split[5]);
 
-                
+                _iconFileName = split[6];
             }
             else
             {
