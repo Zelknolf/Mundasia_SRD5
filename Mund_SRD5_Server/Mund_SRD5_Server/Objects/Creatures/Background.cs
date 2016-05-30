@@ -78,7 +78,9 @@ namespace Mundasia.Objects
             get
             {
                 if (_icon != null) return _icon;
-                _icon = Image.FromFile(System.IO.Directory.GetCurrentDirectory() + "\\Images\\Backgrounds\\" + _iconFileName + ".png");
+                string filePath = System.IO.Directory.GetCurrentDirectory() + "\\Images\\Backgrounds\\" + _iconFileName + ".png";
+                if (File.Exists(filePath)) _icon = Image.FromFile(filePath);
+                else _icon = NullBackgroundImage;
                 return _icon;
             }
         }
