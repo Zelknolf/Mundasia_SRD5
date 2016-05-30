@@ -1483,7 +1483,7 @@ namespace Mundasia.Interface
             _wisdomScore = (int)wisdomEdit.Value;
             _charismaScore = (int)charismaEdit.Value;
 
-            int points = GetRemainingPoints();
+            int points = Communication.CharacterCreation.GetRemainingPoints(_strengthScore, _dexterityScore, _constitutionScore, _intelligenceScore, _wisdomScore, _charismaScore, _selectedRace);
 
             pointsLeft.Text = points.ToString() + " points remain";
             pointsLeft.Size = pointsLeft.PreferredSize;
@@ -1609,27 +1609,6 @@ namespace Mundasia.Interface
                 }
             }
         }
-
-        private static Dictionary<int, int> AbilityScoreCosts = new Dictionary<int, int>()
-        {
-            { 0, 0 },
-            { 1, 0 },
-            { 2, 0 },
-            { 3, 0 },
-            { 4, 0 },
-            { 5, 0 },
-            { 6, 0 },
-            { 7, 1 },
-            { 8, 2 },
-            { 9, 3 },
-            { 10, 4 },
-            { 11, 5 },
-            { 12, 6 },
-            { 13, 8 },
-            { 14, 10 },
-            { 15, 12 },
-            { 16, 14 },
-        };
         #endregion
 
         #region Skills
@@ -2170,78 +2149,19 @@ namespace Mundasia.Interface
         #endregion
 
         #region Validation
-        private static int GetRemainingPoints()
-        {
-            int _strengthCostAdjust = 0;
-            int _dexterityCostAdjust = 0;
-            int _constitutionCostAdjust = 0;
-            int _wisdomCostAdjust = 0;
-            int _intelligenceCostAdjust = 0;
-            int _charismaCostAdjust = 0;
-            if (_selectedRace != null &&
-                _selectedRace.OtherBonusStats > 0)
-            {
-                int bonuses = _selectedRace.OtherBonusStats;
-                List<int> scores = new List<int>();
-                if (_selectedRace.Strength == 0) scores.Add(_strengthScore);
-                if (_selectedRace.Dexterity == 0) scores.Add(_dexterityScore);
-                if (_selectedRace.Constitution == 0) scores.Add(_constitutionScore);
-                if (_selectedRace.Intelligence == 0) scores.Add(_intelligenceScore);
-                if (_selectedRace.Wisdom == 0) scores.Add(_wisdomScore);
-                if (_selectedRace.Charisma == 0) scores.Add(_charismaScore);
-
-                scores.Sort();
-                while (bonuses > 0)
-                {
-                    if (_strengthScore == scores[scores.Count - bonuses] &&
-                        _strengthCostAdjust == 0)
-                    {
-                        _strengthCostAdjust--;
-                    }
-                    else if (_dexterityScore == scores[scores.Count - bonuses] &&
-                        _dexterityCostAdjust == 0)
-                    {
-                        _dexterityCostAdjust--;
-                    }
-                    else if (_constitutionScore == scores[scores.Count - bonuses] &&
-                        _constitutionCostAdjust == 0)
-                    {
-                        _constitutionCostAdjust--;
-                    }
-                    else if (_intelligenceScore == scores[scores.Count - bonuses] &&
-                        _intelligenceCostAdjust == 0)
-                    {
-                        _intelligenceCostAdjust--;
-                    }
-                    else if (_wisdomScore == scores[scores.Count - bonuses] &&
-                        _wisdomCostAdjust == 0)
-                    {
-                        _wisdomCostAdjust--;
-                    }
-                    else if (_charismaScore == scores[scores.Count - bonuses] &&
-                        _charismaCostAdjust == 0)
-                    {
-                        _charismaCostAdjust--;
-                    }
-                    bonuses--;
-                }
-            }
-
-
-            return 40 - AbilityScoreCosts[_strengthScore + _strengthCostAdjust] -
-                        AbilityScoreCosts[_dexterityScore + _dexterityCostAdjust] -
-                        AbilityScoreCosts[_constitutionScore + _constitutionCostAdjust] -
-                        AbilityScoreCosts[_intelligenceScore + _intelligenceCostAdjust] -
-                        AbilityScoreCosts[_wisdomScore + _wisdomCostAdjust] -
-                        AbilityScoreCosts[_charismaScore + _charismaCostAdjust];
-        }
-
         private static void Done_Click(object sender, EventArgs e)
         {
             List<string> errors = new List<string>();
             List<string> warnings = new List<string>();
 
-            int abilityPoints = GetRemainingPoints();
+            if(nameEdit.Text.Contains('|') ||
+               nameEdit.Text.Contains('[') ||
+               nameEdit.Text.Contains(']'))
+            {
+                errors.Add("You may not use special characters in your PC's names.");
+            }
+
+            int abilityPoints = Communication.CharacterCreation.GetRemainingPoints(_strengthScore, _dexterityScore, _constitutionScore, _intelligenceScore, _wisdomScore, _charismaScore, _selectedRace);
             if (abilityPoints < 0)
             {
                 errors.Add("You have spent " + (abilityPoints * -1) + " too many points on ability scores.");

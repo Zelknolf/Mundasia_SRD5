@@ -157,22 +157,9 @@ namespace Mundasia.Communication
         {
             CharacterCreation chr = new CharacterCreation()
             {
-                Authority = authority,
-                Care = care,
-                Fairness = fairness,
-                Hobby = hobby,
-                Loyalty = loyalty,
                 Name = name,
-                Profession = profession,
-                Race = race,
                 SessionId = SessionId,
-                Sex = sex,
-                Talent = talent,
-                Tradition = tradition,
                 UserId = UserId,
-                Vice = vice,
-                Virtue = virtue,
-                Aspiration = aspiration,
                 HairColor = hairColor,
                 HairStyle = hairStyle,
                 SkinColor = skinColor,
