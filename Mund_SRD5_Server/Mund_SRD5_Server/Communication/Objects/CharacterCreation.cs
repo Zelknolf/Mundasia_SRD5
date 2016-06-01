@@ -202,10 +202,10 @@ namespace Mundasia.Communication
                 }
             }
 
-            if(Class.CantripsKnown != null &&
+            Cantrips = new List<Spell>();
+            if (Class.CantripsKnown != null &&
                Class.CantripsKnown.Count > 0)
             {
-                Cantrips = new List<Spell>();
                 string[] cantripsSplit = buildSplit[9].Split(listDelim);
                 foreach(string cantrip in cantripsSplit)
                 {
@@ -246,11 +246,10 @@ namespace Mundasia.Communication
                 }
             }
 
+            SpellsKnown = new List<Spell>();
             if (Class.SpellsKnown != null &&
                 Class.SpellsKnown.Count > 0)
             {
-                SpellsKnown = new List<Spell>();
-
                 string[] spellSplit = buildSplit[10].Split(listDelim);
                 foreach(string spellKnown in spellSplit)
                 {
@@ -368,7 +367,72 @@ namespace Mundasia.Communication
 
         public override string ToString()
         {
-            return String.Empty;
+            StringBuilder ret = new StringBuilder();
+            ret.Append(Name);
+            ret.Append(delimiter);
+            ret.Append(Gender);
+            ret.Append(delimiter);
+            ret.Append(Race.Id);
+            ret.Append(delimiter);
+            ret.Append(Class.Id);
+            ret.Append(delimiter);
+            ret.Append(Background.Id);
+            ret.Append(delimiter);
+            ret.Append(Alignment.Id);
+            ret.Append(delimiter);
+            foreach(Skill sk in RaceSkills)
+            {
+                ret.Append(sk.Id);
+                ret.Append(listDelimiter);
+            }
+            ret.Append(delimiter);
+            foreach(Skill sk in ClassSkills)
+            {
+                ret.Append(sk.Id);
+                ret.Append(listDelimiter);
+            }
+            ret.Append(delimiter);
+            foreach(Skill sk in ClassTools)
+            {
+                ret.Append(sk.Id);
+                ret.Append(listDelimiter);
+            }
+            ret.Append(delimiter);
+            foreach (Spell sp in Cantrips)
+            {
+                ret.Append(sp.Id);
+                ret.Append(listDelimiter);
+            }
+            ret.Append(delimiter);
+            foreach(Spell sp in SpellsKnown)
+            {
+                ret.Append(sp.Id);
+                ret.Append(listDelimiter);
+            }
+            ret.Append(delimiter);
+            ret.Append(BaseStrength);
+            ret.Append(delimiter);
+            ret.Append(BaseDexterity);
+            ret.Append(delimiter);
+            ret.Append(BaseConstitution);
+            ret.Append(delimiter);
+            ret.Append(BaseIntelligence);
+            ret.Append(delimiter);
+            ret.Append(BaseWisdom);
+            ret.Append(delimiter);
+            ret.Append(BaseCharisma);
+            ret.Append(delimiter);
+            ret.Append(HairStyle);
+            ret.Append(delimiter);
+            ret.Append(HairColor);
+            ret.Append(delimiter);
+            ret.Append(SkinColor);
+            ret.Append(delimiter);
+            ret.Append(UserId);
+            ret.Append(delimiter);
+            ret.Append(SessionId);
+
+            return ret.ToString();
         }
 
 
