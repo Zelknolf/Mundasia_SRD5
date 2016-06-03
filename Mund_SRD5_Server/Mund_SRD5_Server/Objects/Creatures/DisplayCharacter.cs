@@ -133,15 +133,15 @@ namespace Mundasia.Objects
             {
                 CharacterId = ch.CachedDisplay.CharacterId;
             }
-            Height = Race.GetRace(ch.CharacterRace).Height;
+            Height = ch.CharacterRace.Height;
             x = ch.LocationX;
             y = ch.LocationY;
             z = ch.LocationZ;
             Facing = ch.LocationFacing;
-            CharacterRace = ch.CharacterRace;
+            CharacterRace = ch.CharacterRace.Id;
             SkinColor = (int)ch.SkinColor;
             HairColor = (int)ch.HairColor;
-            Sex = ch.Sex;
+            Sex = ch.Gender;
             Hair = (int)ch.HairStyle;
             if(ch.Equipment != null && ch.Equipment.ContainsKey((int)InventorySlot.Chest))
             {

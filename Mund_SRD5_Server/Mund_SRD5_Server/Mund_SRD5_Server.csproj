@@ -47,6 +47,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\Mund_SRD5_Client\Mund_SRD5_Client\Objects\Creatures\Alignment.cs">
+      <Link>Communication\Objects\Alignment.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Mund_SRD5_Client\Mund_SRD5_Client\Objects\Creatures\CharacterClass.cs">
+      <Link>Communication\Objects\CharacterClass.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Mund_SRD5_Client\Mund_SRD5_Client\Objects\Creatures\Power.cs">
+      <Link>Communication\Objects\Power.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Mund_SRD5_Client\Mund_SRD5_Client\Objects\Creatures\Spell.cs">
+      <Link>Communication\Objects\Spell.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Mund_SRD5_Client\Mund_SRD5_Client\Objects\Creatures\SpellList.cs">
+      <Link>Communication\Objects\SpellList.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Mund_SRD5_Client\Mund_SRD5_Client\Objects\Creatures\SpellSchool.cs">
+      <Link>Communication\Objects\SpellSchool.cs</Link>
+    </Compile>
     <Compile Include="Account\Account.cs" />
     <Compile Include="Communication\Objects\AccountCreation.cs" />
     <Compile Include="Communication\Objects\CharacterCreation.cs" />

@@ -83,16 +83,33 @@ namespace Mundasia.Server.Communication
             {
                 return "Invalid session Id";
             }
+            if(!nChar.Valid)
+            {
+                return "Character invalid";
+            }
             Creature chr;
             try
             {
                 chr = new Creature()
                 {
-                    // TODO: Update with 5e minimum information
                     AccountName = targetAccount.UserName,
+                    Background = nChar.Background,
+                    Cantrips = nChar.Cantrips,
+                    CharacterAlignment = nChar.Alignment,
                     CharacterName = nChar.Name,
-                    CharacterRace = (uint)nChar.Race,
-                    Sex = nChar.Sex,
+                    CharacterRace = nChar.Race,
+                    Classes = new List<CharacterClass>() { nChar.Class },
+                    Gender = nChar.Gender,
+                    ProficientSaves = nChar.Class.ProficientSaves,
+                    SpellsKnown = nChar.SpellsKnown,
+
+                    Strength = nChar.BaseStrength + nChar.Race.Strength,
+                    Dexterity = nChar.BaseDexterity + nChar.Race.Dexterity,
+                    Constitution = nChar.BaseConstitution + nChar.Race.Constitution,
+                    Intelligence = nChar.BaseIntelligence + nChar.Race.Intelligence,
+                    Wisdom = nChar.BaseWisdom + nChar.Race.Wisdom,
+                    Charisma = nChar.BaseCharisma + nChar.Race.Charisma,
+
                     SkinColor = (uint)nChar.SkinColor,
                     HairColor = (uint)nChar.HairColor,
                     HairStyle = (uint)nChar.HairStyle,
@@ -102,29 +119,23 @@ namespace Mundasia.Server.Communication
             {
                 return "Invalid character data; likely a negative number passed to an unsigned field.";
             }
-            if (!chr.ValidateCharacter())
-            {
-                return "Character violates rules of character creation.";
-            }
-            if(targetAccount.LoadCharacter(chr.CharacterName) != null)
+            chr.Skills = new List<Skill>();
+            chr.Skills.AddRange(nChar.ClassSkills);
+            chr.Skills.AddRange(nChar.ClassTools);
+            chr.Skills.AddRange(nChar.RaceSkills);
+            chr.Skills.AddRange(nChar.Race.AutomaticSkills);
+
+            if (targetAccount.LoadCharacter(chr.CharacterName) != null)
             {
                 return "A character with that name already exists";
             }
             if (!targetAccount.NewCharacter(chr))
             {
-                return "Unable to save character";
-            }
-            try
-            {
-                // TODO: 5e skills
-            }
-            catch
-            {
-                return "Failed to parse aspiration.";
+                return "Unable to attach character to account";
             }
             if (!targetAccount.SaveCharacter(chr))
             {
-                return "Could not save character.";
+                return "Unable to save character";
             }
             return "Success: " + chr.CharacterName;
         }

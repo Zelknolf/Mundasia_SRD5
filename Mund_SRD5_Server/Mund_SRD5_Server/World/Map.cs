@@ -372,7 +372,7 @@ namespace Mundasia.Objects
             Tile targetTile = GetTileExact(X, Y, Z);
             if(targetTile != null)
             {
-                int characterHeight = Race.GetRace(ch.CharacterRace).Height;
+                int characterHeight = ch.CharacterRace.Height;
                 int testedHeight = characterHeight;
                 while(testedHeight > 0)
                 {

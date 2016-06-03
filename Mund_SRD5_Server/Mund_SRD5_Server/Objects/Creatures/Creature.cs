@@ -24,161 +24,31 @@ namespace Mundasia.Objects
 
         public Creature(string message)
         {
-            string[] split = message.Split(delim);
-            if (split.Length < 36) return;
-            AccountName = split[0];
-            CharacterName = split[1];
-            if (!uint.TryParse(split[2], out CharacterRace)) return;
-            if (!int.TryParse(split[3], out Sex)) return;
-            if (!uint.TryParse(split[4], out Background)) return;
-
-            Classes = new Dictionary<uint, int>();
-            foreach(string chCls in split[5].Split(dictDelim))
-            {
-                if (String.IsNullOrWhiteSpace(chCls)) continue;
-                string[] reSplit = chCls.Split(keyDelim);
-                if (reSplit.Length != 2) return;
-                uint cls;
-                int clsLvl;
-                if (!uint.TryParse(reSplit[0], out cls)) return;
-                if (!int.TryParse(reSplit[1], out clsLvl)) return;
-                Classes.Add(cls, clsLvl);
-            }
-
-            if (!uint.TryParse(split[6], out ExperiencePoints)) return;
-            if (!uint.TryParse(split[7], out Level)) return;
-            if (!uint.TryParse(split[8], out Strength)) return;
-            if (!uint.TryParse(split[9], out Dexterity)) return;
-            if (!uint.TryParse(split[10], out Constitution)) return;
-            if (!uint.TryParse(split[11], out Intelligence)) return;
-            if (!uint.TryParse(split[12], out Wisdom)) return;
-            if (!uint.TryParse(split[13], out Charisma)) return;
-            if (!uint.TryParse(split[14], out ProficiencyBonus)) return;
-
-            Skills = new List<uint>();
-            foreach(string sk in split[15].Split(dictDelim))
-            {
-                if (String.IsNullOrWhiteSpace(sk)) continue;
-                uint skToAdd;
-                if (!uint.TryParse(sk, out skToAdd)) return;
-                Skills.Add(skToAdd);
-            }
             
-            if (!uint.TryParse(split[16], out InspirationPoints)) return;
-            if (!uint.TryParse(split[17], out HairStyle)) return;
-            if (!uint.TryParse(split[18], out HairColor)) return;
-            if (!uint.TryParse(split[19], out SkinColor)) return;
-            Map = split[19];
-            if (!int.TryParse(split[20], out LocationX)) return;
-            if (!int.TryParse(split[21], out LocationY)) return;
-            if (!int.TryParse(split[22], out LocationZ)) return;
-            if (!Enum.TryParse<Direction>(split[23], out LocationFacing)) return;
-
-            Equipment = new Dictionary<int, InventoryItem>();
-            foreach (string equip in split[24].Split(dictDelim))
-            {
-                if (String.IsNullOrWhiteSpace(equip)) continue;
-                string[] reSplit = equip.Split(keyDelim);
-                if (reSplit.Length != 2) return;
-                int slot;
-                if (!int.TryParse(reSplit[0], out slot)) return;
-                Equipment.Add(slot, new InventoryItem(reSplit[1]));
-            }
-
-            Inventory = new List<InventoryItem>();
-            foreach (string it in split[25].Split(dictDelim))
-            {
-                if (String.IsNullOrWhiteSpace(it)) continue;
-                Inventory.Add(new InventoryItem(it));
-            }
-
-            if (!bool.TryParse(split[26], out IsGM)) return;
-            IsCreatureValid = true;
         }
 
         public override string ToString()
         {
-            StringBuilder str = new StringBuilder();
-            str.Append(AccountName);
-            str.Append(delimiter);
-            str.Append(CharacterName);
-            str.Append(delimiter);
-            str.Append(CharacterRace);
-            str.Append(delimiter);
-            str.Append(Sex);
-            str.Append(delimiter);
-            str.Append(Background);
-            str.Append(delimiter);
-            foreach(KeyValuePair<uint, int> chClass in Classes)
-            {
-                str.Append(chClass.Key);
-                str.Append(keyDelimiter);
-                str.Append(chClass.Value);
-                str.Append(dictDelimiter);
-            }
-            str.Append(delimiter);
-            str.Append(ExperiencePoints);
-            str.Append(delimiter);
-            str.Append(Level);
-            str.Append(delimiter);
-            str.Append(Strength);
-            str.Append(delimiter);
-            str.Append(Dexterity);
-            str.Append(delimiter);
-            str.Append(Constitution);
-            str.Append(delimiter);
-            str.Append(Intelligence);
-            str.Append(delimiter);
-            str.Append(Wisdom);
-            str.Append(delimiter);
-            str.Append(Charisma);
-            str.Append(delimiter);
-            str.Append(ProficiencyBonus);
-            str.Append(delimiter);
-            foreach(uint skill in Skills)
-            {
-                str.Append(skill);
-                str.Append(dictDelimiter);
-            }
-            str.Append(delimiter);
-            str.Append(InspirationPoints);
-            str.Append(delimiter);
-            str.Append(HairStyle);
-            str.Append(delimiter);
-            str.Append(HairColor);
-            str.Append(delimiter);
-            str.Append(SkinColor);
-            str.Append(delimiter);
-            str.Append(Map);
-            str.Append(delimiter);
-            str.Append(LocationX);
-            str.Append(delimiter);
-            str.Append(LocationY);
-            str.Append(delimiter);
-            str.Append(LocationZ);
-            str.Append(delimiter);
-            str.Append(LocationFacing);
-            str.Append(delimiter);
-            foreach(KeyValuePair<int, InventoryItem> equipped in Equipment)
-            {
-                str.Append(equipped.Key);
-                str.Append(keyDelim);
-                str.Append(equipped.Value.ToString());
-                str.Append(dictDelim);
-            }
-            str.Append(delimiter);
-            foreach(InventoryItem item in Inventory)
-            {
-                str.Append(item.ToString());
-                str.Append(dictDelim);
-            }
-            str.Append(delimiter);
-            str.Append(IsGM);
-            return str.ToString();
+            return String.Empty;
         }
 
         public bool IsCreatureValid = false;
-        
+
+        public int ArmorClass
+        {
+            get
+            {
+                // TODO: Math.Min(max dex, dex)
+                int val = 10 + getMod(Dexterity);
+                
+                // TODO: Powers need a means to hook here, for unarmored defense.
+
+                // TODO: AC from gear
+
+                return val;
+            }
+        }
+
         [XmlElement]
         public string AccountName;
 
@@ -186,16 +56,28 @@ namespace Mundasia.Objects
         public string CharacterName;
 
         [XmlElement]
-        public uint CharacterRace;
+        public Alignment CharacterAlignment;
 
         [XmlElement]
-        public int Sex;
+        public Race CharacterRace;
 
         [XmlElement]
-        public uint Background;
+        public int Gender;
+
+        [XmlElement]
+        public Background Background;
 
         [XmlArray]
-        public Dictionary<uint, int> Classes;
+        public List<CharacterClass> Classes;
+
+        [XmlArray]
+        public List<uint> ProficientSaves;
+
+        [XmlArray]
+        public List<Spell> Cantrips;
+
+        [XmlArray]
+        public List<Spell> SpellsKnown;
 
         [XmlElement]
         public uint ExperiencePoints;
@@ -204,28 +86,31 @@ namespace Mundasia.Objects
         public uint Level;
 
         [XmlElement]
-        public uint Strength;
+        public int Strength;
 
         [XmlElement]
-        public uint Dexterity;
+        public int Dexterity;
 
         [XmlElement]
-        public uint Constitution;
+        public int Constitution;
 
         [XmlElement]
-        public uint Intelligence;
+        public int Intelligence;
 
         [XmlElement]
-        public uint Wisdom;
+        public int Wisdom;
 
         [XmlElement]
-        public uint Charisma;
+        public int Charisma;
 
         [XmlElement]
         public uint ProficiencyBonus;
 
         [XmlArray]
-        public List<uint> Skills;
+        public List<Skill> Skills;
+
+        [XmlArray]
+        public List<Power> Powers;
 
         [XmlElement]
         public uint InspirationPoints;
@@ -263,23 +148,6 @@ namespace Mundasia.Objects
         [XmlElement]
         public bool IsGM;
 
-        private static Dictionary<uint, uint> _pointValue = new Dictionary<uint, uint>()
-        {
-            { 6, 0 },
-            { 7, 1 },
-            { 8, 2 },
-            { 9, 3 },
-            { 10, 4 },
-            { 11, 5 },
-            { 12, 6 },
-            { 13, 8 },
-            { 14, 10 },
-            { 15, 12 },
-            { 16, 14 },
-            { 17, 17 },
-            { 18, 20 },
-        };
-
         public bool ValidateCharacter()
         {
             foreach(char ch in Path.GetInvalidFileNameChars())
@@ -289,41 +157,7 @@ namespace Mundasia.Objects
                     return false;
                 }
             }
-            if(Sex != 0 && Sex != 1)
-            {
-                return false;
-            }
-            Race r = Race.GetRace(CharacterRace);
-            if(r == null)
-            {
-                return false;
-            }
-            if(!_pointValue.ContainsKey(Strength))
-            {
-                return false;
-            }
-            if(!_pointValue.ContainsKey(Dexterity))
-            {
-                return false;
-            }
-            if (!_pointValue.ContainsKey(Constitution))
-            { 
-                return false; 
-            }
-            if(!_pointValue.ContainsKey(Intelligence))
-            {
-                return false;
-            }
-            if(!_pointValue.ContainsKey(Wisdom))
-            {
-                return false;
-            }
-            if(!_pointValue.ContainsKey(Charisma))
-            {
-                return false;
-            }
-
-            if(_pointValue[Strength] + _pointValue[Dexterity] + _pointValue[Constitution] + _pointValue[Intelligence] + _pointValue[Wisdom] + _pointValue[Charisma] > 40)
+            if(Gender != 0 && Gender != 1)
             {
                 return false;
             }
@@ -334,6 +168,18 @@ namespace Mundasia.Objects
             LocationFacing = Direction.North;
             Map = "Material";
             return true;
+        }
+
+        private int getMod(int ability)
+        {
+            if(ability > 10)
+            {
+                return (ability - 10) / 2;
+            }
+            else
+            {
+                return (ability - 11) / 2;
+            }
         }
     }
 }
