@@ -140,7 +140,7 @@ namespace Mundasia.Interface
             StringBuilder sb = new StringBuilder();
             sb.Append(cha.CharacterName);
             sb.Append(Environment.NewLine);
-            if(cha.Sex == 0)
+            if(cha.Gender == 0)
             {
                 sb.Append(StringLibrary.GetString(10));
             }
@@ -149,7 +149,7 @@ namespace Mundasia.Interface
                 sb.Append(StringLibrary.GetString(11));
             }
             sb.Append(" ");
-            sb.Append(Race.GetRace(cha.CharacterRace).Name);
+            sb.Append(cha.CharacterRace.Name);
             sb.Append(Environment.NewLine);
             sb.Append(Environment.NewLine);
             sb.Append(StringLibrary.GetString(26));

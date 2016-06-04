@@ -77,8 +77,8 @@ namespace Mundasia.Objects
 
             if (readOnly)
             {
-                LabelSexRace.Text = Race.GetRace(ShownCharacter.CharacterRace).Name;
-                if (ShownCharacter.Sex == 1)
+                LabelSexRace.Text = ShownCharacter.CharacterRace.Name;
+                if (ShownCharacter.Gender == 1)
                 {
                     LabelSexRace.Text += " Male ";
                 }
@@ -104,7 +104,7 @@ namespace Mundasia.Objects
                 ComboRace.AutoCompleteMode = AutoCompleteMode.Suggest;
                 ComboRace.AutoCompleteSource = AutoCompleteSource.CustomSource;
                 ComboRace.AutoCompleteCustomSource = new AutoCompleteStringCollection();
-                ComboRace.Text = Race.GetRace(ShownCharacter.CharacterRace).Name;
+                ComboRace.Text = ShownCharacter.CharacterRace.Name;
                 ComboRace.SelectedIndexChanged += ComboRace_SelectedIndexChanged;
                 ComboRace.Location = new Point(100, currentY);
                 this.Controls.Add(ComboRace);
@@ -119,7 +119,7 @@ namespace Mundasia.Objects
                 ComboSex.AutoCompleteMode = AutoCompleteMode.Suggest;
                 ComboSex.AutoCompleteSource = AutoCompleteSource.CustomSource;
                 ComboSex.AutoCompleteCustomSource = new AutoCompleteStringCollection();
-                if(ShownCharacter.Sex == 1)
+                if(ShownCharacter.Gender == 1)
                 {
                     ComboSex.Text = "Male";
                 }
@@ -171,11 +171,11 @@ namespace Mundasia.Objects
             string index = ComboSex.SelectedItem.ToString();
             if(index == "Male")
             {
-                ShownCharacter.Sex = 1;
+                ShownCharacter.Gender = 1;
             }
             else
             {
-                ShownCharacter.Sex = 0;
+                ShownCharacter.Gender = 0;
             }
         }
 
@@ -187,7 +187,7 @@ namespace Mundasia.Objects
             {
                 if(index == race.Name)
                 {
-                    ShownCharacter.CharacterRace = race.Id;
+                    ShownCharacter.CharacterRace = race;
                 }
             }
         }
