@@ -153,16 +153,32 @@ namespace Mundasia.Communication
             catch {  }
         }
 
-        public static string CreateCharacter(string name, int authority, int care, int fairness, int hobby, int loyalty, int profession, int race, int sex, int talent, int tradition, int vice, int virtue, int aspiration, int hairStyle, int hairColor, int skinColor)
+        public static string CreateCharacter(Alignment alignment, Background background, int baseCharisma, int baseConstitution, int baseDexterity, int baseIntelligence, int baseStrength, int baseWisdom, List<Spell> cantrips, CharacterClass chClass, List<Skill> classSkills, List<Skill> classTools, int gender, int hairColor, int hairStyle, string name, Race race, List<Skill> raceSkills, int skinColor, List<Spell> spellsKnown)
         {
             CharacterCreation chr = new CharacterCreation()
             {
-                Name = name,
-                SessionId = SessionId,
-                UserId = UserId,
+                Alignment = alignment,
+                Background = background,
+                BaseCharisma = baseCharisma,
+                BaseConstitution = baseConstitution,
+                BaseDexterity = baseDexterity,
+                BaseIntelligence = baseIntelligence,
+                BaseStrength = baseStrength,
+                BaseWisdom = baseWisdom,
+                Cantrips = cantrips,
+                Class = chClass,
+                ClassSkills = classSkills,
+                ClassTools = classTools,
+                Gender = gender,
                 HairColor = hairColor,
                 HairStyle = hairStyle,
+                Name = name,
+                Race = race,
+                RaceSkills = raceSkills,
+                SessionId = SessionId,
                 SkinColor = skinColor,
+                SpellsKnown = spellsKnown,
+                UserId = UserId
             };
             try
             {

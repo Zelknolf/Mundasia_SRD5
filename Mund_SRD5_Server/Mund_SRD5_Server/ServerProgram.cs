@@ -26,9 +26,17 @@ namespace Mundasia
 
         static void LoadLocalResources()
         {
-            Race.Load();
+            Alignment.Load();
             Skill.Load();
+            Power.Load();
+            Race.Load();
+            TileSet.Load();
             Background.Load();
+            SpellSchool.Load();
+            Spell.Load();
+            CharacterClass.Load();
+            CharacterClass.LoadSpellProgression();
+            ClothColor.LoadColors();
         }
     }
 }

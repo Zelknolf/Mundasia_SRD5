@@ -2281,7 +2281,7 @@ namespace Mundasia.Interface
             }
             else
             {
-                MessageBox.Show("Client validation passed. This looks like a normal character.");
+                string response = Communication.ServiceConsumer.CreateCharacter(_selectedAlignment, _selectedBackground, _charismaScore, _constitutionScore, _dexterityScore, _intelligenceScore, _strengthScore, _wisdomScore, _cantrips, _selectedClass, _classSkills, _classTools, _selectedGender, displayChar.HairColor, displayChar.Hair, nameEdit.Text, _selectedRace, _raceSkills, displayChar.SkinColor, _firstLevel);
             }
         }
         #endregion
