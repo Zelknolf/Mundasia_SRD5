@@ -26,12 +26,12 @@ namespace Mundasia.Client
             splash.Show();
 
 
-            //if (!Connect())
-            //{
-            //    error = "Unable to acquire information from the server.";
-            //    splash.Close();
-            //    return false;
-            //}
+            if (!Connect())
+            {
+                error = "Unable to acquire information from the server.";
+                splash.Close();
+                return false;
+            }
             splash.progress.PerformStep();
             if (!LocalLoad())
             {
