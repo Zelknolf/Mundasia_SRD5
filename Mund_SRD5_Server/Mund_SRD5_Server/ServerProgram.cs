@@ -34,6 +34,7 @@ namespace Mundasia
             Background.Load();
             SpellSchool.Load();
             Spell.Load();
+            SpellList.Load();
             CharacterClass.Load();
             CharacterClass.LoadSpellProgression();
             ClothColor.LoadColors();

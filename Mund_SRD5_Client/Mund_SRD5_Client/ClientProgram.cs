@@ -22,8 +22,8 @@ namespace Mundasia.Client
                 MessageBox.Show(String.Format("Mundasia was unable to start, with the following error message:\n\n{0}\n\nPlease check your configuration and try again.", Startup.error));
             }
             PrimaryForm.cachedForm = new PrimaryForm();
-            //LoginScreen.Set(PrimaryForm.cachedForm);
-            CharacterCreationScreen.Set(PrimaryForm.cachedForm);
+            LoginScreen.Set(PrimaryForm.cachedForm);
+            //CharacterCreationScreen.Set(PrimaryForm.cachedForm);
             Application.Run(PrimaryForm.cachedForm);
         }
     }

@@ -68,7 +68,10 @@ namespace Mundasia.Objects
         public Background Background;
 
         [XmlArray]
-        public List<CharacterClass> Classes;
+        public Dictionary<CharacterClass, uint> Classes;
+
+        [XmlArray]
+        public Dictionary<CharacterClass, CharacterClass> SubClasses;
 
         [XmlArray]
         public List<uint> ProficientSaves;

@@ -98,10 +98,11 @@ namespace Mundasia.Server.Communication
                     CharacterAlignment = nChar.Alignment,
                     CharacterName = nChar.Name,
                     CharacterRace = nChar.Race,
-                    Classes = new List<CharacterClass>() { nChar.Class },
+                    Classes = new Dictionary<CharacterClass, uint>() { { nChar.Class, 1 } },
                     Gender = nChar.Gender,
                     ProficientSaves = nChar.Class.ProficientSaves,
                     SpellsKnown = nChar.SpellsKnown,
+                    SubClasses = new Dictionary<CharacterClass, CharacterClass>() { { nChar.Class, nChar.SubClass } },
 
                     Strength = nChar.BaseStrength + nChar.Race.Strength,
                     Dexterity = nChar.BaseDexterity + nChar.Race.Dexterity,
@@ -124,6 +125,17 @@ namespace Mundasia.Server.Communication
             chr.Skills.AddRange(nChar.ClassTools);
             chr.Skills.AddRange(nChar.RaceSkills);
             chr.Skills.AddRange(nChar.Race.AutomaticSkills);
+
+            chr.Powers = new List<Power>();
+            chr.Powers.AddRange(nChar.Race.Powers);
+            if (nChar.Class.ClassPowers.ContainsKey(1))
+            {
+                chr.Powers.AddRange(nChar.Class.ClassPowers[1]);
+            }
+            if (nChar.SubClass != null && nChar.SubClass.ClassPowers.ContainsKey(1))
+            {
+                chr.Powers.AddRange(nChar.SubClass.ClassPowers[1]);
+            }
 
             if (targetAccount.LoadCharacter(chr.CharacterName) != null)
             {

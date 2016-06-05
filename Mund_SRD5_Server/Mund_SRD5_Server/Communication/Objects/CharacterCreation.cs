@@ -21,6 +21,7 @@ namespace Mundasia.Communication
         public int Gender;
         public Race Race;
         public CharacterClass Class;
+        public CharacterClass SubClass;
         public Background Background;
         public Alignment Alignment;
         public List<Skill> RaceSkills;
@@ -50,7 +51,7 @@ namespace Mundasia.Communication
         {
             Valid = false;
             string[] buildSplit = buildLine.Split(delim);
-            if(buildSplit.Length != 22) { return; }
+            if(buildSplit.Length != 23) { return; }
             Name = buildSplit[0];
 
             if(!int.TryParse(buildSplit[1], out Gender))
@@ -232,6 +233,10 @@ namespace Mundasia.Communication
                 }
                 if (Cantrips.Count > 0)
                 {
+                    if(Class.SpellList == null)
+                    {
+                        return;
+                    }
                     if (!Class.SpellList.ContainsKey(0))
                     {
                         return;
@@ -362,6 +367,31 @@ namespace Mundasia.Communication
                 return;
             }
 
+            if(!String.IsNullOrWhiteSpace(buildSplit[22]))
+            {
+                uint subClassId;
+                if (!uint.TryParse(buildSplit[22], out subClassId))
+                {
+                    CharacterClass sub = CharacterClass.GetClass(subClassId);
+                    if (sub == null)
+                    {
+                        return;
+                    }
+                    if (Class.SubClasses.Contains(sub))
+                    {
+                        SubClass = sub;
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+            }
+            else
+            {
+                SubClass = null;
+            }
+
             Valid = true;
         }
 
@@ -431,6 +461,11 @@ namespace Mundasia.Communication
             ret.Append(UserId);
             ret.Append(delimiter);
             ret.Append(SessionId);
+            ret.Append(delimiter);
+            if (SubClass != null)
+            {
+                ret.Append(SubClass.Id);
+            }
 
             return ret.ToString();
         }
