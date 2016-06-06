@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using System.Drawing;
 using System.IO;
+
 
 namespace Mundasia.Objects
 {
@@ -38,6 +40,8 @@ namespace Mundasia.Objects
                 {
                     Description = uint.MaxValue;
                 }
+
+                _iconFileName = split[3];
             }
             else
             {
@@ -79,6 +83,32 @@ namespace Mundasia.Objects
         /// Caching for loaded powers.
         /// </summary>
         private static Dictionary<uint, Power> _library = new Dictionary<uint, Power>();
+
+        private string _iconFileName;
+
+        private Image _icon;
+
+        private static Image _nullIcon;
+
+        public Image Icon
+        {
+            get
+            {
+                if (_icon != null) return _icon;
+                _icon = Image.FromFile(System.IO.Directory.GetCurrentDirectory() + "\\Images\\Powers\\" + _iconFileName + ".png");
+                return _icon;
+            }
+        }
+
+        public static Image NullIcon
+        {
+            get
+            {
+                if (_nullIcon != null) return _nullIcon;
+                _nullIcon = Image.FromFile(System.IO.Directory.GetCurrentDirectory() + "\\Images\\Powers\\NoPower.png");
+                return _nullIcon;
+            }
+        }
 
         /// <summary>
         /// Load powers from the DataArrays\Powers.txt folder and store them in _library
