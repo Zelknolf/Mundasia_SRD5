@@ -180,6 +180,10 @@ namespace Mundasia.Interface
 
         private static bool _eventsInitialized = false;
 
+        static Label charSheetPowersLabel = new Label();
+        static ListView charSheetPowersBox = new ListView();
+        static List<ListView> editPanelPowers = new List<ListView>();
+
         static Label charSheetCantripsLabel = new Label();
         static ListView charSheetCantripsBox = new ListView();
         static Label charSheetSpellBoxLabel = new Label();
@@ -213,6 +217,9 @@ namespace Mundasia.Interface
 
         private static List<Spell> _cantrips = new List<Spell>();
         private static List<Spell> _firstLevel = new List<Spell>();
+
+        private static Dictionary<int, Power> _selectedPowers = new Dictionary<int, Power>();
+        private static Dictionary<int, Power> _selectedSubPowers = new Dictionary<int, Power>();
 
         private static int _selectedGender = -1;
         #endregion
@@ -435,9 +442,18 @@ namespace Mundasia.Interface
             charismaSkills.ItemSelectionChanged += NoSelection;
             StyleListView(charismaSkills, true);
 
+            charSheetPowersLabel.Text = "Powers";
+            StyleLabel(charSheetPowersLabel);
+            charSheetPowersLabel.Location = new Point(padding, charismaSkills.Location.Y + charismaSkills.Height + padding);
+
+            charSheetPowersBox.Location = new Point(padding, charSheetPowersLabel.Location.Y + charSheetPowersLabel.Height);
+            charSheetPowersBox.Size = new Size(availableCharSheetWidth - (padding * 2), 100);
+            charSheetPowersBox.ItemSelectionChanged += NoSelection;
+            StyleListView(charSheetPowersBox, true);
+
             charSheetCantripsLabel.Text = "Cantrips";
             StyleLabel(charSheetCantripsLabel);
-            charSheetCantripsLabel.Location = new Point(padding, charismaSkills.Location.Y + charismaSkills.Height + padding);
+            charSheetCantripsLabel.Location = new Point(padding, charSheetPowersBox.Location.Y + charSheetPowersBox.Height + padding);
 
             charSheetCantripsBox.Location = new Point(padding, charSheetCantripsLabel.Location.Y + charSheetCantripsLabel.Height);
             charSheetCantripsBox.Size = new Size(availableCharSheetWidth - (padding * 2), 100);
@@ -526,6 +542,7 @@ namespace Mundasia.Interface
 
                 charSheetCantripsBox.MouseDown += EditSpells;
                 charSheetSpellBox.MouseDown += EditSpells;
+                charSheetPowersBox.MouseDown += EditPowers;
 
                 CantripBox.ItemSelectionChanged += CantripBox_ItemSelectionChanged;
                 SpellBox.ItemSelectionChanged += SpellBox_ItemSelectionChanged;
@@ -568,6 +585,8 @@ namespace Mundasia.Interface
             _characterSheet.Controls.Add(charSheetCantripsLabel);
             _characterSheet.Controls.Add(charSheetSpellBox);
             _characterSheet.Controls.Add(charSheetSpellBoxLabel);
+            _characterSheet.Controls.Add(charSheetPowersLabel);
+            _characterSheet.Controls.Add(charSheetPowersBox);
             _characterSheet.Controls.Add(done);
 
             _panel.Controls.Add(_characterSheet);
@@ -973,6 +992,7 @@ namespace Mundasia.Interface
                 }
                 UpdateAbilityScores();
                 UpdateSkills();
+                _updateCharacterSheetPowers();
             }
         }
 
@@ -1272,9 +1292,11 @@ namespace Mundasia.Interface
                     }
                     else
                     {
+                        _selectedSubClass = null;
                         _selectedClass = selectedClass;
                         _classSkills.Clear();
                         _classTools.Clear();
+                        _selectedPowers.Clear();
                         UpdateSkills();
                     }
                     if (selectedClass.SubClassLevel == 1)
@@ -1288,6 +1310,7 @@ namespace Mundasia.Interface
                     _cantrips.Clear();
                     _firstLevel.Clear();
                     _populateSpellList();
+                    _updateCharacterSheetPowers();
                 }
             }
         }
@@ -2026,6 +2049,345 @@ namespace Mundasia.Interface
         }
         #endregion
 
+        #region Powers
+        private static void PowerSelection_ItemSelected(object Sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            if (e.IsSelected)
+            {
+                e.Item.Selected = false;
+                ListView viewPickedFrom = Sender as ListView;
+                bool isSubClass = viewPickedFrom.Tag.GetType() == typeof(string);
+
+                int index;
+                if (isSubClass) index = int.Parse(viewPickedFrom.Tag.ToString().Substring(1));
+                else index = (int)viewPickedFrom.Tag;
+
+                if(index == 0)
+                {
+                    int foo = 0;
+                }
+
+                Power selectedPower = Power.GetPower((uint)e.Item.Tag);
+                if(selectedPower != null)
+                {
+                    if(isSubClass)
+                    {
+                        if(_selectedSubPowers.ContainsKey(index))
+                        {
+                            _selectedSubPowers[index] = selectedPower;
+                        }
+                        else
+                        {
+                            _selectedSubPowers.Add(index, selectedPower);
+                        }
+                    }
+                    else
+                    {
+                        if(_selectedPowers.ContainsKey(index))
+                        {
+                            _selectedPowers[index] = selectedPower;
+                        }
+                        else
+                        {
+                            _selectedPowers.Add(index, selectedPower);
+                        }
+                    }
+                }
+                _updateCharacterSheetPowers();
+                _updateEditPanelPowers();
+            }
+        }
+
+        private static void EditPowers(object sender, EventArgs e)
+        {
+            if (_currentEdit == CurrentEdit.Power) return;
+
+            _editPanel.Controls.Clear();
+            editPanelPowers.Clear();
+
+            if (_selectedClass == null)
+            {
+                Label nothingHere = new Label();
+                nothingHere.Text = "You must select a class before you select powers.";
+                StyleLabel(nothingHere);
+                _editPanel.Controls.Add(nothingHere);
+                _currentEdit = CurrentEdit.Power;
+                return;
+            }
+
+            if (!_selectedClass.ClassPowers.ContainsKey(1) && (_selectedSubClass == null || !_selectedSubClass.ClassPowers.ContainsKey(1)))
+            {
+                Label nothingHere = new Label();
+                nothingHere.Text = "Your class does not receive any special powers at level 1.";
+                StyleLabel(nothingHere);
+                _editPanel.Controls.Add(nothingHere);
+                _currentEdit = CurrentEdit.Power;
+                return;
+            }
+
+            List<int> selectedClassPowerIndices = new List<int>();
+            int count = 0;
+            if (_selectedClass.ClassPowers.ContainsKey(1))
+            {
+                while (count < _selectedClass.ClassPowers[1].Count)
+                {
+                    if (_selectedClass.ClassPowers[1][count].Count > 1)
+                    {
+                        selectedClassPowerIndices.Add(count);
+                    }
+                    count++;
+                }
+            }
+
+            List<int> selectedSubClassPowerIndices = new List<int>();
+            count = 0;
+            if (_selectedSubClass != null && _selectedSubClass.ClassPowers.ContainsKey(1))
+            {
+                while (count < _selectedSubClass.ClassPowers[1].Count)
+                {
+                    if (_selectedSubClass.ClassPowers[1][count].Count > 1)
+                    {
+                        selectedSubClassPowerIndices.Add(count);
+                    }
+                    count++;
+                }
+            }
+
+            if (selectedClassPowerIndices.Count == 0 && selectedSubClassPowerIndices.Count == 0)
+            {
+                Label nothingHere = new Label();
+                nothingHere.Text = "Your class does not require you to pick any powers at level 1.";
+                StyleLabel(nothingHere);
+                _editPanel.Controls.Add(nothingHere);
+                _currentEdit = CurrentEdit.Power;
+                return;
+            }
+
+            int totalBoxes = selectedClassPowerIndices.Count + selectedSubClassPowerIndices.Count;
+            int sectionHeight = (_editPanel.ClientRectangle.Height - ((totalBoxes + 1) * padding)) / totalBoxes;
+
+            int currentLocY = padding;
+
+            foreach (int classIndex in selectedClassPowerIndices)
+            {
+                Label classPowerLabel = new Label();
+                classPowerLabel.Text = _selectedClass.Name + " Power";
+                classPowerLabel.Location = new Point(padding, currentLocY);
+                StyleLabel(classPowerLabel);
+                currentLocY += classPowerLabel.Height;
+
+                ListView classPowerList = new ListView();
+                classPowerList.Height = Math.Max(0, sectionHeight - classPowerLabel.Height);
+                classPowerList.Width = _editPanel.Width - (padding * 2);
+                classPowerList.Tag = classIndex;
+                StyleListView(classPowerList, false);
+                classPowerList.Location = new Point(padding, currentLocY);
+                currentLocY += classPowerList.Height + padding;
+
+                _editPanel.Controls.Add(classPowerLabel);
+                _editPanel.Controls.Add(classPowerList);
+
+                classPowerList.ItemSelectionChanged += PowerSelection_ItemSelected;
+
+                editPanelPowers.Add(classPowerList);
+            }
+
+            foreach (int classIndex in selectedSubClassPowerIndices)
+            {
+                Label classPowerLabel = new Label();
+                classPowerLabel.Text = _selectedSubClass.Name + " Power";
+                classPowerLabel.Location = new Point(padding, currentLocY);
+                StyleLabel(classPowerLabel);
+                currentLocY += classPowerLabel.Height;
+
+                ListView classPowerList = new ListView();
+                classPowerList.Height = Math.Max(0, sectionHeight - classPowerLabel.Height);
+                classPowerList.Width = _editPanel.Width - (padding * 2);
+                classPowerList.Tag = "s" + classIndex;
+                StyleListView(classPowerList, false);
+                classPowerList.Location = new Point(padding, currentLocY);
+                currentLocY += classPowerList.Height + padding;
+
+                _editPanel.Controls.Add(classPowerLabel);
+                _editPanel.Controls.Add(classPowerList);
+
+                classPowerList.ItemSelectionChanged += PowerSelection_ItemSelected;
+
+                editPanelPowers.Add(classPowerList);
+            }
+
+            _updateEditPanelPowers();
+
+            _currentEdit = CurrentEdit.Power;
+        }
+
+        private static void _updateCharacterSheetPowers()
+        {
+            charSheetPowersBox.Items.Clear();
+            if (_selectedRace != null)
+            {
+                foreach(Power pow in _selectedRace.Powers)
+                {
+                    ListViewItem toAdd = new ListViewItem(new string[] { "", pow.Name });
+                    StyleListViewItem(toAdd);
+                    charSheetPowersBox.Items.Add(toAdd);
+                }
+            }
+
+            if (_selectedClass != null)
+            {
+                if (_selectedClass.ClassPowers.ContainsKey(1))
+                {
+                    foreach (List<Power> pow in _selectedClass.ClassPowers[1])
+                    {
+                        if(pow.Count == 1)
+                        {
+                            ListViewItem toAdd = new ListViewItem(new string[] { "", pow[0].Name });
+                            StyleListViewItem(toAdd);
+                            charSheetPowersBox.Items.Add(toAdd);
+                        }
+                    }
+                }
+            }
+
+            if (_selectedSubClass != null)
+            {
+                if (_selectedSubClass.ClassPowers.ContainsKey(1))
+                {
+                    foreach (List<Power> pow in _selectedSubClass.ClassPowers[1])
+                    {
+                        if (pow.Count == 1)
+                        {
+                            ListViewItem toAdd = new ListViewItem(new string[] { "", pow[0].Name });
+                            StyleListViewItem(toAdd);
+                            charSheetPowersBox.Items.Add(toAdd);
+                        }
+                    }
+                }
+            }
+
+            foreach(Power pow in _selectedPowers.Values)
+            {
+                ListViewItem toAdd = new ListViewItem(new string[] { "", pow.Name });
+                StyleListViewItem(toAdd);
+                charSheetPowersBox.Items.Add(toAdd);
+            }
+
+            foreach (Power pow in _selectedSubPowers.Values)
+            {
+                ListViewItem toAdd = new ListViewItem(new string[] { "", pow.Name });
+                StyleListViewItem(toAdd);
+                charSheetPowersBox.Items.Add(toAdd);
+            }
+        }
+
+        private static void _updateEditPanelPowers()
+        {
+            List<int> selectedClassPowerIndices = new List<int>();
+            int count = 0;
+            if (_selectedClass.ClassPowers.ContainsKey(1))
+            {
+                while (count < _selectedClass.ClassPowers[1].Count)
+                {
+                    if (_selectedClass.ClassPowers[1][count].Count > 1)
+                    {
+                        selectedClassPowerIndices.Add(count);
+                    }
+                    count++;
+                }
+            }
+
+            List<int> selectedSubClassPowerIndices = new List<int>();
+            count = 0;
+            if (_selectedSubClass != null && _selectedSubClass.ClassPowers.ContainsKey(1))
+            {
+                while (count < _selectedSubClass.ClassPowers[1].Count)
+                {
+                    if (_selectedSubClass.ClassPowers[1][count].Count > 1)
+                    {
+                        selectedSubClassPowerIndices.Add(count);
+                    }
+                    count++;
+                }
+            }
+
+            int powerListViewIndex = 0;
+            foreach (int classIndex in selectedClassPowerIndices)
+            {
+                ListView classPowerList = editPanelPowers[powerListViewIndex];
+
+                ListViewItem topItem = classPowerList.TopItem;
+                classPowerList.BeginUpdate();
+                classPowerList.Items.Clear();
+                uint topItemIndex = uint.MaxValue;
+                if (topItem != null)
+                {
+                    topItemIndex = (uint)topItem.Tag;
+                }
+                ImageList imgs = new ImageList();
+                imgs.ImageSize = IconSize;
+                imgs.ColorDepth = ColorDepth.Depth32Bit;
+                int imageIndex = 0;
+                foreach (Power pow in _selectedClass.ClassPowers[1][classIndex])
+                {
+                    ListViewItem toAdd = new ListViewItem(new string[] { String.Empty, pow.Name });
+                    toAdd.Name = pow.Name;
+                    toAdd.Tag = pow.Id;
+                    toAdd.ToolTipText = StringLibrary.GetString(pow.Description);
+                    toAdd.ImageIndex = imageIndex;
+                    imgs.Images.Add(pow.Icon);
+                    imageIndex++;
+                    StyleListViewItem(toAdd);
+                    if (_selectedPowers.ContainsKey(classIndex) && _selectedPowers[classIndex] == pow) toAdd.BackColor = SelectedRowColor;
+                    classPowerList.Items.Add(toAdd);
+                    if (pow.Id == topItemIndex) topItem = toAdd;
+
+                }
+                classPowerList.SmallImageList = imgs;
+                classPowerList.EndUpdate();
+                if (topItem != null) classPowerList.TopItem = topItem;
+                powerListViewIndex++;
+            }
+
+            foreach (int classIndex in selectedSubClassPowerIndices)
+            {
+                ListView classPowerList = editPanelPowers[powerListViewIndex];
+
+                ListViewItem topItem = classPowerList.TopItem;
+                classPowerList.BeginUpdate();
+                classPowerList.Items.Clear();
+                uint topItemIndex = uint.MaxValue;
+                if (topItem != null)
+                {
+                    topItemIndex = (uint)topItem.Tag;
+                }
+                ImageList imgs = new ImageList();
+                imgs.ImageSize = IconSize;
+                imgs.ColorDepth = ColorDepth.Depth32Bit;
+                int imageIndex = 0;
+                foreach (Power pow in _selectedSubClass.ClassPowers[1][classIndex])
+                {
+                    ListViewItem toAdd = new ListViewItem(new string[] { String.Empty, pow.Name });
+                    toAdd.Name = pow.Name;
+                    toAdd.Tag = pow.Id;
+                    toAdd.ToolTipText = StringLibrary.GetString(pow.Description);
+                    toAdd.ImageIndex = imageIndex;
+                    imgs.Images.Add(pow.Icon);
+                    imageIndex++;
+                    StyleListViewItem(toAdd);
+                    if (_selectedSubPowers.ContainsKey(classIndex) && _selectedSubPowers[classIndex] == pow) toAdd.BackColor = SelectedRowColor;
+                    classPowerList.Items.Add(toAdd);
+                    if (pow.Id == topItemIndex) topItem = toAdd;
+
+                }
+                classPowerList.SmallImageList = imgs;
+                classPowerList.EndUpdate();
+                if (topItem != null) classPowerList.TopItem = topItem;
+                powerListViewIndex++;
+            }
+        }
+        #endregion
+
         #region Styles, Sizing, and Color
         private static void _form_Resize(object sender, EventArgs e)
         {
@@ -2073,6 +2435,7 @@ namespace Mundasia.Interface
             Background,
             Class,
             Gender,
+            Power,
             Race,
             Skill,
             Spell
