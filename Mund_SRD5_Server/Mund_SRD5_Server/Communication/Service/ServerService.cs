@@ -130,11 +130,23 @@ namespace Mundasia.Server.Communication
             chr.Powers.AddRange(nChar.Race.Powers);
             if (nChar.Class.ClassPowers.ContainsKey(1))
             {
-                chr.Powers.AddRange(nChar.Class.ClassPowers[1]);
+                foreach(List<Power> pow in nChar.Class.ClassPowers[1])
+                {
+                    if(pow.Count == 1)
+                    {
+                        chr.Powers.AddRange(pow);
+                    }
+                }
             }
             if (nChar.SubClass != null && nChar.SubClass.ClassPowers.ContainsKey(1))
             {
-                chr.Powers.AddRange(nChar.SubClass.ClassPowers[1]);
+                foreach (List<Power> pow in nChar.SubClass.ClassPowers[1])
+                {
+                    if (pow.Count == 1)
+                    {
+                        chr.Powers.AddRange(pow);
+                    }
+                }
             }
 
             if (targetAccount.LoadCharacter(chr.CharacterName) != null)
