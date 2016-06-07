@@ -24,9 +24,7 @@ namespace Mundasia.Interface
         static Size MiniIconSize = new Size(10, 10);
         static Size IconSize = new Size(64, 64);
 
-        private static int selectionHeight = 250;
         private static int padding = 5;
-        private static int indent = 20;
 
         private static CharacterCreationScreen _panel = new CharacterCreationScreen();
         private static Panel _characterSheet = new Panel();
