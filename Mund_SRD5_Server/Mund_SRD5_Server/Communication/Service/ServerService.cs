@@ -100,6 +100,7 @@ namespace Mundasia.Server.Communication
                     CharacterRace = nChar.Race,
                     Classes = new Dictionary<CharacterClass, uint>() { { nChar.Class, 1 } },
                     Gender = nChar.Gender,
+                    Powers = nChar.SelectedPowers,
                     ProficientSaves = nChar.Class.ProficientSaves,
                     SpellsKnown = nChar.SpellsKnown,
                     SubClasses = new Dictionary<CharacterClass, CharacterClass>() { { nChar.Class, nChar.SubClass } },
@@ -126,7 +127,6 @@ namespace Mundasia.Server.Communication
             chr.Skills.AddRange(nChar.RaceSkills);
             chr.Skills.AddRange(nChar.Race.AutomaticSkills);
 
-            chr.Powers = new List<Power>();
             chr.Powers.AddRange(nChar.Race.Powers);
             if (nChar.Class.ClassPowers.ContainsKey(1))
             {

@@ -2566,6 +2566,7 @@ namespace Mundasia.Interface
                 }
             }
 
+            List<Power> pow = new List<Power>();
             if (_selectedClass == null)
             {
                 errors.Add("You have not selected a class.");
@@ -2618,9 +2619,69 @@ namespace Mundasia.Interface
                         warnings.Add("You have not selected all of your spells.");
                     }
                 }
+
+                pow.AddRange(_selectedPowers.Values);
+                pow.AddRange(_selectedSubPowers.Values);
+
+                List<Power> soughtPowers = new List<Power>();
+                soughtPowers.AddRange(pow);
+
+                if (_selectedClass.ClassPowers.ContainsKey(1))
+                {
+                    foreach (List<Power> p in _selectedClass.ClassPowers[1])
+                    {
+                        if (p.Count > 1)
+                        {
+                            bool foundPower = false;
+                            foreach (Power pw in p)
+                            {
+                                if(soughtPowers.Contains(pw))
+                                {
+                                    soughtPowers.Remove(pw);
+                                    foundPower = true;
+                                    break;
+                                }
+                            }
+                            if(!foundPower)
+                            {
+                                warnings.Add("You have not selected all of your class powers.");
+                            }
+                        }
+                    }
+                }
+                if(_selectedSubClass != null && _selectedSubClass.ClassPowers.ContainsKey(1))
+                {
+                    foreach(List<Power> p in _selectedClass.ClassPowers[1])
+                    {
+                        if (p.Count > 1)
+                        {
+                            bool foundPower = false;
+                            foreach (Power pw in p)
+                            {
+                                if (soughtPowers.Contains(pw))
+                                {
+                                    soughtPowers.Remove(pw);
+                                    foundPower = true;
+                                    break;
+                                }
+                            }
+                            if (!foundPower)
+                            {
+                                warnings.Add("You have not selected all of your class powers.");
+                            }
+                        }
+                    }
+                }
+                if(soughtPowers.Count > 1)
+                {
+                    errors.Add("You have selected powers that your class is not allowed to have.");
+                }
             }
 
-            if(errors.Count > 0)
+
+            
+
+            if (errors.Count > 0)
             {
                 StringBuilder errorMessage = new StringBuilder();
                 errorMessage.AppendLine("You may not create this character.");
@@ -2639,13 +2700,12 @@ namespace Mundasia.Interface
                 {
                     warningMessage.AppendLine(" - " + warning);
                 }
-                MessageBox.Show(warningMessage.ToString());
-                return;
+                warningMessage.AppendLine("Are you sure you want to create this character?");
+                DialogResult res = MessageBox.Show(warningMessage.ToString(), "Character Too Weak", MessageBoxButtons.YesNo);
+                if (res == DialogResult.No) return;
             }
-            else
-            {
-                string response = Communication.ServiceConsumer.CreateCharacter(_selectedAlignment, _selectedBackground, _charismaScore, _constitutionScore, _dexterityScore, _intelligenceScore, _strengthScore, _wisdomScore, _cantrips, _selectedClass, _classSkills, _classTools, _selectedGender, displayChar.HairColor, displayChar.Hair, nameEdit.Text, _selectedRace, _raceSkills, displayChar.SkinColor, _firstLevel, _selectedSubClass);
-            }
+            
+            string response = Communication.ServiceConsumer.CreateCharacter(_selectedAlignment, _selectedBackground, _charismaScore, _constitutionScore, _dexterityScore, _intelligenceScore, _strengthScore, _wisdomScore, _cantrips, _selectedClass, _classSkills, _classTools, _selectedGender, displayChar.HairColor, displayChar.Hair, nameEdit.Text, _selectedRace, _raceSkills, displayChar.SkinColor, _firstLevel, _selectedSubClass, pow);
         }
         #endregion
     }

@@ -29,6 +29,7 @@ namespace Mundasia.Communication
         public List<Skill> ClassTools;
         public List<Spell> Cantrips;
         public List<Spell> SpellsKnown;
+        public List<Power> SelectedPowers;
         public int BaseStrength;
         public int BaseDexterity;
         public int BaseConstitution;
@@ -51,7 +52,7 @@ namespace Mundasia.Communication
         {
             Valid = false;
             string[] buildSplit = buildLine.Split(delim);
-            if(buildSplit.Length != 23) { return; }
+            if(buildSplit.Length != 24) { return; }
             Name = buildSplit[0];
 
             if(!int.TryParse(buildSplit[1], out Gender))
@@ -391,6 +392,78 @@ namespace Mundasia.Communication
             {
                 SubClass = null;
             }
+            if(SubClass == null && Class.SubClassLevel == 1)
+            {
+                return;
+            }
+            if(SubClass != null && Class.SubClassLevel != 1)
+            {
+                return;
+            }
+            if(Class.SubClassLevel == 1)
+            {
+                if(!Class.SubClasses.Contains(SubClass))
+                {
+                    return;
+                }
+            }
+
+            string[] powerSplit = buildSplit[23].Split(listDelim);
+            List<Power> selPow = new List<Power>();
+            SelectedPowers = new List<Power>();
+            foreach(string powString in powerSplit)
+            {
+                if(String.IsNullOrWhiteSpace(powString))
+                {
+                    continue;
+                }
+                uint powIndex = uint.MaxValue;
+                if(!uint.TryParse(powString, out powIndex))
+                {
+                    return;
+                }
+                Power toAdd = Power.GetPower(powIndex);
+                if(toAdd == null)
+                {
+                    return;
+                }
+                selPow.Add(toAdd);
+            }
+
+            if(Class.ClassPowers.ContainsKey(1))
+            {
+                foreach(List<Power> classPowerList in Class.ClassPowers[1])
+                {
+                    foreach(Power classPower in classPowerList)
+                    {
+                        if(selPow.Contains(classPower))
+                        {
+                            selPow.Remove(classPower);
+                            SelectedPowers.Add(classPower);
+                            break;
+                        }
+                    }
+                }
+            }
+            if(SubClass != null && Class.ClassPowers.ContainsKey(1))
+            {
+                foreach (List<Power> classPowerList in SubClass.ClassPowers[1])
+                {
+                    foreach (Power classPower in classPowerList)
+                    {
+                        if (selPow.Contains(classPower))
+                        {
+                            selPow.Remove(classPower);
+                            SelectedPowers.Add(classPower);
+                            break;
+                        }
+                    }
+                }
+            }
+            if(selPow.Count > 0)
+            {
+                return;
+            }
 
             Valid = true;
         }
@@ -466,7 +539,12 @@ namespace Mundasia.Communication
             {
                 ret.Append(SubClass.Id);
             }
-
+            ret.Append(delimiter);
+            foreach(Power p in SelectedPowers)
+            {
+                ret.Append(p.Id);
+                ret.Append(listDelimiter);
+            }
             return ret.ToString();
         }
 
