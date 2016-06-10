@@ -100,6 +100,8 @@ namespace Mundasia.Server.Communication
                     CharacterRace = nChar.Race,
                     Classes = new Dictionary<CharacterClass, uint>() { { nChar.Class, 1 } },
                     Gender = nChar.Gender,
+                    Equipment = new Dictionary<int, InventoryItem>(),
+                    Inventory = new List<InventoryItem>(),
                     Powers = nChar.SelectedPowers,
                     ProficientSaves = nChar.Class.ProficientSaves,
                     SpellsKnown = nChar.SpellsKnown,
@@ -120,6 +122,10 @@ namespace Mundasia.Server.Communication
             catch
             {
                 return "Invalid character data; likely a negative number passed to an unsigned field.";
+            }
+            if(!chr.ValidateCharacter())
+            {
+                return "Could not validate created character.";
             }
             chr.Skills = new List<Skill>();
             chr.Skills.AddRange(nChar.ClassSkills);
