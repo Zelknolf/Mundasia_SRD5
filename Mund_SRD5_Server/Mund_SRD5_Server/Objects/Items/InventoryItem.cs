@@ -15,6 +15,7 @@ namespace Mundasia.Objects
 
         public InventoryItem(string FileLine) 
         {
+            Valid = false;
             string[] pieces = FileLine.Split(delim);
             if (pieces.Length < 4) return;
 
@@ -25,6 +26,8 @@ namespace Mundasia.Objects
             int.TryParse(pieces[4], out SecondaryColor);
             Name = pieces[5];
             Identifier = pieces[6];
+
+            Valid = true;
         }
 
         public override string ToString()
@@ -56,6 +59,8 @@ namespace Mundasia.Objects
         public int Appearance;
         public int PrimaryColor;
         public int SecondaryColor;
+
+        public bool Valid;
     }
 
     public enum ItemType
