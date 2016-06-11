@@ -103,6 +103,7 @@ namespace Mundasia.Server.Communication
                     Equipment = new Dictionary<int, InventoryItem>(),
                     Inventory = new List<InventoryItem>(),
                     Powers = nChar.SelectedPowers,
+                    ProficiencyBonus = 2,
                     ProficientSaves = nChar.Class.ProficientSaves,
                     SpellsKnown = nChar.SpellsKnown,
                     SubClasses = new Dictionary<CharacterClass, CharacterClass>() { { nChar.Class, nChar.SubClass } },
