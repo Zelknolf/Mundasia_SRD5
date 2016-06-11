@@ -48,7 +48,7 @@ namespace Mundasia.Objects
 
             string[] subClassSplit = buildSplit[7].Split(listDelim);
             SubClasses = new Dictionary<CharacterClass, CharacterClass>();
-            foreach (string sub in classSplit)
+            foreach (string sub in subClassSplit)
             {
                 if (String.IsNullOrWhiteSpace(sub))
                 {
@@ -173,6 +173,7 @@ namespace Mundasia.Objects
                 }
             }
             IsGM = bool.Parse(buildSplit[33]);
+            IsCreatureValid = true;
         }
 
         public override string ToString()
