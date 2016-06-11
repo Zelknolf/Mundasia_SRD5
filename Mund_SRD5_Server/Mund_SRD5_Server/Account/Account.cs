@@ -19,6 +19,12 @@ namespace Mundasia
     [XmlRootAttribute]
     public class Account
     {
+        const string delimiter = "|";
+        static char[] delim = new char[] { '|' };
+
+        const string listDelimiter = "[";
+        static char[] listDelim = new char[] { '[' };
+
         /// <summary>
         /// Parameterless constructor exists to facilitate serialize/ deserialize operations
         /// </summary>
@@ -51,16 +57,48 @@ namespace Mundasia
             _cachedAccounts.Add(userName, this);
         }
 
+        public Account(string FileLine)
+        {
+            string[] fileSplit = FileLine.Split(delim);
+            UserName = fileSplit[0];
+            _password = fileSplit[1];
+            string[] characters = fileSplit[2].Split(listDelim);
+            Characters = new List<string>();
+            foreach (string character in characters)
+            {
+                if (String.IsNullOrWhiteSpace(character))
+                {
+                    continue;
+                }
+                Characters.Add(character);
+            }
+        }
+
+        public override string ToString()
+        {
+            StringBuilder ret = new StringBuilder();
+            ret.Append(UserName);
+            ret.Append(delimiter);
+            ret.Append(_password);
+            ret.Append(delimiter);
+            foreach(string character in Characters)
+            {
+                ret.Append(character);
+                ret.Append(listDelimiter);
+            }
+            return ret.ToString();
+    }
+
         public void SaveAccount()
         {
             string path = GetPathForId(UserName);
             using (FileStream stream = new FileStream(path + UserName + ".aco", FileMode.Create))
             {
-                Password = _password;
-                DataContractSerializer ser = new DataContractSerializer(typeof(Account));
-                ser.WriteObject(stream, this);
-                _password = Password;
-                Password = null;
+                using (StreamWriter sr = new StreamWriter(stream))
+                {
+                    sr.WriteLine(this.ToString());
+                    sr.Flush();
+                }
             }
         }
 
@@ -103,18 +141,18 @@ namespace Mundasia
             {
                 using (FileStream stream = new FileStream(path + userName + ".aco", FileMode.Open))
                 {
-                    DataContractSerializer ser = new DataContractSerializer(typeof(Account));
-                    Account ret = ser.ReadObject(stream) as Account;
-                    ret._password = ret.Password;
-                    ret.Password = null;
-                    ret._lastAccessed = DateTime.UtcNow;
-                    ret.LoadedCharacters = new List<Creature>();
-                    if (ret.Characters == null)
+                    using (StreamReader sr = new StreamReader(stream))
                     {
-                        ret.Characters = new List<string>();
+                        Account ret = new Account(sr.ReadLine());
+                        ret._lastAccessed = DateTime.UtcNow;
+                        ret.LoadedCharacters = new List<Creature>();
+                        if (ret.Characters == null)
+                        {
+                            ret.Characters = new List<string>();
+                        }
+                        _cachedAccounts.Add(userName, ret);
+                        return ret;
                     }
-                    _cachedAccounts.Add(userName, ret);
-                    return ret;
                 }
             }
             catch
@@ -193,10 +231,12 @@ namespace Mundasia
             {
                 using (FileStream stream = new FileStream(path + characterName + ".chr", FileMode.Open))
                 {
-                    DataContractSerializer ser = new DataContractSerializer(typeof(Creature));
-                    Creature ret = ser.ReadObject(stream) as Creature;
-                    LoadedCharacters.Add(ret);
-                    return ret;
+                    using (StreamReader sr = new StreamReader(stream))
+                    {
+                        Creature ret = new Creature(sr.ReadLine());
+                        LoadedCharacters.Add(ret);
+                        return ret;
+                    }
                 }
             }
             catch
@@ -240,8 +280,11 @@ namespace Mundasia
                 }
                 using (FileStream stream = new FileStream(path + chr.CharacterName + ".chr", FileMode.Create))
                 {
-                    DataContractSerializer ser = new DataContractSerializer(typeof(Creature));
-                    ser.WriteObject(stream, chr);
+                    using (StreamWriter sr = new StreamWriter(stream))
+                    {
+                        sr.WriteLine(chr.ToString());
+                        sr.Flush();
+                    }
                 }
                 _lastAccessed = DateTime.UtcNow;
                 SaveAccount();
@@ -258,12 +301,6 @@ namespace Mundasia
         /// </summary>
         [XmlAttribute]
         public string UserName;
-
-        /// <summary>
-        /// The field we temporarily hold hashed passwords in while serializing the object.
-        /// </summary>
-        [XmlAttribute]
-        public string Password;
 
         /// <summary>
         /// A list of characters belonging to this account
