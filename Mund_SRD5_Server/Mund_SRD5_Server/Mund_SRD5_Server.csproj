@@ -65,6 +65,9 @@
     <Compile Include="..\..\Mund_SRD5_Client\Mund_SRD5_Client\Objects\Creatures\SpellSchool.cs">
       <Link>Communication\Objects\SpellSchool.cs</Link>
     </Compile>
+    <Compile Include="..\..\Mund_SRD5_Client\Mund_SRD5_Client\UI\Utilities\Pixel.cs">
+      <Link>UI\Pixel.cs</Link>
+    </Compile>
     <Compile Include="Account\Account.cs" />
     <Compile Include="Communication\Objects\AccountCreation.cs" />
     <Compile Include="Communication\Objects\CharacterCreation.cs" />

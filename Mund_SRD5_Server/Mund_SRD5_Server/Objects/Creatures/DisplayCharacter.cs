@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Drawing;
 using System.Windows.Forms;
 
+using Mund_SRD5_Client.UI.Utilities;
+
 namespace Mundasia.Objects
 {
     public class DisplayCharacter
@@ -260,7 +262,68 @@ namespace Mundasia.Objects
             {
                 ret = ClothColor.Light[ClothColorB];
             }
+            else if(startingPixel.B == 0 && startingPixel.R != 0 && startingPixel.G != 0)
+            {
+                // Channel-based coloring. This is a skin pixel.
+                float brightness = Pixel.GetBrightness(currentRace.SkinColors[SkinColor].MedColor) - 0.5f;
+                brightness = Math.Max(0.0f, ((float)startingPixel.R / 255.0f) + brightness);
+                brightness = Math.Min(1.0f, brightness);
+                ret = Pixel.FromHSL(startingPixel.A, currentRace.SkinColors[SkinColor].MedColor.GetHue(), currentRace.SkinColors[SkinColor].MedColor.GetSaturation(), brightness);
+            }
+            else if(startingPixel.B == 0 && startingPixel.R != 0 && startingPixel.G == 0)
+            {
+                // Channel-based coloring. This is a hair pixel.
+                float brightness = Pixel.GetBrightness(currentRace.HairColors[HairColor].MedColor) - 0.5f;
+                brightness = Math.Max(0.0f, ((float)startingPixel.R / 255.0f) + brightness);
+                brightness = Math.Min(1.0f, brightness);
+                ret = Pixel.FromHSL(startingPixel.A, currentRace.HairColors[HairColor].MedColor.GetHue(), currentRace.HairColors[HairColor].MedColor.GetSaturation(), brightness);
+            }
+            else if(startingPixel.B != 0 && startingPixel.R == 0 && startingPixel.G != 0)
+            {
+                // Channel-based coloring. This is the primary cloth color.
+                float brightness = Pixel.GetBrightness(ClothColor.Med[ClothColorA]) - 0.5f;
+                brightness = Math.Max(0.0f, ((float)startingPixel.B / 255.0f) + brightness);
+                brightness = Math.Min(1.0f, brightness);
+                ret = Pixel.FromHSL(startingPixel.A, ClothColor.Med[ClothColorA].GetHue(), ClothColor.Med[ClothColorA].GetSaturation(), brightness);
+            }
+            else if (startingPixel.B != 0 && startingPixel.R == 0 && startingPixel.G == 0)
+            {
+                // Channel-based coloring. This is the secondary cloth color.
+                float brightness = Pixel.GetBrightness(ClothColor.Med[ClothColorB]) - 0.5f;
+                brightness = Math.Max(0.0f, ((float)startingPixel.B / 255.0f) + brightness);
+                brightness = Math.Min(1.0f, brightness);
+                ret = Pixel.FromHSL(startingPixel.A, ClothColor.Med[ClothColorB].GetHue(), ClothColor.Med[ClothColorB].GetSaturation(), brightness);
+            }
             return ret;
+        }
+
+        public Color CombinePixels(Color topPixel, Color bottomPixel)
+        {
+            if (topPixel.A == 255) return topPixel;
+            if (topPixel.A == 0) return bottomPixel;
+            if (bottomPixel.A == 0) return topPixel;
+
+            if(topPixel.A + bottomPixel.A >= 255)
+            {
+                int bottomA = 255 - topPixel.A;
+
+                int R = ((topPixel.R * topPixel.A) / 255) + ((bottomPixel.R * bottomA) / 255);
+                int G = ((topPixel.G * topPixel.A) / 255) + ((bottomPixel.G * bottomA) / 255);
+                int B = ((topPixel.B * topPixel.A) / 255) + ((bottomPixel.B * bottomA) / 255);
+
+                return Color.FromArgb(255, R, G, B);
+            }
+
+            else
+            {
+                int totalA = topPixel.A + bottomPixel.A;
+
+                int R = ((topPixel.R * topPixel.A) / totalA) + ((bottomPixel.R * bottomPixel.A) / totalA);
+                int G = ((topPixel.G * topPixel.A) / totalA) + ((bottomPixel.G * bottomPixel.A) / totalA);
+                int B = ((topPixel.B * topPixel.A) / totalA) + ((bottomPixel.B * bottomPixel.A) / totalA);
+
+                return Color.FromArgb(totalA, R, G, B);
+            }
         }
 
         /// <summary>
@@ -423,12 +486,9 @@ namespace Mundasia.Objects
                 {
                     for (int cc = 0; cc < Day.Height; cc++)
                     {
-                        Color px = Day.GetPixel(c, cc);
-                        if (px.A == 0)
-                        {
-                            Color hair = HairBottom.GetPixel(c, cc);
-                            Day.SetPixel(c, cc, ConvertPixel(hair));
-                        }
+                        Color hair = ConvertPixel(HairBottom.GetPixel(c, cc));
+                        Color original = Day.GetPixel(c, cc);
+                        Day.SetPixel(c, cc, CombinePixels(original, hair));
                     }
                 }
 
@@ -439,11 +499,9 @@ namespace Mundasia.Objects
                     {
                         for (int cc = 0; cc < ClothesImage.Height; cc++)
                         {
-                            Color px = ClothesImage.GetPixel(c, cc);
-                            if (px.A != 0)
-                            {
-                                Day.SetPixel(c, cc, ConvertPixel(px));
-                            }
+                            Color clothes = ConvertPixel(ClothesImage.GetPixel(c, cc));
+                            Color original = Day.GetPixel(c, cc);
+                            Day.SetPixel(c, cc, CombinePixels(clothes, original));
                         }
                     }
                 }
@@ -453,11 +511,9 @@ namespace Mundasia.Objects
                 {
                     for (int cc = 0; cc < HairTop.Height; cc++)
                     {
-                        Color px = HairTop.GetPixel(c, cc);
-                        if (px.A != 0)
-                        {
-                            Day.SetPixel(c, cc, ConvertPixel(px));
-                        }
+                        Color hair = ConvertPixel(HairTop.GetPixel(c, cc));
+                        Color original = Day.GetPixel(c, cc);
+                        Day.SetPixel(c, cc, CombinePixels(hair, original));
                     }
                 }
             }
@@ -470,11 +526,9 @@ namespace Mundasia.Objects
                     {
                         for (int cc = 0; cc < ClothesImage.Height; cc++)
                         {
-                            Color px = ClothesImage.GetPixel(c, cc);
-                            if (px.A != 0)
-                            {
-                                Day.SetPixel(c, cc, ConvertPixel(px));
-                            }
+                            Color clothes = ConvertPixel(ClothesImage.GetPixel(c, cc));
+                            Color original = Day.GetPixel(c, cc);
+                            Day.SetPixel(c, cc, CombinePixels(clothes, original));
                         }
                     }
                 }

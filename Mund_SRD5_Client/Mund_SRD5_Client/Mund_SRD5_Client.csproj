@@ -175,6 +175,7 @@
     <Compile Include="UI\Screens\PlayScene\TileEditPane.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="UI\Utilities\Pixel.cs" />
     <Compile Include="UI\Windows\InventoryForm.cs" />
     <Compile Include="UI\Windows\ItemCreationForm.cs" />
     <Compile Include="UI\Windows\Lore\Lore.cs" />
