@@ -2393,19 +2393,78 @@ namespace Mundasia.Interface
 
             _characterSheet.Height = _form.ClientRectangle.Height - (padding * 2);
             _characterSheet.Width = (_form.ClientRectangle.Width - (padding * 3)) / 2;
-            _characterSheet.Location = new Point(padding, padding);
+
+            int availableCharSheetWidth = _characterSheet.Width - System.Windows.Forms.SystemInformation.VerticalScrollBarWidth;
 
             _editPanel.Height = _characterSheet.Height;
             _editPanel.Width = _characterSheet.Width;
             _editPanel.Location = new Point(_characterSheet.Location.X + _characterSheet.Width + padding, padding);
 
-            raceIcon.Location = new Point(padding, padding);
-            raceText.Location = new Point(raceIcon.Location.X + raceIcon.Width + padding, padding);
-            raceText.Size = new Size((_characterSheet.Width - (raceIcon.Width * 2) - (padding * 5)) / 2, 64);
+            _panel.Size = _form.ClientRectangle.Size;
 
-            characterClassIcon.Location = new Point(raceText.Location.X + raceText.Width + padding, padding);
-            characterClassText.Location = new Point(characterClassIcon.Location.X + characterClassIcon.Width + padding, padding);
+            nameEdit.Size = new Size((availableCharSheetWidth - (padding * 2)) / 2, nameEdit.PreferredHeight);
+
+            alignmentIcon.Location = new Point(nameEdit.Location.X + nameEdit.Width + padding, nameEdit.Location.Y);
+
+            alignmentText.Location = new Point(alignmentIcon.Location.X + alignmentIcon.Width + padding, alignmentIcon.Location.Y);
+            alignmentText.Size = new Size((availableCharSheetWidth - (alignmentIcon.Width * 2) - (padding * 5)) / 2, 64);
+
+            genderText.Size = new Size((availableCharSheetWidth - (genderIcon.Width * 2) - (padding * 5)) / 2, 64);
+
+            backgroundIcon.Location = new Point(genderText.Location.X + genderText.Size.Width + padding, genderIcon.Location.Y);
+
+            backgroundText.Location = new Point(backgroundIcon.Location.X + backgroundIcon.Size.Width + padding, genderIcon.Location.Y);
+            backgroundText.Size = genderText.Size;
+
+            raceText.Size = genderText.Size;
+
+            characterClassIcon.Location = new Point(raceText.Location.X + raceText.Width + padding, raceIcon.Location.Y);
+
+            characterClassText.Location = new Point(characterClassIcon.Location.X + characterClassIcon.Width + padding, raceIcon.Location.Y);
             characterClassText.Size = raceText.Size;
+
+            strengthSkills.Size = new Size(availableCharSheetWidth - abilityStrength.Width - padding * 3, abilityStrength.Height + labelStrengthScore.Height);
+            StyleListView(strengthSkills, true);
+
+            dexteritySkills.Size = new Size(availableCharSheetWidth - abilityDexterity.Width - padding * 3, abilityDexterity.Height + labelDexterityScore.Height);
+            StyleListView(dexteritySkills, true);
+
+            constitutionSkills.Size = new Size(availableCharSheetWidth - abilityConstitution.Width - padding * 3, abilityConstitution.Height + labelConstitutionScore.Height);
+            StyleListView(constitutionSkills, true);
+
+            intelligenceSkills.Size = new Size(availableCharSheetWidth - abilityIntelligence.Width - padding * 3, abilityIntelligence.Height + labelIntelligenceScore.Height);
+            StyleListView(intelligenceSkills, true);
+
+            wisdomSkills.Size = new Size(availableCharSheetWidth - abilityWisdom.Width - padding * 3, abilityWisdom.Height + labelWisdomScore.Height);
+            StyleListView(wisdomSkills, true);
+
+            charismaSkills.Size = new Size(availableCharSheetWidth - abilityCharisma.Width - padding * 3, abilityCharisma.Height + labelCharismaScore.Height);
+            StyleListView(charismaSkills, true);
+
+            charSheetPowersLabel.Location = new Point(padding, charismaSkills.Location.Y + charismaSkills.Height + padding);
+            charSheetPowersBox.Location = new Point(padding, charSheetPowersLabel.Location.Y + charSheetPowersLabel.Height);
+            charSheetPowersBox.Size = new Size(availableCharSheetWidth - (padding * 2), 100);
+            StyleListView(charSheetPowersBox, true);
+
+            charSheetCantripsLabel.Location = new Point(padding, charSheetPowersBox.Location.Y + charSheetPowersBox.Height + padding);
+            charSheetCantripsBox.Location = new Point(padding, charSheetCantripsLabel.Location.Y + charSheetCantripsLabel.Height);
+            charSheetCantripsBox.Size = new Size(availableCharSheetWidth - (padding * 2), 100);
+            StyleListView(charSheetCantripsBox, true);
+
+            charSheetSpellBoxLabel.Location = new Point(padding, charSheetCantripsBox.Location.Y + charSheetCantripsBox.Height + padding);
+            charSheetSpellBox.Location = new Point(padding, charSheetSpellBoxLabel.Location.Y + charSheetSpellBoxLabel.Height);
+            charSheetSpellBox.Size = new Size(availableCharSheetWidth - (padding * 2), 100);
+            StyleListView(charSheetSpellBox, true);
+
+            done.Location = new Point(availableCharSheetWidth - padding - done.Width, charSheetSpellBox.Location.Y + charSheetSpellBox.Height + padding);
+
+            UpdateSkills();
+            _updateCharacterSheetPowers();
+
+            if (_selectedClass != null)
+            {
+                _populateSpellList();
+            }
 
             switch (_currentEdit)
             {
