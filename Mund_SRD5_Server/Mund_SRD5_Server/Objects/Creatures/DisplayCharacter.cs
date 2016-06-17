@@ -265,18 +265,18 @@ namespace Mundasia.Objects
             else if(startingPixel.B == 0 && startingPixel.R != 0 && startingPixel.G != 0)
             {
                 // Channel-based coloring. This is a skin pixel.
-                float brightness = Pixel.GetBrightness(currentRace.SkinColors[SkinColor].MedColor) - 0.5f;
+                float brightness = Pixel.GetBrightness(currentRace.SkinColors[SkinColor].DarkColor) - 0.5f;
                 brightness = Math.Max(0.0f, ((float)startingPixel.R / 255.0f) + brightness);
                 brightness = Math.Min(1.0f, brightness);
-                ret = Pixel.FromHSL(startingPixel.A, currentRace.SkinColors[SkinColor].MedColor.GetHue(), currentRace.SkinColors[SkinColor].MedColor.GetSaturation(), brightness);
+                ret = Pixel.FromHSL(startingPixel.A, currentRace.SkinColors[SkinColor].DarkColor.GetHue(), currentRace.SkinColors[SkinColor].DarkColor.GetSaturation(), brightness);
             }
             else if(startingPixel.B == 0 && startingPixel.R != 0 && startingPixel.G == 0)
             {
                 // Channel-based coloring. This is a hair pixel.
-                float brightness = Pixel.GetBrightness(currentRace.HairColors[HairColor].MedColor) - 0.5f;
+                float brightness = Pixel.GetBrightness(currentRace.HairColors[HairColor].DarkColor) - 0.5f;
                 brightness = Math.Max(0.0f, ((float)startingPixel.R / 255.0f) + brightness);
                 brightness = Math.Min(1.0f, brightness);
-                ret = Pixel.FromHSL(startingPixel.A, currentRace.HairColors[HairColor].MedColor.GetHue(), currentRace.HairColors[HairColor].MedColor.GetSaturation(), brightness);
+                ret = Pixel.FromHSL(startingPixel.A, currentRace.HairColors[HairColor].DarkColor.GetHue(), currentRace.HairColors[HairColor].DarkColor.GetSaturation(), brightness);
             }
             else if(startingPixel.B != 0 && startingPixel.R == 0 && startingPixel.G != 0)
             {
