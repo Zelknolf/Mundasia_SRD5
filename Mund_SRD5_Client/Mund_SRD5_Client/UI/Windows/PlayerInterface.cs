@@ -101,6 +101,10 @@ namespace Mundasia.Interface
                 if (!String.IsNullOrEmpty(resp))
                 {
                     MapDelta delta = _handleDelta(resp);
+                    if (delta.RemovedTiles.Contains(_currentTile))
+                    {
+                        _currentTile = null;
+                    }
                     if (delta.AddedTiles.Count > 0)
                     {
                         _currentTile = delta.AddedTiles[0];
@@ -146,6 +150,10 @@ namespace Mundasia.Interface
                 if (!String.IsNullOrEmpty(resp))
                 {
                     MapDelta delta = _handleDelta(resp);
+                    if (delta.RemovedTiles.Contains(_currentTile))
+                    {
+                        _currentTile = null;
+                    }
                     if (delta.AddedTiles.Count > 0)
                     {
                         _currentTile = delta.AddedTiles[0];
@@ -195,6 +203,10 @@ namespace Mundasia.Interface
                 if (!String.IsNullOrEmpty(resp))
                 {
                     MapDelta delta = _handleDelta(resp);
+                    if (delta.RemovedTiles.Contains(_currentTile))
+                    {
+                        _currentTile = null;
+                    }
                     if (delta.AddedTiles.Count > 0)
                     {
                         _currentTile = delta.AddedTiles[0];
@@ -240,6 +252,10 @@ namespace Mundasia.Interface
                 if (!String.IsNullOrEmpty(resp))
                 {
                     MapDelta delta = _handleDelta(resp);
+                    if (delta.RemovedTiles.Contains(_currentTile))
+                    {
+                        _currentTile = null;
+                    }
                     if (delta.AddedTiles.Count > 0)
                     {
                         _currentTile = delta.AddedTiles[0];
@@ -289,6 +305,10 @@ namespace Mundasia.Interface
                 if (!String.IsNullOrEmpty(resp))
                 {
                     MapDelta delta = _handleDelta(resp);
+                    if (delta.RemovedTiles.Contains(_currentTile))
+                    {
+                        _currentTile = null;
+                    }
                     if (delta.AddedTiles.Count > 0)
                     {
                         _currentTile = delta.AddedTiles[0];
@@ -347,6 +367,10 @@ namespace Mundasia.Interface
                 if (!String.IsNullOrEmpty(resp))
                 {
                     MapDelta delta = _handleDelta(resp);
+                    if (delta.RemovedTiles.Contains(_currentTile))
+                    {
+                        _currentTile = null;
+                    }
                     if (delta.AddedTiles.Count > 0)
                     {
                         _currentTile = delta.AddedTiles[0];
@@ -396,6 +420,10 @@ namespace Mundasia.Interface
                 if (!String.IsNullOrEmpty(resp))
                 {
                     MapDelta delta = _handleDelta(resp);
+                    if(delta.RemovedTiles.Contains(_currentTile))
+                    {
+                        _currentTile = null;
+                    }
                     if (delta.AddedTiles.Count > 0)
                     {
                         _currentTile = delta.AddedTiles[0];
@@ -441,6 +469,10 @@ namespace Mundasia.Interface
                 if (!String.IsNullOrEmpty(resp))
                 {
                     MapDelta delta = _handleDelta(resp);
+                    if (delta.RemovedTiles.Contains(_currentTile))
+                    {
+                        _currentTile = null;
+                    }
                     if (delta.AddedTiles.Count > 0)
                     {
                         _currentTile = delta.AddedTiles[0];
@@ -490,6 +522,10 @@ namespace Mundasia.Interface
                 if (!String.IsNullOrEmpty(resp))
                 {
                     MapDelta delta = _handleDelta(resp);
+                    if (delta.RemovedTiles.Contains(_currentTile))
+                    {
+                        _currentTile = null;
+                    }
                     if (delta.AddedTiles.Count > 0)
                     {
                         _currentTile = delta.AddedTiles[0];
@@ -535,6 +571,10 @@ namespace Mundasia.Interface
                 if (!String.IsNullOrEmpty(resp))
                 {
                     MapDelta delta = _handleDelta(resp);
+                    if (delta.RemovedTiles.Contains(_currentTile))
+                    {
+                        _currentTile = null;
+                    }
                     if (delta.AddedTiles.Count > 0)
                     {
                         _currentTile = delta.AddedTiles[0];
@@ -565,6 +605,10 @@ namespace Mundasia.Interface
                 if (!String.IsNullOrEmpty(resp))
                 {
                     MapDelta delta = _handleDelta(resp);
+                    if (delta.RemovedTiles.Contains(_currentTile))
+                    {
+                        _currentTile = null;
+                    }
                     if (delta.AddedTiles.Count > 0)
                     {
                         _currentTile = delta.AddedTiles[0];
@@ -588,6 +632,10 @@ namespace Mundasia.Interface
                 if (!String.IsNullOrEmpty(resp))
                 {
                     MapDelta delta = _handleDelta(resp);
+                    if (delta.RemovedTiles.Contains(_currentTile))
+                    {
+                        _currentTile = null;
+                    }
                     if (delta.AddedTiles.Count > 0)
                     {
                         _currentTile = delta.AddedTiles[0];
@@ -615,6 +663,10 @@ namespace Mundasia.Interface
                 if (!String.IsNullOrEmpty(resp))
                 {
                     MapDelta delta = _handleDelta(resp);
+                    if (delta.RemovedTiles.Contains(_currentTile))
+                    {
+                        _currentTile = null;
+                    }
                     if (delta.AddedTiles.Count > 0)
                     {
                         _currentTile = delta.AddedTiles[0];
@@ -642,6 +694,10 @@ namespace Mundasia.Interface
                 if (!String.IsNullOrEmpty(resp))
                 {
                     MapDelta delta = _handleDelta(resp);
+                    if (delta.RemovedTiles.Contains(_currentTile))
+                    {
+                        _currentTile = null;
+                    }
                     if (delta.AddedTiles.Count > 0)
                     {
                         _currentTile = delta.AddedTiles[0];
@@ -668,6 +724,10 @@ namespace Mundasia.Interface
                 if (!String.IsNullOrEmpty(resp))
                 {
                     MapDelta delta = _handleDelta(resp);
+                    if (delta.RemovedTiles.Contains(_currentTile))
+                    {
+                        _currentTile = null;
+                    }
                     if (delta.AddedTiles.Count > 0)
                     {
                         _currentTile = delta.AddedTiles[0];
@@ -694,6 +754,10 @@ namespace Mundasia.Interface
                 if (!String.IsNullOrEmpty(resp))
                 {
                     MapDelta delta = _handleDelta(resp);
+                    if (delta.RemovedTiles.Contains(_currentTile))
+                    {
+                        _currentTile = null;
+                    }
                     if (delta.AddedTiles.Count > 0)
                     {
                         _currentTile = delta.AddedTiles[0];

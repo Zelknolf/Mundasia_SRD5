@@ -477,6 +477,24 @@ namespace Mundasia.Objects
             str.Append(z);
             return str.ToString();
         }
+
+        public override bool Equals(object obj)
+        {
+            Tile t = obj as Tile;
+            if(t == null)
+            {
+                return false;
+            }
+            if(this.CurrentTileSet == t.CurrentTileSet &&
+               this.height == t.height &&
+               this.x == t.x &&
+               this.y == t.y &&
+               this.z == t.z)
+            {
+                return true;
+            }
+            return false;
+        }
         #endregion
 
         #region Tile Definition
