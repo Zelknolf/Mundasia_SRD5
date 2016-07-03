@@ -291,7 +291,7 @@ namespace Mundasia.Interface
                         t.PosX == x &&
                         t.PosY == y &&
                         t.PosZ > z - height &&
-                        t.PosZ <= z + t.TileHeight)
+                        t.PosZ < z + t.TileHeight)
                     {
                         return true;
                     }
