@@ -354,24 +354,27 @@ namespace Mundasia.Server.Communication
             }
             Map currentMap = Map.LoadedMaps[ch.Map];
 
-            foreach(Tile t in tc.RemovedTiles)
-            {
-                currentMap.Remove(t);
-                t.Delete(currentMap.Name);
-            }
-            foreach(Tile t in tc.AddedTiles)
-            {
-                currentMap.Add(t);
-                t.Save(currentMap.Name);
-            }
-
             string ret = String.Empty;
-            if(!currentMap.MapDeltas.ContainsKey(ch))
+            if (!currentMap.MapDeltas.ContainsKey(ch))
             {
-                return String.Empty;
+                currentMap.MapDeltas.Add(ch, new MapDelta());
             }
             lock (currentMap.MapDeltas[ch])
             {
+                foreach (Tile t in tc.RemovedTiles)
+                {
+                    currentMap.Remove(t);
+                    t.Delete(currentMap.Name);
+                }
+                foreach (Tile t in tc.AddedTiles)
+                {
+                    currentMap.Add(t);
+                    t.Save(currentMap.Name);
+                }
+                if (!currentMap.MapDeltas.ContainsKey(ch))
+                {
+                    return String.Empty;
+                }
                 ret = currentMap.MapDeltas[ch].ToString();
                 currentMap.MapDeltas[ch].AddedCharacters.Clear();
                 currentMap.MapDeltas[ch].AddedTiles.Clear();
