@@ -825,6 +825,7 @@ namespace Mundasia.Interface
                     case Direction.SouthEast: facing = Direction.North; break;
                     default:                  facing = Direction.North; break;
                 }
+                ctl.Selected = false;
                 string resp = ServiceConsumer.MoveCharacter(DrivingCharacter.AccountName, DrivingCharacter.CharacterName, ctl.GetObjectPositionX(), ctl.GetObjectPositionY(), ctl.GetObjectPositionZ(), facing);
                 if (!String.IsNullOrEmpty(resp))
                 {
@@ -848,6 +849,7 @@ namespace Mundasia.Interface
                     case Direction.SouthEast: facing = Direction.West;  break;
                     default: facing = Direction.North; break;
                 }
+                ctl.Selected = false;
                 string resp = ServiceConsumer.MoveCharacter(DrivingCharacter.AccountName, DrivingCharacter.CharacterName, ctl.GetObjectPositionX(), ctl.GetObjectPositionY(), ctl.GetObjectPositionZ(), facing);
                 if (!String.IsNullOrEmpty(resp))
                 {
@@ -871,6 +873,7 @@ namespace Mundasia.Interface
                     case Direction.SouthEast: facing = Direction.East;  break;
                     default: facing = Direction.North; break;
                 }
+                ctl.Selected = false;
                 string resp = ServiceConsumer.MoveCharacter(DrivingCharacter.AccountName, DrivingCharacter.CharacterName, ctl.GetObjectPositionX(), ctl.GetObjectPositionY(), ctl.GetObjectPositionZ(), facing);
                 if (!String.IsNullOrEmpty(resp))
                 {
@@ -894,6 +897,7 @@ namespace Mundasia.Interface
                     case Direction.SouthEast: facing = Direction.South; break;
                     default: facing = Direction.North; break;
                 }
+                ctl.Selected = false;
                 string resp = ServiceConsumer.MoveCharacter(DrivingCharacter.AccountName, DrivingCharacter.CharacterName, ctl.GetObjectPositionX(), ctl.GetObjectPositionY(), ctl.GetObjectPositionZ(), facing);
                 if (!String.IsNullOrEmpty(resp))
                 {
