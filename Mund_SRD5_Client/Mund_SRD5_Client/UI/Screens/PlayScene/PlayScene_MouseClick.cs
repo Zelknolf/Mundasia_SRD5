@@ -54,8 +54,15 @@ namespace Mundasia.Interface
                     drawableImages.Sort();
                     if (lastSelected != null)
                     {
-                        lastSelected = lastSelected.GetNewDrawable();
-                        lastSelected.SetSelected(true);
+                        if (lastSelected.GetSelected()) // Check, in case the drawable deselects itself as part of processing selection.
+                        {
+                            lastSelected = lastSelected.GetNewDrawable();
+                            lastSelected.SetSelected(true);
+                        }
+                        else
+                        {
+                            lastSelected = null;
+                        }
                     }
                     this.Refresh();
                 }
@@ -92,8 +99,15 @@ namespace Mundasia.Interface
                     drawableImages.Sort();
                     if (lastSelected != null)
                     {
-                        lastSelected = lastSelected.GetNewDrawable();
-                        lastSelected.SetSelected(true);
+                        if (lastSelected.GetSelected()) // Check, in case the drawable deselects itself as part of processing selection.
+                        {
+                            lastSelected = lastSelected.GetNewDrawable();
+                            lastSelected.SetSelected(true);
+                        }
+                        else
+                        {
+                            lastSelected = null;
+                        }
                     }
                     this.Refresh();
                 }
