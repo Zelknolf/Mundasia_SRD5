@@ -1,50 +1,50 @@
-0|0|Athletics|10000|NoSkill
-1|1|Acrobatics|10001|NoSkill
-2|1|Sleight of Hand|10002|NoSkill
-3|1|Stealth|10003|NoSkill
-4|3|Arcana|10004|NoSkill
-5|3|History|10005|NoSkill
-6|3|Investigation|10006|NoSkill
-7|3|Nature|10007|NoSkill
-8|3|Religion|10008|NoSkill
-9|4|Animal Handling|10009|NoSkill
-10|4|Insight|10010|NoSkill
-11|4|Medicine|10011|NoSkill
-12|4|Perception|10012|NoSkill
-13|4|Survival|10013|NoSkill
-14|5|Deception|10014|NoSkill
-15|5|Intimidation|10015|NoSkill
-16|5|Performance|10016|NoSkill
-17|5|Persuasion|10017|NoSkill
-100|3|Alchemy|10100|NoSkill
-101|3|Brewing|10101|NoSkill
-102|1|Calligraphy|10102|NoSkill
-103|3|Carpentry|10103|NoSkill
-104|3|Cartography|10104|NoSkill
-105|3|Cobbling|10105|NoSkill
-106|4|Cooking|10106|NoSkill
-107|3|Glass Blowing|10107|NoSkill
-108|3|Jewelling|10108|NoSkill
-109|3|Masonry|10109|NoSkill
-110|3|Painting|10110|NoSkill
-111|3|Pottery|10111|NoSkill
-112|3|Smithing|10112|NoSkill
-113|3|Tinkering|10113|NoSkill
-114|3|Weaving|10114|NoSkill
-115|3|Carving|10115|NoSkill
-116|5|Disguise|10116|NoSkill
-117|3|Forgery|10117|NoSkill
-118|4|Herbalism|10118|NoSkill
-119|4|Navigation|10119|NoSkill
-120|3|Poisoning|10120|NoSkill
-121|3|Housebreaking|10121|NoSkill
-200|5|Play Bagpipes|10200|NoSkill
-201|5|Play Drums|10201|NoSkill
-202|5|Play Dulcimer|10202|NoSkill
-203|5|Play Flute|10203|NoSkill
-204|5|Play Lute|10204|NoSkill
-205|5|Play Lyre|10205|NoSkill
-206|5|Play Horn|10206|NoSkill
-207|5|Play Panflute|10207|NoSkill
-208|5|Play Shawm|10208|NoSkill
-209|5|Play Viol|10209|NoSkill
+0|0|Athletics|10000|Athletics
+1|1|Acrobatics|10001|Acrobatics
+2|1|Sleight of Hand|10002|Alchemy
+3|1|Stealth|10003|AnimalHandling
+4|3|Arcana|10004|Arcana
+5|3|History|10005|History
+6|3|Investigation|10006|Investigation
+7|3|Nature|10007|Nature
+8|3|Religion|10008|Religion
+9|4|Animal Handling|10009|AnimalHandling
+10|4|Insight|10010|Insight
+11|4|Medicine|10011|Medicine
+12|4|Perception|10012|Perception
+13|4|Survival|10013|Survival
+14|5|Deception|10014|Deception
+15|5|Intimidation|10015|Intimidation
+16|5|Performance|10016|Performance
+17|5|Persuasion|10017|Persuasion
+100|3|Alchemy|10100|Alchemy
+101|3|Brewing|10101|Brewing
+102|1|Calligraphy|10102|Calligraphy
+103|3|Carpentry|10103|Carpentry
+104|3|Cartography|10104|Cartography
+105|3|Cobbling|10105|Cobbling
+106|4|Cooking|10106|Cooking
+107|3|Glass Blowing|10107|GlassBlowing
+108|3|Jewelling|10108|Jewelling
+109|3|Masonry|10109|Masonry
+110|3|Painting|10110|Painting
+111|3|Pottery|10111|Pottery
+112|3|Smithing|10112|Smithing
+113|3|Tinkering|10113|Tinkering
+114|3|Weaving|10114|Weaving
+115|3|Carving|10115|Carving
+116|5|Disguise|10116|Disguise
+117|3|Forgery|10117|Forgery
+118|4|Herbalism|10118|Herbalism
+119|4|Navigation|10119|Navigation
+120|3|Poisoning|10120|Poisoning
+121|3|Housebreaking|10121|Housebreaking
+200|5|Play Bagpipes|10200|PlayBagpipes
+201|5|Play Drums|10201|PlayDrums
+202|5|Play Dulcimer|10202|PlayDulcimer
+203|5|Play Flute|10203|PlayFlute
+204|5|Play Lute|10204|PlayLute
+205|5|Play Lyre|10205|PlayLyre
+206|5|Play Horn|10206|PlayHorn
+207|5|Play Panflute|10207|PlayPanflute
+208|5|Play Shawm|10208|PlayShawm
+209|5|Play Viol|10209|PlayViol
