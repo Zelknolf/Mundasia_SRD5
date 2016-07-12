@@ -2060,11 +2060,6 @@ namespace Mundasia.Interface
                 if (isSubClass) index = int.Parse(viewPickedFrom.Tag.ToString().Substring(1));
                 else index = (int)viewPickedFrom.Tag;
 
-                if(index == 0)
-                {
-                    int foo = 0;
-                }
-
                 Power selectedPower = Power.GetPower((uint)e.Item.Tag);
                 if(selectedPower != null)
                 {
@@ -2468,15 +2463,117 @@ namespace Mundasia.Interface
 
             switch (_currentEdit)
             {
+                case CurrentEdit.Alignment:
+                    alignmentBox.Height = _editPanel.ClientRectangle.Height - (padding * 2);
+                    alignmentBox.Width = _editPanel.ClientRectangle.Width - (padding * 2);
+                    alignmentBox.Location = new Point(padding, padding);
+                    ListViewColumns(alignmentBox, false);
+                    break;
+                case CurrentEdit.Appearance:
+                    scene.Location = new Point(padding, Math.Max(0, (_editPanel.ClientRectangle.Height - 200) / 2));
+                    dispCharChangeClothes.Location = new Point(scene.Location.X + scene.Width + padding, scene.Location.Y);
+                    dispCharChangeClothColorA.Location = new Point(dispCharChangeClothes.Location.X, dispCharChangeClothes.Location.Y + dispCharChangeClothes.Height + padding);
+                    dispCharChangeClothColorB.Location = new Point(dispCharChangeClothColorA.Location.X, dispCharChangeClothColorA.Location.Y + dispCharChangeClothColorA.Height + padding);
+                    dispCharHair.Location = new Point(dispCharChangeClothColorB.Location.X, dispCharChangeClothColorB.Location.Y + dispCharChangeClothColorB.Height + padding);
+                    dispCharHairColor.Location = new Point(dispCharHair.Location.X, dispCharHair.Location.Y + dispCharHair.Height + padding);
+                    dispCharSkinColor.Location = new Point(dispCharHairColor.Location.X, dispCharHairColor.Location.Y + dispCharHairColor.Height + padding);
+                    break;
+                case CurrentEdit.Background:
+                    backgroundBox.Height = _editPanel.ClientRectangle.Height - (padding * 2);
+                    backgroundBox.Width = _editPanel.ClientRectangle.Width - (padding * 2);
+                    backgroundBox.Location = new Point(padding, padding);
+                    ListViewColumns(backgroundBox, false);
+                    break;
                 case CurrentEdit.Class:
-                    characterClassBox.Height = _editPanel.Height - (padding * 2);
-                    characterClassBox.Width = _editPanel.Width - (padding * 2);
+                    characterClassBox.Height = _editPanel.ClientRectangle.Height - (padding * 2);
+                    characterClassBox.Width = _editPanel.ClientRectangle.Width - (padding * 2);
                     characterClassBox.Location = new Point(padding, padding);
+                    ListViewColumns(characterClassBox, false);
+                    break;
+                case CurrentEdit.Gender:
+                    genderBox.Height = _editPanel.ClientRectangle.Height - (padding * 2);
+                    genderBox.Width = _editPanel.ClientRectangle.Width - (padding * 2);
+                    genderBox.Location = new Point(padding, padding);
+                    ListViewColumns(genderBox, false);
+                    break;
+                case CurrentEdit.Power:
+                    List<ListView> lists = new List<ListView>();
+                    List<Label> labels = new List<Label>();
+                    foreach (Control ctl in _editPanel.Controls)
+                    {
+                        if (ctl.GetType() == typeof(Label))
+                        {
+                            labels.Add((Label)ctl);
+                        }
+                        if (ctl.GetType() == typeof(ListView))
+                        {
+                            lists.Add((ListView)ctl);
+                        }
+                    }
+                    if(lists.Count == 0)
+                    {
+                        break;
+                    }
+                    int listHeight = (_editPanel.ClientRectangle.Height / lists.Count) - padding;
+                    if(labels.Count > 0)
+                    {
+                        listHeight -= (labels[0].Height);
+                    }
+                    int currentY = padding;
+                    for (int i=0; i<lists.Count; i++)
+                    {
+                        if (i < labels.Count)
+                        {
+                            labels[i].Location = new Point(padding, currentY);
+                            labels[i].Width = _editPanel.ClientRectangle.Width - (padding * 2);
+                            currentY += labels[i].Height;
+                        }
+                        if(i < lists.Count)
+                        {
+                            lists[i].Location = new Point(padding, currentY);
+                            lists[i].Width = _editPanel.ClientRectangle.Width - (padding * 2);
+                            ListViewColumns(lists[i], false);
+                            currentY += (lists[i].Height + padding);
+                        }
+                    }
                     break;
                 case CurrentEdit.Race:
-                    raceBox.Height = _editPanel.Height - (padding * 2);
-                    raceBox.Width = _editPanel.Width - (padding * 2);
+                    raceBox.Height = _editPanel.ClientRectangle.Height - (padding * 2);
+                    raceBox.Width = _editPanel.ClientRectangle.Width - (padding * 2);
                     raceBox.Location = new Point(padding, padding);
+                    ListViewColumns(raceBox, false);
+                    break;
+                case CurrentEdit.Skill:
+                    raceSkillsLabel.Width = _editPanel.ClientRectangle.Width - padding * 2;
+                    classSkillsLabel.Width = _editPanel.ClientRectangle.Width - padding * 2;
+                    classToolsLabel.Width = _editPanel.ClientRectangle.Width - padding * 2;
+                    raceSkills.Width = _editPanel.ClientRectangle.Width - padding * 2;
+                    classSkills.Width = _editPanel.ClientRectangle.Width - padding * 2;
+                    classTools.Width = _editPanel.ClientRectangle.Width - padding * 2;
+                    raceSkills.Height = (_editPanel.ClientRectangle.Height - padding * 4 - raceSkillsLabel.Height * 3) / 3;
+                    classSkills.Height = (_editPanel.ClientRectangle.Height - padding * 4 - raceSkillsLabel.Height * 3) / 3;
+                    classTools.Height = (_editPanel.ClientRectangle.Height - padding * 4 - raceSkillsLabel.Height * 3) / 3;
+                    raceSkillsLabel.Location = new Point(padding, padding);
+                    raceSkills.Location = new Point(padding, raceSkillsLabel.Location.Y + raceSkillsLabel.Height);
+                    classSkillsLabel.Location = new Point(padding, raceSkills.Location.Y + raceSkills.Height + padding);
+                    classSkills.Location = new Point(padding, classSkillsLabel.Location.Y + classSkillsLabel.Height);
+                    classToolsLabel.Location = new Point(padding, classSkills.Location.Y + classSkills.Height + padding);
+                    classTools.Location = new Point(padding, classToolsLabel.Location.Y + classToolsLabel.Height);
+                    ListViewColumns(raceSkills, false);
+                    ListViewColumns(classSkills, false);
+                    ListViewColumns(classTools, false);
+                    break;
+                case CurrentEdit.Spell:
+                    cantripsLabel.Width = _editPanel.ClientRectangle.Width - (padding * 2);
+                    spellBoxLabel.Width = _editPanel.ClientRectangle.Width - (padding * 2);
+                    CantripBox.Size = new Size(_editPanel.ClientRectangle.Width - (padding * 2), (_editPanel.ClientRectangle.Height - (cantripsLabel.Height * 2) - (padding * 5)) / 2);
+                    SpellBox.Size = CantripBox.Size;
+                    cantripsLabel.Location = new Point(padding, padding);
+                    CantripBox.Location = new Point(padding, cantripsLabel.Location.Y + cantripsLabel.Height + padding);
+                    spellBoxLabel.Location = new Point(padding, CantripBox.Location.Y + CantripBox.Height + padding);
+                    SpellBox.Location = new Point(padding, spellBoxLabel.Location.Y + spellBoxLabel.Height + padding);
+                    ListViewColumns(CantripBox, false);
+                    ListViewColumns(SpellBox, false);
                     break;
             }
         }
@@ -2534,6 +2631,21 @@ namespace Mundasia.Interface
             toStyle.Size = toStyle.PreferredSize;
         }
 
+        private static void ListViewColumns(ListView listView, bool threeColumns)
+        {
+            if (threeColumns)
+            {
+                listView.Columns[0].Width = MiniIconSize.Width + 2;
+                listView.Columns[1].Width = ((listView.ClientRectangle.Width - SystemInformation.VerticalScrollBarWidth - MiniIconSize.Width - 2) * 8) / 10;
+                listView.Columns[2].Width = listView.ClientRectangle.Width - SystemInformation.VerticalScrollBarWidth - MiniIconSize.Width - 2 - listView.Columns[1].Width;
+            }
+            else
+            {
+                listView.Columns[0].Width = IconSize.Width + 2;
+                listView.Columns[1].Width = listView.ClientRectangle.Width - SystemInformation.VerticalScrollBarWidth - IconSize.Width - 2;
+            }
+        }
+
         private static void StyleListView(ListView listView, bool threeColumns)
         {
             listView.Clear();
@@ -2547,17 +2659,7 @@ namespace Mundasia.Interface
             listView.HeaderStyle = ColumnHeaderStyle.None;
             listView.ShowItemToolTips = true;
             listView.Font = labelFont;
-            if (threeColumns)
-            {
-                listView.Columns[0].Width = MiniIconSize.Width + 2;
-                listView.Columns[1].Width = ((listView.ClientRectangle.Width - SystemInformation.VerticalScrollBarWidth - MiniIconSize.Width - 2) * 8) / 10;
-                listView.Columns[2].Width = listView.ClientRectangle.Width - SystemInformation.VerticalScrollBarWidth - MiniIconSize.Width - 2 - listView.Columns[1].Width;
-            }
-            else
-            {
-                listView.Columns[0].Width = IconSize.Width + 2;
-                listView.Columns[1].Width = listView.ClientRectangle.Width - SystemInformation.VerticalScrollBarWidth - IconSize.Width - 2;
-            }
+            ListViewColumns(listView, threeColumns);
         }
 
         private static void StyleListViewItem(ListViewItem item)
