@@ -345,7 +345,7 @@ namespace Mundasia.Interface
             }
             if(!File.Exists(path))
             {
-                if(IconCache.ContainsKey("Unknown"))
+                if(!IconCache.ContainsKey("Unknown"))
                 {
                     IconCache.Add("Unknown", Image.FromFile(Environment.CurrentDirectory + Path.DirectorySeparatorChar + "Images" + Path.DirectorySeparatorChar + "Icons" + Path.DirectorySeparatorChar + "Items" + Path.DirectorySeparatorChar + "Unknown.png"));
                 }
