@@ -2865,6 +2865,15 @@ namespace Mundasia.Interface
             }
             
             string response = Communication.ServiceConsumer.CreateCharacter(_selectedAlignment, _selectedBackground, _charismaScore, _constitutionScore, _dexterityScore, _intelligenceScore, _strengthScore, _wisdomScore, _cantrips, _selectedClass, _classSkills, _classTools, _selectedGender, displayChar.HairColor, displayChar.Hair, nameEdit.Text, _selectedRace, _raceSkills, displayChar.SkinColor, _firstLevel, _selectedSubClass, pow);
+            if(!response.StartsWith("Success"))
+            {
+                MessageBox.Show(response.ToString());
+            }
+            else
+            {
+                Clear();
+                CharacterSelectScreen.Set(_form);
+            }
         }
         #endregion
     }
