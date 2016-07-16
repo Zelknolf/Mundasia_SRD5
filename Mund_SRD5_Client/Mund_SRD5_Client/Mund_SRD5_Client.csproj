@@ -149,6 +149,9 @@
       <DependentUpon>SplashScreen.cs</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
+    <Compile Include="UI\Controls\AbilityScoreBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="UI\Info\StringLibrary.cs" />
     <Compile Include="UI\Screens\CharacterCreationScreen.cs" />
     <Compile Include="UI\Screens\CharacterPanel.cs">
