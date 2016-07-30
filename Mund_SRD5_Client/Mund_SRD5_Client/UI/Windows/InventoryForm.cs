@@ -18,13 +18,21 @@ namespace Mundasia.Interface
         Size IconSize = new Size(64, 64);
         ListView unequippedItems = new ListView();
 
+        Panel BroochPanel = new Panel();
+        Panel HelmetPanel = new Panel();
+        Panel LensPanel = new Panel();
+        Panel CloakPanel = new Panel();
         Panel NeckSlotPanel = new Panel();
+        Panel StonePanel = new Panel();
         Panel LeftRingPanel = new Panel();
         Panel RightRingPanel = new Panel();
         Panel LeftHandPanel = new Panel();
         Panel RightHandPanel = new Panel();
         Panel ChestPanel = new Panel();
         Panel BeltPanel = new Panel();
+        Panel BracerPanel = new Panel();
+        Panel GlovePanel = new Panel();
+        Panel BootPanel = new Panel();
 
         Creature ChInv;
 
@@ -94,30 +102,124 @@ namespace Mundasia.Interface
                 RightHandPanel.BackgroundImage = GetInventoryIconByTag("EmptyHand");
             }
 
+            if(ch.Equipment.ContainsKey((int)InventorySlot.Brooch))
+            {
+                BroochPanel.BackgroundImage = GetInventoryIconByTag(ch.Equipment[(int)InventorySlot.Brooch].Icon);
+            }
+            else
+            {
+                BroochPanel.BackgroundImage = GetInventoryIconByTag("EmptyBrooch");
+            }
+
+            if(ch.Equipment.ContainsKey((int)InventorySlot.Helm))
+            {
+                HelmetPanel.BackgroundImage = GetInventoryIconByTag(ch.Equipment[(int)InventorySlot.Helm].Icon);
+            }
+            else
+            {
+                HelmetPanel.BackgroundImage = GetInventoryIconByTag("EmptyHelmet");
+            }
+
+            if(ch.Equipment.ContainsKey((int)InventorySlot.Lens))
+            {
+                LensPanel.BackgroundImage = GetInventoryIconByTag(ch.Equipment[(int)InventorySlot.Lens].Icon);
+            }
+            else
+            {
+                LensPanel.BackgroundImage = GetInventoryIconByTag("EmptyLenses");
+            }
+            
+            if(ch.Equipment.ContainsKey((int)InventorySlot.Cloak))
+            {
+                CloakPanel.BackgroundImage = GetInventoryIconByTag(ch.Equipment[(int)InventorySlot.Cloak].Icon);
+            }
+            else
+            {
+                CloakPanel.BackgroundImage = GetInventoryIconByTag("EmptyCloak");
+            }
+            
+            if(ch.Equipment.ContainsKey((int)InventorySlot.Stone))
+            {
+                StonePanel.BackgroundImage = GetInventoryIconByTag(ch.Equipment[(int)InventorySlot.Stone].Icon);
+            }
+            else
+            {
+                StonePanel.BackgroundImage = GetInventoryIconByTag("EmptyStone");
+            }
+            
+            if(ch.Equipment.ContainsKey((int)InventorySlot.Bracers))
+            {
+                BracerPanel.BackgroundImage = GetInventoryIconByTag(ch.Equipment[(int)InventorySlot.Bracers].Icon);
+            }
+            else
+            {
+                BracerPanel.BackgroundImage = GetInventoryIconByTag("EmptyBracers");
+            }
+            
+            if(ch.Equipment.ContainsKey((int)InventorySlot.Gloves))
+            {
+                GlovePanel.BackgroundImage = GetInventoryIconByTag(ch.Equipment[(int)InventorySlot.Gloves].Icon);
+            }
+            else
+            {
+                GlovePanel.BackgroundImage = GetInventoryIconByTag("EmptyGloves");
+            }
+            
+            if(ch.Equipment.ContainsKey((int)InventorySlot.Boots))
+            {
+                BootPanel.BackgroundImage = GetInventoryIconByTag(ch.Equipment[(int)InventorySlot.Boots].Icon);
+            }
+            else
+            {
+                BootPanel.BackgroundImage = GetInventoryIconByTag("EmptyBoots");
+            }
+
+            BroochPanel.Size = IconSize;
+            HelmetPanel.Size = IconSize;
+            LensPanel.Size = IconSize;
+
+            CloakPanel.Size = IconSize;
             NeckSlotPanel.Size = IconSize;
-            LeftRingPanel.Size = IconSize;
-            RightRingPanel.Size = IconSize;
+            StonePanel.Size = IconSize;
+
             LeftHandPanel.Size = IconSize;
-            RightHandPanel.Size = IconSize;
             ChestPanel.Size = IconSize;
+            RightHandPanel.Size = IconSize;
+
+            BracerPanel.Size = IconSize;
             BeltPanel.Size = IconSize;
+            LeftRingPanel.Size = IconSize;
 
-            LeftHandPanel.Location = new Point(InventoryPadding, InventoryPadding * 2 + IconSize.Height);
-            LeftRingPanel.Location = new Point(InventoryPadding, InventoryPadding * 3 + IconSize.Height * 2);
+            GlovePanel.Size = IconSize;
+            BootPanel.Size = IconSize;
+            RightRingPanel.Size = IconSize;
 
-            NeckSlotPanel.Location = new Point(InventoryPadding * 2 + IconSize.Width, InventoryPadding);
-            ChestPanel.Location = new Point(InventoryPadding * 2 + IconSize.Width, InventoryPadding * 2 + IconSize.Height);
-            BeltPanel.Location = new Point(InventoryPadding * 2 + IconSize.Width, InventoryPadding * 3 + IconSize.Height * 2);
+            BroochPanel.Location = new Point(InventoryPadding, InventoryPadding);
+            HelmetPanel.Location = new Point(BroochPanel.Location.X + BroochPanel.Width + InventoryPadding, InventoryPadding);
+            LensPanel.Location = new Point(HelmetPanel.Location.X + HelmetPanel.Width + InventoryPadding, InventoryPadding);
 
-            RightHandPanel.Location = new Point(InventoryPadding * 3 + IconSize.Width * 2, InventoryPadding * 2 + IconSize.Height);
-            RightRingPanel.Location = new Point(InventoryPadding * 3 + IconSize.Width * 2, InventoryPadding * 3 + IconSize.Height * 2);
+            CloakPanel.Location = new Point(BroochPanel.Location.X, BroochPanel.Location.Y + BroochPanel.Height + InventoryPadding);
+            NeckSlotPanel.Location = new Point(HelmetPanel.Location.X, CloakPanel.Location.Y);
+            StonePanel.Location = new Point(LensPanel.Location.X, CloakPanel.Location.Y);
+
+            LeftHandPanel.Location = new Point(BroochPanel.Location.X, CloakPanel.Location.Y + CloakPanel.Height + InventoryPadding);
+            ChestPanel.Location = new Point(HelmetPanel.Location.X, LeftHandPanel.Location.Y);
+            RightHandPanel.Location = new Point(LensPanel.Location.X, LeftHandPanel.Location.Y);
+
+            BracerPanel.Location = new Point(BroochPanel.Location.X, LeftHandPanel.Location.Y + LeftHandPanel.Height + InventoryPadding);
+            BeltPanel.Location = new Point(HelmetPanel.Location.X, BracerPanel.Location.Y);
+            LeftRingPanel.Location = new Point(LensPanel.Location.X, BracerPanel.Location.Y);
+
+            GlovePanel.Location = new Point(BroochPanel.Location.X, BracerPanel.Location.Y + BracerPanel.Height + InventoryPadding);
+            BootPanel.Location = new Point(HelmetPanel.Location.X, GlovePanel.Location.Y);
+            RightRingPanel.Location = new Point(LensPanel.Location.X, GlovePanel.Location.Y);
 
             ImageList imgs = new ImageList();
             imgs.ImageSize = IconSize;
             imgs.ColorDepth = ColorDepth.Depth32Bit;
             unequippedItems.Location = new Point(InventoryPadding * 4 + IconSize.Width * 3, InventoryPadding);
             unequippedItems.Width = 300;
-            unequippedItems.Height = InventoryPadding * 2 + IconSize.Height * 3;
+            unequippedItems.Height = InventoryPadding * 4 + IconSize.Height * 5;
             StyleListView(unequippedItems);
             unequippedItems.DoubleClick += unequippedItems_DoubleClick;
             int imageIndex = 0;
@@ -136,7 +238,7 @@ namespace Mundasia.Interface
 
 
             this.BackColor = Color.Black;
-            this.Size = new Size(InventoryPadding * 5 + IconSize.Width * 3 + 300 + this.Size.Width - this.ClientRectangle.Size.Width, InventoryPadding * 4 + IconSize.Height * 3 + this.Size.Height - this.ClientRectangle.Size.Height);
+            this.Size = new Size(unequippedItems.Location.X + unequippedItems.Width + InventoryPadding + this.Size.Width - this.ClientRectangle.Size.Width, unequippedItems.Location.Y + unequippedItems.Height + InventoryPadding + this.Size.Height - this.ClientRectangle.Size.Height);
 
             Controls.Add(NeckSlotPanel);
             Controls.Add(LeftRingPanel);
@@ -145,6 +247,14 @@ namespace Mundasia.Interface
             Controls.Add(RightHandPanel);
             Controls.Add(ChestPanel);
             Controls.Add(BeltPanel);
+            Controls.Add(BroochPanel);
+            Controls.Add(HelmetPanel);
+            Controls.Add(LensPanel);
+            Controls.Add(CloakPanel);
+            Controls.Add(StonePanel);
+            Controls.Add(BracerPanel);
+            Controls.Add(GlovePanel);
+            Controls.Add(BootPanel);
             Controls.Add(unequippedItems);
 
             this.FormClosed += InventoryForm_OnClosed;

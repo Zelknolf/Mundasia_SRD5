@@ -11,10 +11,10 @@ namespace Mundasia.Objects
         {
             { InventorySlot.Belt, new List<ItemType>() { ItemType.Belt } },
             { InventorySlot.Chest, new List<ItemType>() { ItemType.Clothing } },
-            { InventorySlot.LeftHand, new List<ItemType>() { ItemType.OneHand, ItemType.TwoHand } },
+            { InventorySlot.LeftHand, new List<ItemType>() { ItemType.LightWeapon, ItemType.Shield } },
             { InventorySlot.LeftRing, new List<ItemType>() { ItemType.Ring } },
             { InventorySlot.Neck, new List<ItemType>() { ItemType.Necklace } },
-            { InventorySlot.RightHand, new List<ItemType>() { ItemType.OneHand, ItemType.TwoHand } },
+            { InventorySlot.RightHand, new List<ItemType>() { ItemType.LightWeapon, ItemType.HeavyOrAmmoWeapon, ItemType.LightWeapon } },
             { InventorySlot.RightRing, new List<ItemType>() { ItemType.Ring } },
         };
 

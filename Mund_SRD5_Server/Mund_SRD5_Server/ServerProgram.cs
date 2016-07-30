@@ -38,6 +38,7 @@ namespace Mundasia
             CharacterClass.Load();
             CharacterClass.LoadSpellProgression();
             ClothColor.LoadColors();
+            InventoryItem.Load();
         }
     }
 }
