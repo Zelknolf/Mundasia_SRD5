@@ -36,143 +36,11 @@ namespace Mundasia.Interface
 
         Creature ChInv;
 
+        bool eventsInitialized = false;
+
         public InventoryForm(Creature ch)
         {
             ChInv = ch;
-            if(ch.Equipment.ContainsKey((int)InventorySlot.Chest))
-            {
-                ChestPanel.BackgroundImage = GetInventoryIconByTag(ch.Equipment[(int)InventorySlot.Chest].Icon);
-            }
-            else
-            {
-                ChestPanel.BackgroundImage = GetInventoryIconByTag("EmptyChest");
-            }
-
-            if(ch.Equipment.ContainsKey((int)InventorySlot.Neck))
-            {
-                NeckSlotPanel.BackgroundImage = GetInventoryIconByTag(ch.Equipment[(int)InventorySlot.Neck].Icon);
-            }
-            else
-            {
-                NeckSlotPanel.BackgroundImage = GetInventoryIconByTag("EmptyNeck");
-            }
-
-            if (ch.Equipment.ContainsKey((int)InventorySlot.Belt))
-            {
-                BeltPanel.BackgroundImage = GetInventoryIconByTag(ch.Equipment[(int)InventorySlot.Belt].Icon);
-            }
-            else
-            {
-                BeltPanel.BackgroundImage = GetInventoryIconByTag("EmptyBelt");
-            }
-
-            if (ch.Equipment.ContainsKey((int)InventorySlot.LeftRing))
-            {
-                LeftRingPanel.BackgroundImage = GetInventoryIconByTag(ch.Equipment[(int)InventorySlot.LeftRing].Icon);
-            }
-            else
-            {
-                LeftRingPanel.BackgroundImage = GetInventoryIconByTag("EmptyRing");
-            }
-
-            if (ch.Equipment.ContainsKey((int)InventorySlot.RightRing))
-            {
-                RightRingPanel.BackgroundImage = GetInventoryIconByTag(ch.Equipment[(int)InventorySlot.RightRing].Icon);
-            }
-            else
-            {
-                RightRingPanel.BackgroundImage = GetInventoryIconByTag("EmptyRing");
-            }
-
-            if (ch.Equipment.ContainsKey((int)InventorySlot.LeftHand))
-            {
-                LeftHandPanel.BackgroundImage = GetInventoryIconByTag(ch.Equipment[(int)InventorySlot.LeftHand].Icon);
-            }
-            else
-            {
-                LeftHandPanel.BackgroundImage = GetInventoryIconByTag("EmptyHand");
-            }
-
-            if (ch.Equipment.ContainsKey((int)InventorySlot.RightHand))
-            {
-                RightHandPanel.BackgroundImage = GetInventoryIconByTag(ch.Equipment[(int)InventorySlot.RightHand].Icon);
-            }
-            else
-            {
-                RightHandPanel.BackgroundImage = GetInventoryIconByTag("EmptyHand");
-            }
-
-            if(ch.Equipment.ContainsKey((int)InventorySlot.Brooch))
-            {
-                BroochPanel.BackgroundImage = GetInventoryIconByTag(ch.Equipment[(int)InventorySlot.Brooch].Icon);
-            }
-            else
-            {
-                BroochPanel.BackgroundImage = GetInventoryIconByTag("EmptyBrooch");
-            }
-
-            if(ch.Equipment.ContainsKey((int)InventorySlot.Helm))
-            {
-                HelmetPanel.BackgroundImage = GetInventoryIconByTag(ch.Equipment[(int)InventorySlot.Helm].Icon);
-            }
-            else
-            {
-                HelmetPanel.BackgroundImage = GetInventoryIconByTag("EmptyHelmet");
-            }
-
-            if(ch.Equipment.ContainsKey((int)InventorySlot.Lens))
-            {
-                LensPanel.BackgroundImage = GetInventoryIconByTag(ch.Equipment[(int)InventorySlot.Lens].Icon);
-            }
-            else
-            {
-                LensPanel.BackgroundImage = GetInventoryIconByTag("EmptyLenses");
-            }
-            
-            if(ch.Equipment.ContainsKey((int)InventorySlot.Cloak))
-            {
-                CloakPanel.BackgroundImage = GetInventoryIconByTag(ch.Equipment[(int)InventorySlot.Cloak].Icon);
-            }
-            else
-            {
-                CloakPanel.BackgroundImage = GetInventoryIconByTag("EmptyCloak");
-            }
-            
-            if(ch.Equipment.ContainsKey((int)InventorySlot.Stone))
-            {
-                StonePanel.BackgroundImage = GetInventoryIconByTag(ch.Equipment[(int)InventorySlot.Stone].Icon);
-            }
-            else
-            {
-                StonePanel.BackgroundImage = GetInventoryIconByTag("EmptyStone");
-            }
-            
-            if(ch.Equipment.ContainsKey((int)InventorySlot.Bracers))
-            {
-                BracerPanel.BackgroundImage = GetInventoryIconByTag(ch.Equipment[(int)InventorySlot.Bracers].Icon);
-            }
-            else
-            {
-                BracerPanel.BackgroundImage = GetInventoryIconByTag("EmptyBracers");
-            }
-            
-            if(ch.Equipment.ContainsKey((int)InventorySlot.Gloves))
-            {
-                GlovePanel.BackgroundImage = GetInventoryIconByTag(ch.Equipment[(int)InventorySlot.Gloves].Icon);
-            }
-            else
-            {
-                GlovePanel.BackgroundImage = GetInventoryIconByTag("EmptyGloves");
-            }
-            
-            if(ch.Equipment.ContainsKey((int)InventorySlot.Boots))
-            {
-                BootPanel.BackgroundImage = GetInventoryIconByTag(ch.Equipment[(int)InventorySlot.Boots].Icon);
-            }
-            else
-            {
-                BootPanel.BackgroundImage = GetInventoryIconByTag("EmptyBoots");
-            }
 
             BroochPanel.Size = IconSize;
             HelmetPanel.Size = IconSize;
@@ -214,31 +82,15 @@ namespace Mundasia.Interface
             BootPanel.Location = new Point(HelmetPanel.Location.X, GlovePanel.Location.Y);
             RightRingPanel.Location = new Point(LensPanel.Location.X, GlovePanel.Location.Y);
 
-            ImageList imgs = new ImageList();
-            imgs.ImageSize = IconSize;
-            imgs.ColorDepth = ColorDepth.Depth32Bit;
             unequippedItems.Location = new Point(InventoryPadding * 4 + IconSize.Width * 3, InventoryPadding);
             unequippedItems.Width = 300;
             unequippedItems.Height = InventoryPadding * 4 + IconSize.Height * 5;
             StyleListView(unequippedItems);
-            unequippedItems.DoubleClick += unequippedItems_DoubleClick;
-            int imageIndex = 0;
-
-            foreach(InventoryItem item in ch.Inventory)
-            {
-                ListViewItem toAdd = new ListViewItem(new string[] { "", item.Name });
-                toAdd.Tag = item.Identifier;
-                toAdd.ImageIndex = imageIndex;
-                StyleListViewItem(toAdd);
-                imgs.Images.Add(GetInventoryIconByTag(item.Icon));
-                imageIndex++;
-                unequippedItems.Items.Add(toAdd);
-            }
-            unequippedItems.SmallImageList = imgs;
-
 
             this.BackColor = Color.Black;
             this.Size = new Size(unequippedItems.Location.X + unequippedItems.Width + InventoryPadding + this.Size.Width - this.ClientRectangle.Size.Width, unequippedItems.Location.Y + unequippedItems.Height + InventoryPadding + this.Size.Height - this.ClientRectangle.Size.Height);
+
+            RefreshInventory();
 
             Controls.Add(NeckSlotPanel);
             Controls.Add(LeftRingPanel);
@@ -263,13 +115,19 @@ namespace Mundasia.Interface
 
         void RefreshInventory()
         {
-            ChestPanel.DoubleClick += ChestPanel_DoubleClick;
-            NeckSlotPanel.DoubleClick += NeckSlotPanel_DoubleClick;
-            BeltPanel.DoubleClick += BeltPanel_DoubleClick;
-            LeftRingPanel.DoubleClick += LeftRingPanel_DoubleClick;
-            RightRingPanel.DoubleClick += RightRingPanel_DoubleClick;
-            LeftHandPanel.DoubleClick += LeftHandPanel_DoubleClick;
-            RightHandPanel.DoubleClick += RightHandPanel_DoubleClick;
+            if (!eventsInitialized)
+            {
+                ChestPanel.DoubleClick += ChestPanel_DoubleClick;
+                NeckSlotPanel.DoubleClick += NeckSlotPanel_DoubleClick;
+                BeltPanel.DoubleClick += BeltPanel_DoubleClick;
+                LeftRingPanel.DoubleClick += LeftRingPanel_DoubleClick;
+                RightRingPanel.DoubleClick += RightRingPanel_DoubleClick;
+                LeftHandPanel.DoubleClick += LeftHandPanel_DoubleClick;
+                RightHandPanel.DoubleClick += RightHandPanel_DoubleClick;
+                unequippedItems.DoubleClick += unequippedItems_DoubleClick;
+                eventsInitialized = true;
+            }
+
             if (ChInv.Equipment.ContainsKey((int)InventorySlot.Chest))
             {
                 ChestPanel.BackgroundImage = GetInventoryIconByTag(ChInv.Equipment[(int)InventorySlot.Chest].Icon);
@@ -333,10 +191,84 @@ namespace Mundasia.Interface
                 RightHandPanel.BackgroundImage = GetInventoryIconByTag("EmptyHand");
             }
 
+            if (ChInv.Equipment.ContainsKey((int)InventorySlot.Brooch))
+            {
+                BroochPanel.BackgroundImage = GetInventoryIconByTag(ChInv.Equipment[(int)InventorySlot.Brooch].Icon);
+            }
+            else
+            {
+                BroochPanel.BackgroundImage = GetInventoryIconByTag("EmptyBrooch");
+            }
+
+            if (ChInv.Equipment.ContainsKey((int)InventorySlot.Helm))
+            {
+                HelmetPanel.BackgroundImage = GetInventoryIconByTag(ChInv.Equipment[(int)InventorySlot.Helm].Icon);
+            }
+            else
+            {
+                HelmetPanel.BackgroundImage = GetInventoryIconByTag("EmptyHelmet");
+            }
+
+            if (ChInv.Equipment.ContainsKey((int)InventorySlot.Lens))
+            {
+                LensPanel.BackgroundImage = GetInventoryIconByTag(ChInv.Equipment[(int)InventorySlot.Lens].Icon);
+            }
+            else
+            {
+                LensPanel.BackgroundImage = GetInventoryIconByTag("EmptyLenses");
+            }
+
+            if (ChInv.Equipment.ContainsKey((int)InventorySlot.Cloak))
+            {
+                CloakPanel.BackgroundImage = GetInventoryIconByTag(ChInv.Equipment[(int)InventorySlot.Cloak].Icon);
+            }
+            else
+            {
+                CloakPanel.BackgroundImage = GetInventoryIconByTag("EmptyCloak");
+            }
+
+            if (ChInv.Equipment.ContainsKey((int)InventorySlot.Stone))
+            {
+                StonePanel.BackgroundImage = GetInventoryIconByTag(ChInv.Equipment[(int)InventorySlot.Stone].Icon);
+            }
+            else
+            {
+                StonePanel.BackgroundImage = GetInventoryIconByTag("EmptyStone");
+            }
+
+            if (ChInv.Equipment.ContainsKey((int)InventorySlot.Bracers))
+            {
+                BracerPanel.BackgroundImage = GetInventoryIconByTag(ChInv.Equipment[(int)InventorySlot.Bracers].Icon);
+            }
+            else
+            {
+                BracerPanel.BackgroundImage = GetInventoryIconByTag("EmptyBracers");
+            }
+
+            if (ChInv.Equipment.ContainsKey((int)InventorySlot.Gloves))
+            {
+                GlovePanel.BackgroundImage = GetInventoryIconByTag(ChInv.Equipment[(int)InventorySlot.Gloves].Icon);
+            }
+            else
+            {
+                GlovePanel.BackgroundImage = GetInventoryIconByTag("EmptyGloves");
+            }
+
+            if (ChInv.Equipment.ContainsKey((int)InventorySlot.Boots))
+            {
+                BootPanel.BackgroundImage = GetInventoryIconByTag(ChInv.Equipment[(int)InventorySlot.Boots].Icon);
+            }
+            else
+            {
+                BootPanel.BackgroundImage = GetInventoryIconByTag("EmptyBoots");
+            }
+
             ImageList imgs = new ImageList();
             int imageIndex = 0;
+            imgs.ImageSize = IconSize;
+            imgs.ColorDepth = ColorDepth.Depth32Bit;
 
-            unequippedItems.Clear();
+            unequippedItems.Items.Clear();
             foreach (InventoryItem item in ChInv.Inventory)
             {
                 ListViewItem toAdd = new ListViewItem(new string[] { "", item.Name });
@@ -357,16 +289,13 @@ namespace Mundasia.Interface
 
         private void equipItem(InventorySlot slot, string identifier)
         {
-            if (ChInv.Equipment.ContainsKey((int)slot))
+            string ret = ServiceConsumer.EquipItem(PlayerInterface.DrivingCharacter.AccountName, PlayerInterface.DrivingCharacter.CharacterName, ChInv.AccountName, ChInv.CharacterName, identifier, (int)slot);
+            if (ret.StartsWith("Error")) return;
+            else
             {
-                string ret = ServiceConsumer.EquipItem(PlayerInterface.DrivingCharacter.AccountName, PlayerInterface.DrivingCharacter.CharacterName, ChInv.AccountName, ChInv.CharacterName, identifier, (int)slot);
-                if (ret.StartsWith("Error")) return;
-                else
-                {
-                    ChInv = new Creature(ret);
-                    RefreshInventory();
-                    return;
-                }
+                ChInv = new Creature(ret);
+                RefreshInventory();
+                return;
             }
         }
 
@@ -425,11 +354,11 @@ namespace Mundasia.Interface
                         {
                             equipItem(InventorySlot.Neck, item.Identifier);
                         }
-                        else if(item.ItType == ItemType.OneHand)
+                        else if(item.ItType == ItemType.Weapon)
                         {
                             equipItem(InventorySlot.RightHand, item.Identifier);
                         }
-                        else if(item.ItType == ItemType.OffHand)
+                        else if(item.ItType == ItemType.LightWeapon)
                         {
                             equipItem(InventorySlot.LeftHand, item.Identifier);
                         }
@@ -437,7 +366,7 @@ namespace Mundasia.Interface
                         {
                             equipItem(InventorySlot.LeftRing, item.Identifier);
                         }
-                        else if(item.ItType == ItemType.TwoHand)
+                        else if(item.ItType == ItemType.HeavyOrAmmoWeapon)
                         {
                             equipItem(InventorySlot.RightHand, item.Identifier);
                         }
