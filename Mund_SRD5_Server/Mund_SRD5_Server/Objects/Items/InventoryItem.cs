@@ -11,8 +11,8 @@ namespace Mundasia.Objects
     public class InventoryItem
     {
         private static int identifier = 0;
-        private static string delimiter = "]";
-        private static char[] delim = new char[] { ']' };
+        private static string delimiter = "!";
+        private static char[] delim = new char[] { '!' };
 
         public InventoryItem() { }
 
@@ -220,6 +220,27 @@ namespace Mundasia.Objects
 
 
         private static Dictionary<string, InventoryItem> _library = new Dictionary<string, InventoryItem>();
+
+        public static InventoryItem SpawnItem(string index)
+        {
+            if(_library.ContainsKey(index))
+            {
+                InventoryItem nItem = (InventoryItem)_library[index].MemberwiseClone();
+                nItem.Identifier = (identifier++).ToString("X20");
+                _library.Add(nItem.Identifier, nItem);
+                return nItem;
+            }
+            return null;
+        }
+
+        public static InventoryItem GetItem(string index)
+        {
+            if (_library.ContainsKey(index))
+            {
+                return _library[index];
+            }
+            return null;
+        }
 
         public static void Load()
         {

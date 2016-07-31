@@ -1,16 +1,16 @@
-0]Underpants]]cloth_beige]1]8]0]5]0]0]99]0]False]False]False]0]0]0]16]30]6]0]0]0]0
-0]Dress]]cloth_beige]2]8]0]5]0]0]99]0]False]False]False]0]0]0]16]30]6]0]0]0]0
-0]Tunic]]cloth_beige]3]8]0]5]0]0]99]0]False]False]False]0]0]0]16]30]6]0]0]0]0
-0]Padded Armor]]cloth_beige]3]8]0]500]1]11]99]0]False]False]True]0]0]0]128]60]60]0]0]0]0
-0]Leather Armor]]cloth_beige]3]8]0]1000]1]11]99]0]False]False]False]0]0]0]160]60]60]0]0]0]0
-0]Studded Leather Armor]]cloth_beige]3]8]0]4500]1]12]99]0]False]False]False]0]0]0]208]60]60]0]0]0]0
-0]Hide Armor]]cloth_beige]3]8]0]1000]2]12]2]0]False]False]False]0]0]0]192]300]60]0]0]0]0
-0]Chain Shirt]]cloth_beige]3]8]0]5000]2]13]2]0]False]False]False]0]0]0]320]300]60]0]0]0]0
-0]Scale Mail]]cloth_beige]3]8]0]5000]2]14]2]0]False]False]True]0]0]0]720]300]60]0]0]0]0
-0]Breastplate]]cloth_beige]3]8]0]40000]2]14]2]0]False]False]False]0]0]0]320]300]60]0]0]0]0
-0]Half Plate]]cloth_beige]3]8]0]75000]2]15]2]0]False]False]True]0]0]0]640]300]60]0]0]0]0
-0]Ring Mail]]cloth_beige]3]8]0]3000]3]14]0]0]False]False]True]0]0]0]640]600]300]0]0]0]0
-0]Chain Mail]]cloth_beige]3]8]0]7500]3]16]0]0]False]False]True]0]0]0]880]600]300]0]0]0]0
-0]Splint Armor]]cloth_beige]3]8]0]20000]3]17]0]0]False]False]True]0]0]0]960]600]300]0]0]0]0
-0]Plate Armor]]cloth_beige]3]8]0]150000]3]18]0]0]False]False]True]0]0]0]1040]600]300]0]0]0]0
-15]Shield]]cloth_beige]3]8]0]1000]0]0]99]2]False]False]False]0]0]0]96]3]3]0]0]0]0
+0!Underpants!!cloth_beige!1!8!0!5!0!0!99!0!False!False!False!0!0!0!16!30!6!0!0!0!0
+0!Dress!!cloth_beige!2!8!0!5!0!0!99!0!False!False!False!0!0!0!16!30!6!0!0!0!0
+0!Tunic!!cloth_beige!3!8!0!5!0!0!99!0!False!False!False!0!0!0!16!30!6!0!0!0!0
+0!Padded Armor!!cloth_beige!3!8!0!500!1!11!99!0!False!False!True!0!0!0!128!60!60!0!0!0!0
+0!Leather Armor!!cloth_beige!3!8!0!1000!1!11!99!0!False!False!False!0!0!0!160!60!60!0!0!0!0
+0!Studded Leather Armor!!cloth_beige!3!8!0!4500!1!12!99!0!False!False!False!0!0!0!208!60!60!0!0!0!0
+0!Hide Armor!!cloth_beige!3!8!0!1000!2!12!2!0!False!False!False!0!0!0!192!300!60!0!0!0!0
+0!Chain Shirt!!cloth_beige!3!8!0!5000!2!13!2!0!False!False!False!0!0!0!320!300!60!0!0!0!0
+0!Scale Mail!!cloth_beige!3!8!0!5000!2!14!2!0!False!False!True!0!0!0!720!300!60!0!0!0!0
+0!Breastplate!!cloth_beige!3!8!0!40000!2!14!2!0!False!False!False!0!0!0!320!300!60!0!0!0!0
+0!Half Plate!!cloth_beige!3!8!0!75000!2!15!2!0!False!False!True!0!0!0!640!300!60!0!0!0!0
+0!Ring Mail!!cloth_beige!3!8!0!3000!3!14!0!0!False!False!True!0!0!0!640!600!300!0!0!0!0
+0!Chain Mail!!cloth_beige!3!8!0!7500!3!16!0!0!False!False!True!0!0!0!880!600!300!0!0!0!0
+0!Splint Armor!!cloth_beige!3!8!0!20000!3!17!0!0!False!False!True!0!0!0!960!600!300!0!0!0!0
+0!Plate Armor!!cloth_beige!3!8!0!150000!3!18!0!0!False!False!True!0!0!0!1040!600!300!0!0!0!0
+15!Shield!!cloth_beige!3!8!0!1000!0!0!99!2!False!False!False!0!0!0!96!3!3!0!0!0!0
