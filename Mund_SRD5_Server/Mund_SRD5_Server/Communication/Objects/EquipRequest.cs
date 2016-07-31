@@ -30,6 +30,7 @@ namespace Mundasia.Communication
             ChangedAccount = pieces[3];
             Identifier = pieces[4];
             Int32.TryParse(pieces[5], out InventorySlot);
+            Int32.TryParse(pieces[6], out SessionId);
         }
 
         public EquipRequest(string requestingCharacter, string requestingAccount, string changedCharacter, string changedAccount, string tag, int inventorySlot, int sessionId)
@@ -58,6 +59,7 @@ namespace Mundasia.Communication
             bld.Append(delimiter);
             bld.Append(InventorySlot);
             bld.Append(delimiter);
+            bld.Append(SessionId);
             return bld.ToString();
         }
     }
