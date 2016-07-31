@@ -155,6 +155,8 @@ namespace Mundasia.Server.Communication
                     }
                 }
             }
+            InventoryItem it = InventoryItem.SpawnItem(2.ToString("X20"));
+            chr.Equipment.Add((int)InventorySlot.Chest, it);
 
             if (targetAccount.LoadCharacter(chr.CharacterName) != null)
             {
@@ -419,6 +421,7 @@ namespace Mundasia.Server.Communication
                             Map.LoadedMaps[ch.Map].ChangeCharacterAppearance(ch);
                         }
                     }
+                    acct.SaveCharacter(ch);
                     return ch.ToString();
                 }
                 else
