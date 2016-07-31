@@ -111,7 +111,7 @@ namespace Mundasia.Objects
         {
             if (String.IsNullOrWhiteSpace(fileLine)) return;
             string[] input = fileLine.Split(delim);
-            if (input.Length < 11) return;
+            if (input.Length < 14) return;
             uint.TryParse(input[0], out CharacterId);
             int.TryParse(input[1], out Height);
             int.TryParse(input[2], out x);
@@ -123,6 +123,9 @@ namespace Mundasia.Objects
             int.TryParse(input[8], out HairColor);
             int.TryParse(input[9], out Sex);
             int.TryParse(input[10], out Hair);
+            int.TryParse(input[11], out Clothes);
+            int.TryParse(input[12], out ClothColorA);
+            int.TryParse(input[13], out ClothColorB);
         }
 
         private DisplayCharacter(Creature ch)
@@ -179,6 +182,12 @@ namespace Mundasia.Objects
             ret.Append(Sex);
             ret.Append(delimiter);
             ret.Append(Hair);
+            ret.Append(delimiter);
+            ret.Append(Clothes);
+            ret.Append(delimiter);
+            ret.Append(ClothColorA);
+            ret.Append(delimiter);
+            ret.Append(ClothColorB);
             return ret.ToString();
         }
 
