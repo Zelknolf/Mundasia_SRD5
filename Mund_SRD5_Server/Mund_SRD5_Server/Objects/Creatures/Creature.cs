@@ -282,10 +282,13 @@ namespace Mundasia.Objects
             ret.Append(delimiter);
             foreach(KeyValuePair<int, InventoryItem> it in Equipment)
             {
-                ret.Append(it.Key);
-                ret.Append(keyDelimiter);
-                ret.Append(it.Value.ToString());
-                ret.Append(listDelimiter);
+                if (it.Value != null)
+                {
+                    ret.Append(it.Key);
+                    ret.Append(keyDelimiter);
+                    ret.Append(it.Value.ToString());
+                    ret.Append(listDelimiter);
+                }
             }
             ret.Append(delimiter);
             foreach(InventoryItem it in Inventory)
