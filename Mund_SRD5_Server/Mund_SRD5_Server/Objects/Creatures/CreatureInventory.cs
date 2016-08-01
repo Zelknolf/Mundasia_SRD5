@@ -24,12 +24,14 @@ namespace Mundasia.Objects
             {
                 if(Equipment.ContainsKey(InventorySlot))
                 {
+                    Inventory.Add(Equipment[InventorySlot]);
                     Equipment.Remove(InventorySlot);
                     return true;
                 }
             }
             else
             {
+                InventoryItem itemToRemove = null;
                 foreach (InventoryItem it in Inventory)
                 {
                     if (it.Identifier == ItemIdentifier)
@@ -42,13 +44,15 @@ namespace Mundasia.Objects
                                 {
                                     Inventory.Add(Equipment[InventorySlot]);
                                 }
+                                itemToRemove = it;
                                 Equipment[InventorySlot] = it;
-                                return true;
+                                break;
                             }
                             else
                             {
+                                itemToRemove = it;
                                 Equipment.Add(InventorySlot, it);
-                                return true;
+                                break;
                             }
                         }
                         else
@@ -56,6 +60,11 @@ namespace Mundasia.Objects
                             return false;
                         }
                     }
+                }
+                if(itemToRemove != null)
+                {
+                    Inventory.Remove(itemToRemove);
+                    return true;
                 }
             }
             return false;
